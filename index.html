@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planisphere — a star wheel for any latitude, any century</title>
+    <meta
+      name="description"
+      content="Generate an accurate, printable planisphere for any latitude and any epoch from 3000 BCE to 3000 CE, precessed with the IAU 2006/P03 model."
+    />
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Spectral+SC:wght@500&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#preview">Skip to disc preview</a>
+
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">&#9788;</span>
+        <div>
+          <h1>Planisphere</h1>
+          <p class="tagline">A star wheel for any latitude, any century.</p>
+        </div>
+      </div>
+      <fieldset class="theme-toggle">
+        <legend class="sr-only">Chart theme</legend>
+        <button type="button" id="theme-ink" class="theme-btn" aria-pressed="true">Ink &amp; paper</button>
+        <button type="button" id="theme-night" class="theme-btn" aria-pressed="false">Night sky</button>
+      </fieldset>
+    </header>
+
+    <main class="layout">
+      <section class="controls" aria-label="Planisphere controls">
+        <div class="control-group">
+          <label for="city">Location</label>
+          <select id="city"></select>
+          <p class="hint" id="city-note"></p>
+        </div>
+
+        <div class="control-group">
+          <label for="lat">Latitude</label>
+          <div class="row">
+            <input type="range" id="lat" min="-89" max="89" step="0.1" />
+            <output id="lat-value" for="lat"></output>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="epoch">Epoch year</label>
+          <div class="row">
+            <input type="range" id="epoch" min="-3000" max="3000" step="10" />
+            <output id="epoch-value" for="epoch"></output>
+          </div>
+          <p class="hint">Negative = BCE (astronomical year numbering: -700 = 700 BCE).</p>
+        </div>
+
+        <div class="control-group">
+          <label for="mag">Magnitude limit</label>
+          <div class="row">
+            <input type="range" id="mag" min="2" max="5.5" step="0.1" />
+            <output id="mag-value" for="mag"></output>
+          </div>
+        </div>
+
+        <div class="control-group checks">
+          <label><input type="checkbox" id="show-constellations" checked /> Constellation lines</label>
+          <label><input type="checkbox" id="show-names" checked /> Bright-star names</label>
+        </div>
+
+        <div class="control-group">
+          <label for="date">Tonight's date</label>
+          <input type="date" id="date" />
+        </div>
+
+        <div class="control-group">
+          <label for="hour">Local time</label>
+          <div class="row">
+            <input type="range" id="hour" min="0" max="23.98" step="0.25" />
+            <output id="hour-value" for="hour"></output>
+          </div>
+          <p class="hint">Local mean time, not civil/DST time — see Accuracy in the README.</p>
+        </div>
+
+        <div class="control-group export-group">
+          <p class="hint">Exports are scale-exact SVG, sized for the paper below.</p>
+          <div class="row">
+            <select id="paper-size">
+              <option value="a4">A4</option>
+              <option value="letter">US Letter</option>
+            </select>
+          </div>
+          <button type="button" id="export-disc" class="export-btn">Download star disc (SVG)</button>
+          <button type="button" id="export-holder" class="export-btn">Download holder (SVG)</button>
+        </div>
+      </section>
+
+      <section class="preview" id="preview" aria-label="Planisphere preview">
+        <div class="disc-stage">
+          <svg id="disc-svg" viewBox="-260 -260 520 520" role="img" aria-label="Rotatable star wheel preview">
+            <title>Planisphere disc preview</title>
+          </svg>
+        </div>
+        <p class="drag-hint">Drag the disc to turn it.</p>
+        <dl class="readout">
+          <div><dt>Sidereal alignment</dt><dd id="readout-lst">—</dd></div>
+          <div><dt>Visible declination limit</dt><dd id="readout-limit">—</dd></div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Star data: HYG v4.1 (CC BY-SA 4.0). Precession: Capitaine et al. 2003 (IAU 2006/P03).
+        <a href="https://github.com/antonsoo/planisphere" target="_blank" rel="noopener">Source on GitHub</a>
+        · pairs with
+        <a href="https://antonsoo.github.io/horologium/" target="_blank" rel="noopener">horologium</a>
+        and
+        <a href="https://antonsoo.github.io/gnomon/" target="_blank" rel="noopener">gnomon</a>.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
