@@ -1,0 +1,97 @@
+{
+  "generator": "pyerfa erfa.p06e (IAU 2006/P03 precession angles), astropy/pyerfa in a throwaway uv venv",
+  "note": "Independent-library cross-check of the zeta_A/z_A/theta_A polynomial coefficients from Capitaine et al. 2003 (A&A 412, 567), eq. 40, as adopted by IAU 2006.",
+  "cases": [
+    {
+      "year": 2000,
+      "t_centuries": 0.0,
+      "zetaA_arcsec": 2.650545,
+      "zA_arcsec": -2.650545,
+      "thetaA_arcsec": 0.0
+    },
+    {
+      "year": 2028.867,
+      "t_centuries": 0.2886700000000058,
+      "zetaA_arcsec": 668.3729267977394,
+      "zA_arcsec": 663.136252079357,
+      "thetaA_arcsec": 578.5132807034105
+    },
+    {
+      "year": 2050,
+      "t_centuries": 0.5,
+      "zetaA_arcsec": 1155.769122876897,
+      "zA_arcsec": 1150.663510949925,
+      "thetaA_arcsec": 1001.9833498729562
+    },
+    {
+      "year": 2100,
+      "t_centuries": 1.0,
+      "zetaA_arcsec": 2309.0506338917,
+      "zA_arcsec": 2304.5376102836003,
+      "thetaA_arcsec": 2003.7205797436
+    },
+    {
+      "year": 1900,
+      "t_centuries": -1.0,
+      "zetaA_arcsec": -2303.1518560337,
+      "zA_arcsec": -2307.6532878756,
+      "thetaA_arcsec": -2004.5795807216002
+    },
+    {
+      "year": 1,
+      "t_centuries": -19.99,
+      "zetaA_arcsec": -46120.403468112105,
+      "zA_arcsec": -45814.04356400718,
+      "thetaA_arcsec": -39902.06755874742
+    },
+    {
+      "year": -699,
+      "t_centuries": -26.99,
+      "zetaA_arcsec": -62373.71946768907,
+      "zA_arcsec": -61817.85227727693,
+      "thetaA_arcsec": -53585.66470543674
+    },
+    {
+      "year": -1499,
+      "t_centuries": -34.99,
+      "zetaA_arcsec": -81085.49997653457,
+      "zA_arcsec": -80164.67325173036,
+      "thetaA_arcsec": -68864.8383963084
+    },
+    {
+      "year": -2999,
+      "t_centuries": -49.99,
+      "zetaA_arcsec": -116720.78971255192,
+      "zA_arcsec": -114922.80362156936,
+      "thetaA_arcsec": -96042.66146343182
+    },
+    {
+      "year": 3000,
+      "t_centuries": 10.0,
+      "zetaA_arcsec": 23111.294645,
+      "zA_arcsec": 23185.348115000004,
+      "thetaA_arcsec": 19957.06342
+    },
+    {
+      "year": -100,
+      "t_centuries": -21.0,
+      "zetaA_arcsec": -48460.03706798371,
+      "zA_arcsec": -48121.93402951559,
+      "thetaA_arcsec": -41890.975444701595
+    },
+    {
+      "year": 500,
+      "t_centuries": -15.0,
+      "zetaA_arcsec": -34582.2296596875,
+      "zA_arcsec": -34410.82582875,
+      "thetaA_arcsec": -30018.62528625
+    },
+    {
+      "year": 1500,
+      "t_centuries": -5.0,
+      "zetaA_arcsec": -11522.549367812499,
+      "zA_arcsec": -11508.018591250002,
+      "thetaA_arcsec": -10026.4730525
+    }
+  ]
+}
