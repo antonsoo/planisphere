@@ -1,0 +1,40 @@
+{
+  "name": "planisphere",
+  "version": "0.1.0",
+  "description": "Print a star wheel for any latitude and any century, precessed to the sky the Babylonians, Ptolemy, or the Maya actually saw.",
+  "type": "module",
+  "author": "Anton Soloviev",
+  "license": "MIT",
+  "homepage": "https://antonsoo.github.io/planisphere/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antonsoo/planisphere.git"
+  },
+  "keywords": [
+    "astronomy",
+    "planisphere",
+    "star-chart",
+    "precession",
+    "archaeoastronomy",
+    "svg",
+    "laser-cut",
+    "star-wheel"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/node": "^26.6.2",
+    "typescript": "^5.7.3",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}
