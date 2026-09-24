@@ -8,7 +8,7 @@ import type { ConstellationData, PlanisphereConfig } from './buildPlanisphereSvg
 import { pathFromPoints } from './svgUtil.js';
 
 /** Physical page sizes in millimetres. */
-const PAPER_MM: Record<'a4' | 'letter', { w: number; h: number }> = {
+export const PAPER_MM: Record<'a4' | 'letter', { w: number; h: number }> = {
   a4: { w: 210, h: 297 },
   letter: { w: 215.9, h: 279.4 },
 };
@@ -22,7 +22,7 @@ const PAPER_MM: Record<'a4' | 'letter', { w: number; h: number }> = {
  * Verified numerically in tests/render/export.test.ts.
  */
 export const DISC_RADIUS_MM = 60;
-const RING_EXTENT_MM = 34;
+export const RING_EXTENT_MM = 34;
 
 const CUT = 'red';
 const ENGRAVE = 'black';
@@ -47,12 +47,13 @@ ${body}
 </svg>`;
 }
 
-export function exportDiscSvg(
+/** Pure markup builder (no DOM/Blob side effects), so it's directly testable. */
+export function buildDiscSvgMarkup(
   stars: CatalogueStar[],
   constellations: ConstellationData[],
   config: PlanisphereConfig,
   paper: 'a4' | 'letter',
-) {
+): string {
   const { w, h } = PAPER_MM[paper];
   const cx = w / 2;
   const cy = h / 2;
@@ -111,10 +112,23 @@ export function exportDiscSvg(
 
   const label = `<text x="${cx}" y="${h - 6}" text-anchor="middle" font-size="3" fill="${ENGRAVE}">Planisphere star disc — lat ${config.latDeg.toFixed(1)}°, epoch ${config.epochYear <= 0 ? `${1 - config.epochYear} BCE` : `${config.epochYear} CE`}. Red = cut, black = engrave.</text>`;
 
-  download(`planisphere-disc-${paper}.svg`, page(paper, parts.join('\n') + label));
+  return page(paper, parts.join('\n') + label);
 }
 
-export function exportHolderSvg(config: PlanisphereConfig, paper: 'a4' | 'letter') {
+export function exportDiscSvg(
+  stars: CatalogueStar[],
+  constellations: ConstellationData[],
+  config: PlanisphereConfig,
+  paper: 'a4' | 'letter',
+) {
+  download(
+    `planisphere-disc-${paper}.svg`,
+    buildDiscSvgMarkup(stars, constellations, config, paper),
+  );
+}
+
+/** Pure markup builder (no DOM/Blob side effects), so it's directly testable. */
+export function buildHolderSvgMarkup(config: PlanisphereConfig, paper: 'a4' | 'letter'): string {
   const { w, h } = PAPER_MM[paper];
   const cx = w / 2;
   const cy = h / 2;
@@ -156,5 +170,9 @@ export function exportHolderSvg(config: PlanisphereConfig, paper: 'a4' | 'letter
 
   const label = `<text x="${cx}" y="${h - 6}" text-anchor="middle" font-size="3" fill="${ENGRAVE}">Planisphere holder — lat ${config.latDeg.toFixed(1)}°. Cut the outer circle and the horizon window; pin through the centre hole. Red = cut, black = engrave.</text>`;
 
-  download(`planisphere-holder-${paper}.svg`, page(paper, parts.join('\n') + label));
+  return page(paper, parts.join('\n') + label);
+}
+
+export function exportHolderSvg(config: PlanisphereConfig, paper: 'a4' | 'letter') {
+  download(`planisphere-holder-${paper}.svg`, buildHolderSvgMarkup(config, paper));
 }

@@ -155,7 +155,7 @@ flowchart LR
 ## Testing
 
 ```sh
-npm run test   # 309 tests across astro, geometry and export-dimension suites
+npm run test   # 316 tests across astro, geometry and export suites
 npm run lint
 npm run typecheck
 npm run build
@@ -171,8 +171,10 @@ npm run build
   combinations (`tests/geometry/window.test.ts`) — this is the test that
   actually verifies "a star is inside the window exactly when its computed
   altitude is > 0."
-- **Export**: physical page-fit dimensions verified numerically
-  (`tests/render/export.test.ts`).
+- **Export**: physical page-fit dimensions verified numerically, and the
+  generated SVG markup itself is checked (correct millimetre sizing, cut
+  paths in red, engraved marks in black, star count matches the magnitude
+  filter) — `tests/render/export.test.ts`.
 
 Machine for any benchmarking implied above: this box, 14 vCPU WSL2 Linux, 48
 GB RAM — not that anything here is performance-sensitive; the whole computed
