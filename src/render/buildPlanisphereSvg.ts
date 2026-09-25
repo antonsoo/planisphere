@@ -44,6 +44,15 @@ const MONTH_STARTS = [
   'Dec 1',
 ];
 
+function circlePathPoints(r: number, n: number): { x: number; y: number }[] {
+  const pts: { x: number; y: number }[] = [];
+  for (let i = 0; i < n; i++) {
+    const t = (2 * Math.PI * i) / n;
+    pts.push({ x: r * Math.cos(t), y: r * Math.sin(t) });
+  }
+  return pts;
+}
+
 function starRadius(mag: number): number {
   // Brighter (numerically smaller/negative) magnitude -> bigger disc. Clamp so
   // mag 5.5 stars are still a visible dot and Sirius doesn't dominate the page.
@@ -80,20 +89,6 @@ export function buildPlanisphereSvg(
   );
 
   const windowPolygon = buildHorizonWindowPolygon(config.latDeg, hemisphereSign, scale, 720);
-  holder.appendChild(
-    svgEl('path', {
-      class: 'horizon-window',
-      d: pathFromPoints(windowPolygon),
-      fill: 'none',
-    }),
-  );
-  const maskId = 'horizonMask';
-  const mask = svgEl('mask', { id: maskId });
-  mask.appendChild(
-    svgEl('rect', { x: -9999, y: -9999, width: 19998, height: 19998, fill: 'black' }),
-  );
-  mask.appendChild(svgEl('path', { d: pathFromPoints(windowPolygon), fill: 'white' }));
-  root.appendChild(mask);
 
   const hourRing = svgEl('g', { class: 'hour-ring' });
   holder.appendChild(hourRing);
@@ -124,17 +119,36 @@ export function buildPlanisphereSvg(
   }
 
   // ---- Rotating star disc ----
-  const maskedGroup = svgEl('g', { mask: `url(#${maskId})` });
-  root.appendChild(maskedGroup);
+  // Layering mirrors the physical object: the whole star disc turns underneath,
+  // the holder face covers it except for the horizon window (translucent here so
+  // the rest of the sky stays legible), and the disc's date ring stays in view
+  // around the rim so a date can be lined up against the holder's hour ring.
+  // The date ring lives in a second rotator on top; both share one transform.
   const bakedRotationDeg = discRotationDeg(config.date, config.localHour);
-  const discRotator = svgEl('g', {
-    class: 'disc-rotator',
-    transform: `rotate(${bakedRotationDeg.toFixed(4)})`,
-  });
-  maskedGroup.appendChild(discRotator);
+  const rotation = `rotate(${bakedRotationDeg.toFixed(4)})`;
+  const discRotator = svgEl('g', { class: 'disc-rotator', transform: rotation });
+  root.appendChild(discRotator);
 
+  const faceRing = circlePathPoints(config.discRadius, 360);
+  root.appendChild(
+    svgEl('path', {
+      class: 'holder-face',
+      d: `${pathFromPoints(faceRing)} ${pathFromPoints(windowPolygon)}`,
+      'fill-rule': 'evenodd',
+    }),
+  );
+  root.appendChild(
+    svgEl('path', {
+      class: 'horizon-window',
+      d: pathFromPoints(windowPolygon),
+      fill: 'none',
+    }),
+  );
+
+  const dateRotator = svgEl('g', { class: 'disc-rotator', transform: rotation });
+  root.appendChild(dateRotator);
   const dateRing = svgEl('g', { class: 'date-ring' });
-  discRotator.appendChild(dateRing);
+  dateRotator.appendChild(dateRing);
   for (let m = 0; m < 12; m++) {
     const d = new Date(Date.UTC(2026, m, 1));
     const theta = (dateRingAngleDeg(d) * Math.PI) / 180;

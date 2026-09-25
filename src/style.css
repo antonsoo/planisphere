@@ -323,6 +323,10 @@ output {
   stroke: var(--brass);
   stroke-width: 1.5;
 }
+.holder-face {
+  fill: var(--paper-deep);
+  opacity: 0.8;
+}
 .horizon-window {
   stroke: var(--oxblood);
   stroke-width: 1.5;

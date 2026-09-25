@@ -51,8 +51,10 @@ a static site, nothing to install.
   constellations, every line endpoint verified against the catalogue.
 - **Any latitude**, with a preset list including ancient sites: Babylon,
   Alexandria, Athens, Rome, Chichén Itzá, Tikal, Chang'an, Ujjain.
-- **Live, rotatable SVG preview** — drag the disc to turn it; a horizon
-  mask shows exactly which stars are up right now.
+- **Live, rotatable SVG preview** — drag the disc to turn it. As on the
+  printed object, the holder face covers the sky outside the horizon window
+  (dimmed here so it stays readable) and the disc's date ring stays visible
+  around the rim, against the holder's hour ring.
 - **Ink & paper / night-sky themes**, keyboard-accessible, responsive down
   to 375px.
 - **Scale-exact SVG export** of the star disc and the horizon-window
@@ -98,8 +100,10 @@ flowchart LR
    where the date/hour rings come from, is in
    [`docs/geometry.md`](docs/geometry.md).
 4. **Rendering & export.** `src/render/buildPlanisphereSvg.ts` draws the
-   live preview (an SVG `<mask>` shows exactly which stars are currently
-   above the horizon). `src/render/exportSvg.ts` renders the same geometry
+   live preview: the rotating star disc, a translucent holder face with the
+   horizon window cut out (exactly the stars above the horizon show at full
+   strength), and the date ring drawn on top so it can be read against the
+   hour ring. `src/render/exportSvg.ts` renders the same geometry
    at real millimetre scale for print/laser-cut — see
    [`docs/assembly.md`](docs/assembly.md).
 

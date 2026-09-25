@@ -16,7 +16,7 @@ export const CITIES: City[] = [
     name: 'Babylon',
     lat: 32.54,
     lon: 44.42,
-    suggestedEpoch: -700,
+    suggestedEpoch: -699,
     note: 'Neo-Babylonian astronomers, MUL.APIN era',
   },
   {
@@ -32,7 +32,7 @@ export const CITIES: City[] = [
     name: 'Athens',
     lat: 37.98,
     lon: 23.73,
-    suggestedEpoch: -350,
+    suggestedEpoch: -349,
     note: 'Aristotle, Eudoxus',
   },
   {

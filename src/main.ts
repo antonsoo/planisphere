@@ -101,8 +101,9 @@ async function main() {
   }
 
   function applyDragRotation() {
-    const rotator = svg.querySelector<SVGGElement>('.disc-rotator');
-    if (rotator) {
+    // The star disc and its date ring are separate layers (the holder face sits
+    // between them) that must turn together.
+    for (const rotator of svg.querySelectorAll<SVGGElement>('.disc-rotator')) {
       rotator.setAttribute(
         'transform',
         `rotate(${(bakedRotationDeg + dragRotationDeg).toFixed(3)})`,
