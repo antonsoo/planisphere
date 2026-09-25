@@ -193,3 +193,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 MIT, see [`LICENSE`](LICENSE). Star data is CC BY-SA 4.0 (see Data licenses,
 above) — the code and the self-authored constellation lines are MIT, the
 vendored star catalogue derivative keeps its original license.
+
+---
+
+<sub>Part of [Officina](https://antonsoo.github.io/officina/), a set of small open-source tools by [Anton Soloviev](https://github.com/antonsoo).</sub>
