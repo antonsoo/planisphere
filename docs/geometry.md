@@ -63,30 +63,46 @@ noon, 180 at local midnight), so the hour ring is a plain linear scale,
 independent of date: `hourRingAngleDeg(hour) = (hour - 12) * 15`.
 
 The date ring is on the rotating disc, alongside the stars, so it uses the
-same mirrored convention. At local midnight on a given date, the Sun's hour
-angle is 180 degrees, so `LST(midnight) = RA_sun(date) + 180`. Requiring
-that turning the disc by `R = LST(midnight)` aligns that date's mark with
-the holder's `hour = 0` mark gives:
+same mirrored convention. At local mean midnight on a given date, the mean
+Sun's hour angle is 180 degrees, so `LST(midnight) = RA_meanSun(date) + 180`.
+Requiring that turning the disc by `R = LST(midnight)` aligns that date's
+mark with the holder's `hour = 0` mark gives:
 
 ```
-dateRingAngleDeg(date) = -RA_sun(date)        (mod 360)
+dateRingAngleDeg(date) = -RA_meanSun(date)        (mod 360)
 ```
 
-`RA_sun(date)` comes from the low-accuracy solar-position formula in Meeus,
-*Astronomical Algorithms* 2nd ed., ch. 25 (`src/geometry/sun.ts`), good to
-about 0.01 degree — far tighter than this ring needs.
+`RA_meanSun(date)` is the Sun's geometric mean longitude L0 (Meeus,
+*Astronomical Algorithms* 2nd ed., ch. 25; `meanSunRaDeg` in
+`src/geometry/sun.ts`): the fictitious mean Sun moves uniformly along the
+equator, and it is the mean Sun, not the real one, that keeps mean time.
+Using the real (apparent) Sun's RA here instead would put the rings on
+apparent solar time and make them read up to 16 minutes (4 degrees of
+rotation) off the local mean time the user is told to enter; that was this
+app's behaviour before 0.2.0.
 
-Combining the two: `discRotationDeg(date, hour) = RA_sun(date) + (hour - 12) * 15`,
-which is exactly the LST used everywhere else. `tests/geometry/window.test.ts`
+Combining the two: `discRotationDeg(date, hour) = RA_meanSun(date) + (hour - 12) * 15`,
+which is exactly the LST used everywhere else. A date mark stands for one
+instant (0h UT that day), and the Sun moves about 0.99 degrees a day, so a
+reading late in the day trails the true sidereal time by up to about a
+degree (4 minutes); `tests/geometry/dial.test.ts` checks the rotation
+against an independent sidereal-time formula to 0.02 degrees once that is
+accounted for. `tests/geometry/window.test.ts`
 exercises this same function, so the rendered rings and the visibility test
 are provably using the same rotation.
 
 ## What this ignores
 
 - **The equation of time.** A paper (or SVG) ring can't encode the few
-  minutes of difference between local mean time and true solar time; enter
-  local *mean* time, not your clock's civil/DST time. Commercial paper
-  planispheres make the same simplification.
+  minutes of difference between local mean time and true solar time; the
+  rings read local *mean* time, so enter that, not your clock's civil/DST
+  time and not sundial time. Commercial paper planispheres make the same
+  simplification.
+- **The calendar.** The date ring is Gregorian, drawn from 2026's dates,
+  which is right for any epoch because the Gregorian calendar keeps the
+  equinox near 20 March. For an ancient epoch that means proleptic
+  Gregorian dates: in 700 BCE the Julian calendar ran about a week ahead of
+  them, so convert a Julian date before setting it.
 - **Longitude.** The geometry depends only on latitude. Longitude only
   matters for converting a civil clock reading to local mean time, which
   this app leaves to the user (enter your own local time directly).

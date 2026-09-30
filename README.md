@@ -132,10 +132,17 @@ flowchart LR
   asterisms (see [`docs/constellations.md`](docs/constellations.md)), not
   the official 88-constellation IAU boundaries/figures — 24 of the most
   recognizable constellations are included, not all 88.
-- **Date/hour rings** assume local *mean solar time*, ignoring the equation
+- **Date/hour rings** read local *mean solar time*, ignoring the equation
   of time (up to about &plusmn;16 minutes) and longitude/timezone — the same
   simplification every paper planisphere makes, because a printed ring
-  can't encode either. Enter your own local time directly.
+  can't encode either. Enter your own local mean time directly. The date
+  marks are placed by the mean Sun and checked against an independent
+  sidereal-time formula (`tests/geometry/dial.test.ts`); each mark stands
+  for 0h UT, so a reading late in the day trails the sky by up to a degree
+  (4 minutes).
+- **The date ring is Gregorian**, which keeps the equinox near 20 March in
+  any epoch; for ancient epochs that means proleptic Gregorian dates (in
+  700 BCE the Julian calendar ran about a week ahead of them).
 - **Geometric horizon**, not the atmospherically refracted one (about 34
   arcminutes higher in reality) — smaller than the drawn window line.
 - The horizon-window/altitude cross-check test

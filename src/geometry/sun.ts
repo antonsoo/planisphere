@@ -20,14 +20,27 @@ export function julianDayFromDate(date: Date): number {
 }
 
 /**
+ * Right ascension of the *mean* Sun, degrees: the fictitious sun that moves
+ * uniformly along the equator and keeps local mean time. Its RA is the Sun's
+ * geometric mean longitude L0 (Meeus, "Astronomical Algorithms" 2nd ed.,
+ * ch. 25), to within the 20" aberration constant. This places the date ring
+ * (see dial.ts): with it, the rings read local mean time, as the docs say.
+ */
+export function meanSunRaDeg(date: Date): number {
+  const T = (julianDayFromDate(date) - 2451545.0) / 36525;
+  return normalizeDegrees(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+}
+
+/**
  * Low-accuracy apparent right ascension of the Sun, good to about 0.01
  * degree -- the standard simplified solar position algorithm given in
  * Meeus, "Astronomical Algorithms" 2nd ed., ch. 25 ("Solar Coordinates,
  * Low Accuracy"), itself following the Astronomical Almanac's low-precision
- * formula. Used only to place the date ring (see dial.ts); the app's star
- * positions come from src/astro, not from this module.
+ * formula. The apparent Sun keeps apparent (sundial) time; it runs up to
+ * about 4 degrees (16 minutes, the equation of time) from the mean Sun, so
+ * it is not what the rings use.
  */
-export function meanSolarRaDeg(date: Date): number {
+export function apparentSolarRaDeg(date: Date): number {
   const jd = julianDayFromDate(date);
   const T = (jd - 2451545.0) / 36525;
 
