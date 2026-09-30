@@ -34,7 +34,8 @@ function download(filename: string, svgMarkup: string) {
   a.href = url;
   a.download = filename;
   a.click();
-  URL.revokeObjectURL(url);
+  // Revoking in the same task can cancel the download in some browsers.
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function page(paper: 'a4' | 'letter', body: string): string {
