@@ -73,7 +73,9 @@ async function main() {
 
   function currentConfig() {
     const [y, m, d] = dateInput.value.split('-').map(Number);
-    const date = new Date(Date.UTC(y ?? 2026, (m ?? 1) - 1, d ?? 1));
+    // setUTCFullYear, not Date.UTC: Date.UTC reads years 0-99 as 1900-1999.
+    const date = new Date(0);
+    date.setUTCFullYear(y || 2026, (m || 1) - 1, d || 1);
     return {
       latDeg: Number(latInput.value),
       epochYear: Number(epochInput.value),
