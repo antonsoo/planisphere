@@ -166,7 +166,7 @@ flowchart LR
 ## Testing
 
 ```sh
-npm run test   # 316 tests across astro, geometry and export suites
+npm run test   # 318 tests across astro, geometry and export suites
 npm run lint
 npm run typecheck
 npm run build
