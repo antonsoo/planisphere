@@ -1,6 +1,6 @@
 {
   "name": "planisphere",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Print a star wheel for any latitude and any century, precessed to the sky the Babylonians, Ptolemy, or the Maya actually saw.",
   "type": "module",
   "author": "Anton Soloviev",

@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.1] - 2026-10-02
+
+### Changed
+
+- The page's fonts are served by the page itself. They came from Google Fonts,
+  the one request the page made to another origin; the same font files (every
+  subset, as Google serves them to a current browser) are now in
+  `src/fonts/`, with their SIL Open Font License texts. Nothing looks
+  different: screenshots before and after match. The page now loads with
+  every other host blocked.
+
 ## [0.2.0] - 2026-09-30
 
 ### Fixed

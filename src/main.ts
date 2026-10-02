@@ -1,3 +1,4 @@
+import './fonts/fonts.css';
 import type { CatalogueStar } from './astro/starPosition.js';
 import { CITIES, DEFAULT_CITY_ID } from './data/cities.js';
 import { buildPlanisphereSvg, type ConstellationData } from './render/buildPlanisphereSvg.js';
