@@ -24,6 +24,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   event handlers and `eval` are not allowed. Every control was exercised
   in Chromium and Firefox with a listener for policy violations: none.
 
+### Accessibility
+
+- Checked with axe-core (WCAG 2.1 A and AA, and its best-practice rules) in light and dark,
+  at desktop and phone widths: no findings now. Brass as text, and
+  under paper-coloured text, was 3.4:1 and 3.9:1; those places use a darker
+  brass (5.2:1). The paper-size select has a name.
+
 ## [0.2.0] - 2026-09-30
 
 ### Fixed

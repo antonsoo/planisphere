@@ -4,6 +4,8 @@
   --ink: #241f16;
   --ink-soft: #4d4230;
   --brass: #8a6a2f;
+  /* Brass dark enough to read: as text on paper, and under paper-coloured text. */
+  --brass-ink: #735827;
   --brass-light: #b8934f;
   --oxblood: #7d2e28;
   --star: #241f16;
@@ -89,7 +91,7 @@ a {
 
 .brand-mark {
   font-size: 2.1rem;
-  color: var(--brass);
+  color: var(--brass-ink);
   line-height: 1;
 }
 
@@ -142,7 +144,7 @@ a {
 }
 
 .theme-btn[aria-pressed="true"] {
-  background: var(--brass);
+  background: var(--brass-ink);
   color: var(--paper);
 }
 
@@ -176,7 +178,7 @@ a {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--brass);
+  color: var(--brass-ink);
   margin-bottom: 0.35rem;
 }
 
@@ -241,7 +243,7 @@ output {
 .export-btn {
   font-family: var(--body-font);
   font-size: 0.9rem;
-  background: var(--brass);
+  background: var(--brass-ink);
   color: var(--paper);
   border: none;
   border-radius: 3px;
