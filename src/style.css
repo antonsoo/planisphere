@@ -24,6 +24,7 @@
   --ink: #e9e4d6;
   --ink-soft: #b9c3d6;
   --brass: #c9a35f;
+  --brass-ink: #c9a35f;
   --brass-light: #e4c988;
   --oxblood: #d97a6c;
   --star: #f5f2e8;
@@ -214,6 +215,7 @@ input[type="date"] {
 
 input[type="range"] {
   flex: 1;
+  min-width: 0;
   accent-color: var(--oxblood);
 }
 
@@ -252,7 +254,7 @@ output {
 }
 
 .export-btn:hover {
-  background: var(--brass-light);
+  filter: brightness(1.12);
 }
 
 .preview {
@@ -263,7 +265,7 @@ output {
 }
 
 .disc-stage {
-  width: min(100%, 560px);
+  width: min(100%, 680px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle at 42% 38%, var(--paper) 55%, var(--paper-deep) 100%);
@@ -278,10 +280,28 @@ output {
   width: 100%;
   height: 100%;
   cursor: grab;
-  touch-action: none;
+  touch-action: pinch-zoom;
 }
 #disc-svg:active {
   cursor: grabbing;
+}
+.disc-stage[data-view="detail"] {
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px var(--brass);
+  overflow: hidden;
+}
+.disc-stage[data-view="detail"]
+  :is(
+    .date-ring,
+    .hour-tick,
+    .hour-label,
+    .wheel-edge,
+    .holder-edge,
+    .instrument-label,
+    .catalogue-credit,
+    .alignment-guide
+  ) {
+  display: none;
 }
 
 .drag-hint {
@@ -320,50 +340,192 @@ output {
   border-top: 1px solid var(--brass);
 }
 
-/* ---- SVG chart styling ---- */
-.bezel {
-  stroke: var(--brass);
-  stroke-width: 1.5;
+/* The chart uses the same millimetre coordinates and Georgia lettering as print. */
+.disc-paper {
+  fill: var(--paper);
 }
 .holder-face {
   fill: var(--paper-deep);
-  opacity: 0.8;
 }
-.horizon-window {
-  stroke: var(--oxblood);
-  stroke-width: 1.5;
-  stroke-dasharray: 4 3;
-}
-.hour-ring .tick,
-.date-ring .tick {
+.wheel-edge,
+.holder-edge {
   stroke: var(--brass);
-  stroke-width: 1;
+}
+.window-cut {
+  stroke: var(--oxblood);
+}
+.pivot-cut {
+  stroke: var(--ink-soft);
+}
+.pivot {
+  fill: var(--brass-ink);
+}
+.alignment-guide {
+  stroke: var(--oxblood);
+  stroke-width: 0.4;
+  pointer-events: none;
+}
+.date-tick,
+.hour-tick {
+  stroke: var(--brass);
 }
 .hour-label,
-.date-label {
-  font-family: var(--mono-font);
-  font-size: 8px;
-  fill: var(--ink-soft);
+.day-label,
+.month-label,
+.instrument-label {
+  fill: var(--ink);
 }
-.date-label {
-  font-family: var(--body-font);
-  font-style: italic;
-  font-size: 7.5px;
-  fill: var(--ink-soft);
+.cardinal-label {
+  fill: var(--oxblood);
+  font-weight: bold;
 }
 .constellation-line {
   stroke: var(--brass);
-  stroke-width: 0.6;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 .star {
   fill: var(--star);
 }
 .star-label {
-  font-family: var(--body-font);
-  font-style: italic;
-  font-size: 6px;
   fill: var(--ink-soft);
+}
+
+[hidden] {
+  display: none;
+}
+button:disabled,
+fieldset:disabled {
+  opacity: 0.6;
+}
+button:disabled {
+  cursor: default;
+}
+#workbench {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.workbench-heading {
+  font-family: var(--display-font);
+  font-size: 1.1rem;
+  margin: 0;
+}
+.preview-link {
+  font-size: 0.9rem;
+  margin-top: -0.65rem;
+}
+.loading-panel:has(#load-status[hidden]) {
+  display: none;
+}
+#load-status {
+  margin: 0 0 0.5rem;
+}
+.control-error {
+  color: var(--oxblood);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+}
+input[aria-invalid="true"] {
+  border-color: var(--oxblood);
+}
+.preview-heading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+.preview-heading > span {
+  font-family: var(--display-font);
+  letter-spacing: 0.08em;
+  color: var(--brass-ink);
+}
+.preview-heading p {
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  margin: 0.35rem 0 0;
+}
+.time-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.time-stepper button {
+  border: 1px solid var(--brass);
+  padding: 0.5rem;
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.time-stepper .drag-hint {
+  text-align: center;
+}
+.chart-view {
+  display: flex;
+  padding: 0;
+  margin: -0.6rem 0 0.75rem;
+  border: 1px solid var(--brass);
+}
+.chart-view button {
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  padding: 0.6rem 0.8rem;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.chart-view button[aria-pressed="true"] {
+  background: var(--brass-ink);
+  color: var(--paper);
+}
+.assembly-note {
+  width: min(100%, 680px);
+  border-top: 1px solid var(--brass);
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  font-size: 0.95rem;
+}
+.assembly-note h2 {
+  font-family: var(--display-font);
+  font-size: 1.15rem;
+  margin: 0;
+}
+.assembly-note ol {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+.assembly-note li {
+  padding-left: 0.3rem;
+  margin: 0.4rem 0;
+}
+@media (max-width: 420px) {
+  .controls {
+    padding: 1rem;
+  }
+  .readout {
+    gap: 0.8rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+  .readout dt {
+    font-size: 0.58rem;
+  }
+  .time-stepper {
+    gap: 0.5rem;
+  }
+  .disc-stage {
+    box-shadow:
+      0 0 0 1px var(--brass),
+      0 0 0 4px var(--paper-deep),
+      0 0 0 5px var(--brass);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

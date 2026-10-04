@@ -5,8 +5,8 @@ import {
   buildDiscSvgMarkup,
   buildHolderSvgMarkup,
   DISC_RADIUS_MM,
+  HOLDER_RADIUS_MM,
   PAPER_MM,
-  RING_EXTENT_MM,
 } from '../../src/render/exportSvg.js';
 
 describe('export physical dimensions', () => {
@@ -16,8 +16,8 @@ describe('export physical dimensions', () => {
     }
   });
 
-  it('the holder (radius = DISC_RADIUS_MM + RING_EXTENT_MM, incl. hour ring) fits inside both paper sizes', () => {
-    const holderRadius = DISC_RADIUS_MM + RING_EXTENT_MM;
+  it('the holder (radius = HOLDER_RADIUS_MM, incl. hour ring) fits inside both paper sizes', () => {
+    const holderRadius = HOLDER_RADIUS_MM;
     for (const { w, h } of Object.values(PAPER_MM)) {
       const holderDiameter = holderRadius * 2;
       expect(holderDiameter).toBeLessThan(Math.min(w, h));
@@ -85,7 +85,6 @@ const BASE_CONFIG: PlanisphereConfig = {
   showNames: true,
   date: new Date('2026-06-01T00:00:00Z'),
   localHour: 22,
-  discRadius: 220,
 };
 
 describe('buildDiscSvgMarkup', () => {
@@ -112,7 +111,9 @@ describe('buildDiscSvgMarkup', () => {
     // All three fixture stars are bright enough and far enough from the
     // opposite pole to be plotted at latitude 32.5.
     const starCircles =
-      markup.match(/<circle cx="[^"]+" cy="[^"]+" r="[^"]+" fill="black"\/>/g) ?? [];
+      markup.match(
+        /<circle class="star" data-star="[^"]+" cx="[^"]+" cy="[^"]+" r="[^"]+" fill="black"\/>/g,
+      ) ?? [];
     expect(starCircles.length).toBe(FIXTURE_STARS.length);
   });
 
@@ -123,20 +124,23 @@ describe('buildDiscSvgMarkup', () => {
       { ...BASE_CONFIG, magLimit: 0 },
       'a4',
     );
-    const starCircles = dim.match(/<circle cx="[^"]+" cy="[^"]+" r="[^"]+" fill="black"\/>/g) ?? [];
+    const starCircles =
+      dim.match(
+        /<circle class="star" data-star="[^"]+" cx="[^"]+" cy="[^"]+" r="[^"]+" fill="black"\/>/g,
+      ) ?? [];
     // Only Sirius (mag -1.44) is brighter than magLimit=0.
     expect(starCircles.length).toBe(1);
   });
 
   it('draws the Canis Major constellation line when enabled, omits it when disabled', () => {
-    expect(markup).toContain('<path d="M');
+    expect(markup).toContain('class="constellation-line"');
     const withoutLines = buildDiscSvgMarkup(
       FIXTURE_STARS,
       FIXTURE_CONSTELLATIONS,
       { ...BASE_CONFIG, showConstellations: false },
       'a4',
     );
-    expect(withoutLines).not.toContain('<path d="M');
+    expect(withoutLines).not.toContain('class="constellation-line"');
   });
 });
 
@@ -145,12 +149,14 @@ describe('buildHolderSvgMarkup', () => {
     const markup = buildHolderSvgMarkup(BASE_CONFIG, 'letter');
     expect(markup).toContain('width="215.9mm"');
     expect(markup).toContain('height="279.4mm"');
-    const windowPath = markup.match(/<path d="M[^"]+Z" fill="none" stroke="red"/);
+    const windowPath = markup.match(
+      /<path class="window-cut" d="M[^"]+Z" fill="none" stroke="red"/,
+    );
     expect(windowPath).not.toBeNull();
   });
 
-  it('places the outer cut circle at DISC_RADIUS_MM + RING_EXTENT_MM', () => {
+  it('places the outer cut circle at HOLDER_RADIUS_MM', () => {
     const markup = buildHolderSvgMarkup(BASE_CONFIG, 'a4');
-    expect(markup).toContain(`r="${DISC_RADIUS_MM + RING_EXTENT_MM}"`);
+    expect(markup).toContain(`r="${HOLDER_RADIUS_MM}"`);
   });
 });

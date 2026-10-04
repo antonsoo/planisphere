@@ -17,6 +17,9 @@ npm ci
 - `npm run lint` / `npm run lint:fix` — Biome.
 - `npm run typecheck` — `tsc --noEmit`.
 - `npm run build` — typechecks then builds the static site to `dist/`.
+- `npx playwright install chromium firefox`, then `npm run test:browser` — production workflows in both browsers.
+- `PLANISPHERE_BASE_URL=https://antonsoo.github.io/planisphere/ npm run test:browser` — the same workflows against the live site.
+- `npm run verify:hosted` — compare every local `dist/` file with its hosted SHA-256 and require the production CSP.
 
 PRs should keep `npm run lint`, `npm run typecheck`, and `npm run test` green.
 

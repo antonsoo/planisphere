@@ -1,6 +1,13 @@
-import { horizontalToEquatorial } from './horizontal.js';
 import type { HemisphereSign, Point } from './projection.js';
-import { projectPoint } from './projection.js';
+
+/** Solve altitude = 0 for the radius in an elevated-pole projection. */
+export function horizonRadius(theta: number, latDeg: number, scale: number): number {
+  const phi = (Math.abs(latDeg) * Math.PI) / 180;
+  if (phi === 0) return Math.cos(theta) >= 0 ? 180 * scale : 0;
+  return (
+    scale * (90 + (Math.atan2(Math.cos(phi) * Math.cos(theta), Math.sin(phi)) * 180) / Math.PI)
+  );
+}
 
 /**
  * The horizon window's boundary, in the *holder's* fixed frame (hour angle
@@ -11,17 +18,23 @@ import { projectPoint } from './projection.js';
  */
 export function buildHorizonWindowPolygon(
   latDeg: number,
-  hemisphereSign: HemisphereSign,
+  _hemisphereSign: HemisphereSign,
   scale: number,
   samples = 360,
 ): Point[] {
-  const points: Point[] = [];
-  for (let i = 0; i < samples; i++) {
-    const az = (360 * i) / samples;
-    const { decDeg, hourAngleDeg } = horizontalToEquatorial(0, az, latDeg);
-    points.push(projectPoint(decDeg, hourAngleDeg, hemisphereSign, scale));
+  if (latDeg === 0) {
+    // At the equator use a semicircle and its diameter, not a degenerate
+    // horizontal-to-equatorial inversion at the celestial poles.
+    return Array.from({ length: samples + 1 }, (_, i) => {
+      const theta = -Math.PI / 2 + (Math.PI * i) / samples;
+      return { x: 180 * scale * Math.cos(theta), y: 180 * scale * Math.sin(theta) };
+    });
   }
-  return points;
+  return Array.from({ length: samples }, (_, i) => {
+    const theta = (2 * Math.PI * i) / samples;
+    const r = horizonRadius(theta, latDeg, scale);
+    return { x: r * Math.cos(theta), y: r * Math.sin(theta) };
+  });
 }
 
 /** Standard ray-casting point-in-polygon test. */

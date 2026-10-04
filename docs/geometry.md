@@ -23,7 +23,7 @@ centre; a star at the opposite pole (`rho=180`) would sit at radius
 The disc only needs to go out to the faintest declination that ever rises at
 latitude `phi`: `dec_min = -(90 - |phi|)`, i.e. `rho_max = 180 - |phi|`. That
 edge is where `scale = discRadius / rho_max` comes from
-(`src/render/buildPlanisphereSvg.ts`).
+(`src/render/artwork.ts`).
 
 ## Why the star disc is mirrored
 
@@ -91,22 +91,74 @@ accounted for. `tests/geometry/window.test.ts`
 exercises this same function, so the rendered rings and the visibility test
 are provably using the same rotation.
 
-## What this ignores
+## Horizon and retained material
 
-- **The equation of time.** A paper (or SVG) ring can't encode the few
-  minutes of difference between local mean time and true solar time; the
-  rings read local *mean* time, so enter that, not your clock's civil/DST
-  time and not sundial time. Commercial paper planispheres make the same
-  simplification.
-- **The calendar.** The date ring is Gregorian, drawn from 2026's dates,
-  which is right for any epoch because the Gregorian calendar keeps the
-  equinox near 20 March. For an ancient epoch that means proleptic
-  Gregorian dates: in 700 BCE the Julian calendar ran about a week ahead of
-  them, so convert a Julian date before setting it.
-- **Longitude.** The geometry depends only on latitude. Longitude only
-  matters for converting a civil clock reading to local mean time, which
-  this app leaves to the user (enter your own local time directly).
-- **Atmospheric refraction.** The horizon is geometric (altitude = 0
-  exactly), not the ~34 arcminutes higher apparent horizon caused by
-  refraction. That's smaller than the width of the drawn window line at
-  this disc's scale.
+For the elevated-pole projection, let `a = abs(latitude)` and let `theta`
+be the fixed frame's hour angle. Solving the altitude-zero equation gives
+
+```text
+rho_horizon(theta) = 90 + atan2(cos(a) * cos(theta), sin(a))
+r_horizon(theta)   = scale * rho_horizon(theta)
+```
+
+Angles on the right are in degrees after converting `atan2`'s result.
+This radial curve agrees with the independent altitude formula in
+`tests/geometry/window.test.ts`, including latitudes close to zero and both
+hemispheres. The [USNO altitude/azimuth reference](https://aa.usno.navy.mil/faq/alt_az)
+provides the underlying hour-angle equation.
+
+At latitude exactly zero, altitude is positive precisely when `cos(H) > 0`
+away from the poles. The projected window is therefore a half-disc with a
+straight diameter. Constructing that semicircle explicitly avoids the
+pole singularities of horizontal-coordinate inversion; equator tests are
+included rather than excluded.
+
+A full horizon cutout contains the elevated pole and would remove the
+holder's pivot. The printable holder instead has two closed cutouts that
+retain a 3.2 mm radius hub and a 2.4 mm wide horizontal strip. For an upper
+half angle, the inner cutting radius is
+
+```text
+r_inner(theta) = max(3.2 mm, 1.2 mm / sin(theta))
+```
+
+A cut exists only where `r_horizon > r_inner`. The lower half is mirrored.
+The browser and export share these actual polygon paths; the preview's
+holder is opaque. Tests compare the cutouts to the altitude test minus the
+retained hub/strip and verify a continuous connection from the pivot to both
+sides. Compass letters are placed outside the horizon along its altitude
+normal, including the equatorial straight edge.
+
+## Physical scales and bounded engraving
+
+The 60 mm radius sky field belongs to a 96 mm radius wheel. All daily ticks
+start at radius 82 mm, outside the fixed 80 mm radius holder. The date scale
+therefore stays visible through a full rotation. The holder has 24 hour
+labels and 96 quarter-hour ticks. Both page formats leave at least 9 mm
+horizontal margin around the larger wheel.
+
+Constellation **segments** are clipped to the sky-field circle, including
+outside-to-outside crossings. The exported path coordinates are clipped
+geometrically; this does not depend on a cutter honoring SVG `clipPath`.
+Star discs retain a small edge clearance. Bright-star names are XML-escaped
+and omitted when a conservative text rectangle would cross the sky-field
+edge. Browser tests also measure the actual exported text's glyph bounds.
+
+## Approximation and calendar limits
+
+- The rings read local **mean** time. Convert your civil/DST clock using
+  your east-positive longitude; do not enter apparent sundial time. See
+  [assembly and time setting](assembly.md).
+- The date ring is calibrated from the **selected Gregorian year**, with
+  every day represented, including leap day. It is not a perpetual scale.
+  The star-position epoch is independent of this annual calibration.
+- A date mark stands for 00:00 UTC. The mean Sun's motion later that day
+  adds up to about a degree of alignment error. The existing independent
+  Greenwich sidereal-time cross-check retains its 0.02-degree tolerance
+  after accounting for that motion. [USNO's sidereal-time reference](https://aa.usno.navy.mil/faq/GAST)
+  explains the relation between Greenwich and east-positive local time.
+- The horizon is geometric rather than refracted. The center hub and
+  supports obscure part of the otherwise visible sky, including the pole.
+- The UI offers latitudes from 89 degrees south to 89 degrees north and
+  Gregorian date years 0001 through 9999. Epochs run from astronomical year
+  -2999 (3000 BCE) through 3000 CE; year 0 represents 1 BCE.

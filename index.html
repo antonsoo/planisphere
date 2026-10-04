@@ -43,6 +43,14 @@
 
     <main class="layout">
       <section class="controls" aria-label="Planisphere controls">
+        <p class="workbench-heading">Build your instrument</p>
+        <a class="preview-link" href="#preview">View assembled wheel ↓</a>
+        <div class="loading-panel">
+          <p id="load-status" role="status">Loading the star catalogue…</p>
+          <button type="button" id="retry" class="export-btn" hidden>Retry loading catalogue</button>
+        </div>
+        <fieldset id="workbench" disabled>
+        <legend class="sr-only">Star wheel settings and downloads</legend>
         <div class="control-group">
           <label for="city">Location</label>
           <select id="city"></select>
@@ -60,7 +68,7 @@
         <div class="control-group">
           <label for="epoch">Epoch year</label>
           <div class="row">
-            <input type="range" id="epoch" min="-3000" max="3000" step="1" />
+            <input type="range" id="epoch" min="-2999" max="3000" step="1" />
             <output id="epoch-value" for="epoch"></output>
           </div>
           <p class="hint">Negative = BCE (astronomical year numbering: year 0 = 1 BCE, so -699 = 700 BCE).</p>
@@ -80,43 +88,65 @@
         </div>
 
         <div class="control-group">
-          <label for="date">Tonight's date</label>
-          <input type="date" id="date" />
+          <label for="date">Gregorian date</label>
+          <input type="date" id="date" min="0001-01-01" max="9999-12-31" aria-describedby="date-error date-scale-note" />
+          <p id="date-error" class="control-error" role="status" hidden></p>
+          <p id="date-scale-note" class="hint">The date scale is calibrated for this year.</p>
         </div>
 
         <div class="control-group">
-          <label for="hour">Local time</label>
+          <label for="hour">Local mean time</label>
           <div class="row">
-            <input type="range" id="hour" min="0" max="23.98" step="0.25" />
+            <input type="range" id="hour" min="0" max="23.75" step="0.25" />
             <output id="hour-value" for="hour"></output>
           </div>
-          <p class="hint">Local mean time, not civil/DST time — see Accuracy in the README.</p>
+          <p class="hint">Use solar mean time for your site, rather than your civil/DST clock. See <a href="https://github.com/antonsoo/planisphere#accuracy-and-limitations">time conversion and accuracy</a>.</p>
         </div>
 
         <div class="control-group export-group">
-          <p class="hint">Exports are scale-exact SVG, sized for the paper below.</p>
+          <p class="hint">Two sheets, one instrument. Print at 100% and check the 50 mm scale bar.</p>
           <div class="row">
             <select id="paper-size" aria-label="Paper size">
               <option value="a4">A4</option>
               <option value="letter">US Letter</option>
             </select>
           </div>
-          <button type="button" id="export-disc" class="export-btn">Download star disc (SVG)</button>
-          <button type="button" id="export-holder" class="export-btn">Download holder (SVG)</button>
+          <button type="button" id="export-disc" class="export-btn" disabled>Download star disc (SVG)</button>
+          <button type="button" id="export-holder" class="export-btn" disabled>Download holder (SVG)</button>
         </div>
+        </fieldset>
       </section>
 
-      <section class="preview" id="preview" aria-label="Planisphere preview">
-        <div class="disc-stage">
+      <section class="preview" id="preview" aria-label="Planisphere preview" tabindex="-1">
+        <div class="preview-heading"><span>Assembled view</span><p id="preview-setting">Your opaque-paper star wheel</p></div>
+        <fieldset class="chart-view">
+          <legend class="sr-only">Preview view</legend>
+          <button type="button" id="chart-full" aria-pressed="true" disabled>Full instrument</button>
+          <button type="button" id="chart-detail" aria-pressed="false" disabled>Sky detail</button>
+        </fieldset>
+        <div class="disc-stage" id="disc-stage">
           <svg id="disc-svg" viewBox="-260 -260 520 520" role="img" aria-label="Rotatable star wheel preview">
             <title>Planisphere disc preview</title>
           </svg>
         </div>
-        <p class="drag-hint">Drag the disc to turn it.</p>
+        <div class="time-stepper">
+          <button type="button" id="earlier" aria-label="Earlier by 15 minutes" disabled>−15 min</button>
+          <p class="drag-hint" id="drag-hint">Drag the rim. The red guide aligns date and mean time.</p>
+          <button type="button" id="later" aria-label="Later by 15 minutes" disabled>+15 min</button>
+        </div>
         <dl class="readout">
           <div><dt>Sidereal alignment</dt><dd id="readout-lst">—</dd></div>
           <div><dt>Visible declination limit</dt><dd id="readout-limit">—</dd></div>
         </dl>
+        <div class="assembly-note">
+          <h2>Make the sky turn</h2>
+          <ol>
+            <li>Print and cut both red outlines. Cut the holder’s two windows; retain the narrow supports and center hub.</li>
+            <li>Place the smaller holder over the star wheel. Loosely fasten the center holes with a paper brad.</li>
+            <li>Turn a date tick on the outer rim to an hour tick on the holder. Compass letters mark the horizon; the hub and supports hide a small strip.</li>
+          </ol>
+          <a href="https://github.com/antonsoo/planisphere/blob/main/docs/assembly.md">Assembly and time-setting guide →</a>
+        </div>
       </section>
     </main>
 

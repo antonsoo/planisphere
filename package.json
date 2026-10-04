@@ -1,6 +1,6 @@
 {
   "name": "planisphere",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Print a star wheel for any latitude and any century, precessed to the sky the Babylonians, Ptolemy, or the Maya actually saw.",
   "type": "module",
   "author": "Anton Soloviev",
@@ -26,12 +26,16 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:browser": "playwright test",
+    "verify:hosted": "node scripts/verify-hosted.mjs",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@biomejs/biome": "^2.5.14",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.2",
     "typescript": "^5.7.3",
     "vite": "^8.3.0",

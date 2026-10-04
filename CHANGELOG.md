@@ -4,6 +4,35 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.0] - 2026-10-04
+
+### Fixed
+
+- The printed date scale was unlabeled and covered by the larger holder; the
+  cut horizon also removed the material needed for the center pivot. A 192 mm
+  wheel now exposes its date rim around a 160 mm holder. Two real window
+  cutouts retain a connected hub and supports, and the preview is opaque.
+- Exports now honor bright-star names and share the preview's physical artwork.
+  Constellation segments, star discs, and labels stay inside the sky field.
+- Dragging changes local mean time and its readouts, with no hidden offset left
+  after other settings change. Pointer seam crossings and cancellations are handled.
+- Invalid date drafts keep the last valid chart and disable downloads. Catalogue
+  HTTP, JSON, schema, endpoint, size, and timeout failures have working retry;
+  pending requests can be restarted without stale results winning.
+- Equatorial horizon construction is a half-disc verified against altitude.
+  The epoch slider's lower bound now correctly reads 3000 BCE, not 3001 BCE.
+- Night-theme controls and narrow-screen range inputs remain readable and fit.
+
+### Added
+
+- Daily marks for the selected Gregorian year, including leap day; month/day
+  labels, 24 hour labels, quarter-hour ticks, compass letters, catalogue credits,
+  and a 50 mm print calibration bar.
+- Keyboard time steps, a sky-detail view, and saved theme preference. Native
+  two-finger page zoom remains available over the chart.
+- Production Chromium/Firefox workflows and reviewed print-download examples,
+  with an updated assembly and local-mean-time conversion guide.
+
 ## [0.2.1] - 2026-10-02
 
 ### Changed

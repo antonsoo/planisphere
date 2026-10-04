@@ -26,14 +26,7 @@ function mulberry32(seed: number) {
 // and the app's city list.
 describe('horizon window matches the analytic altitude test', () => {
   const scale = 4;
-  // Latitude 0 is deliberately excluded: at the equator the horizon curve
-  // passes through *both* celestial poles (the projection centre), which
-  // makes a finite-sample simple-polygon approximation of the window
-  // boundary ill-defined exactly at the crossing (self-intersecting in
-  // (rho, theta) space), independent of sample count. That is a limitation
-  // of this test's polygon-based cross-check, not of the analytic altitude
-  // formula or of the rendered window itself -- see docs/geometry.md.
-  const latitudes = [51.5, 32.55, 37.98, 20.68, 17.22, -33.87, 65];
+  const latitudes = [0, 0.1, -0.1, 51.5, 32.55, 37.98, 20.68, 17.22, -33.87, 65, -65, 89, -89];
 
   for (const lat of latitudes) {
     const hemisphereSign = lat >= 0 ? 1 : -1;

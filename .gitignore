@@ -4,6 +4,8 @@ dist/
 .DS_Store
 npm-debug.log*
 .vite/
+test-results/
+playwright-report/
 
 # scripts/build_catalogue.py's raw source download (regenerate with scripts/fetch_hygdata.sh)
 scripts/vendor/hygdata_v41.csv

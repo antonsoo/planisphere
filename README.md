@@ -51,15 +51,16 @@ a static site, nothing to install.
   constellations, every line endpoint verified against the catalogue.
 - **Any latitude**, with a preset list including ancient sites: Babylon,
   Alexandria, Athens, Rome, Chichén Itzá, Tikal, Chang'an, Ujjain.
-- **Live, rotatable SVG preview** — drag the disc to turn it. As on the
-  printed object, the holder face covers the sky outside the horizon window
-  (dimmed here so it stays readable) and the disc's date ring stays visible
-  around the rim, against the holder's hour ring.
+- **Live, rotatable SVG preview** — drag the rim to change local mean time,
+  or use the keyboard time control and 15-minute buttons. The opaque holder,
+  exposed daily date scale, and connected pivot match the printed assembly.
+  **Sky detail** enlarges the windows for close inspection.
 - **Ink & paper / night-sky themes**, keyboard-accessible, responsive down
-  to 375px.
+  to 320px, with persistent theme selection.
 - **Scale-exact SVG export** of the star disc and the horizon-window
   holder, sized for A4 or US Letter, with laser-cut colour conventions
-  (red = cut, black = engrave).
+  (red = cut, black = engrave), daily month/day marks, quarter-hour ticks,
+  compass letters, bright-star names, and an independent 50 mm scale bar.
 
 <img src="docs/assets/preview-night.png" alt="Planisphere app interface, night-sky theme, Babylon 700 BCE">
 
@@ -99,13 +100,17 @@ flowchart LR
    then a *fixed* shape, cut once per latitude. Full derivation, including
    where the date/hour rings come from, is in
    [`docs/geometry.md`](docs/geometry.md).
-4. **Rendering & export.** `src/render/buildPlanisphereSvg.ts` draws the
-   live preview: the rotating star disc, a translucent holder face with the
-   horizon window cut out (exactly the stars above the horizon show at full
-   strength), and the date ring drawn on top so it can be read against the
-   hour ring. `src/render/exportSvg.ts` renders the same geometry
-   at real millimetre scale for print/laser-cut — see
-   [`docs/assembly.md`](docs/assembly.md).
+4. **Rendering & export.** `src/render/artwork.ts` supplies the same physical
+   geometry and lettering to the preview and exports. A 192 mm rotating wheel
+   exposes its date scale around a 160 mm opaque holder; two window cutouts
+   retain a connected center hub. Constellation segments are clipped in their
+   actual coordinates, and labels remain inside the sky field. See
+   [`docs/assembly.md`](docs/assembly.md) for printing, cutting, and time setting.
+5. **Recovery.** Catalogue responses are checked for HTTP errors, valid schema,
+   unique star IDs, existing constellation endpoints, and bounded size. Stalled
+   loads can be restarted and time out with retry. Invalid date drafts retain
+   the last valid chart and pause downloads. After loading, calculations,
+   themes, and exports work offline; only the theme preference is stored.
 
 ## Accuracy and limitations
 
@@ -140,16 +145,20 @@ flowchart LR
   sidereal-time formula (`tests/geometry/dial.test.ts`); each mark stands
   for 0h UT, so a reading late in the day trails the sky by up to a degree
   (4 minutes).
-- **The date ring is Gregorian**, which keeps the equinox near 20 March in
-  any epoch; for ancient epochs that means proleptic Gregorian dates (in
-  700 BCE the Julian calendar ran about a week ahead of them).
+- **The date ring is Gregorian and year-specific**, including leap day.
+  Changing its year regenerates the annual scale. The star-position epoch
+  remains a separate setting, so historical epochs can be compared on the
+  same modern seasonal scale. The date input supports years 0001–9999;
+  epoch selection supports 3000 BCE–3000 CE.
 - **Geometric horizon**, not the atmospherically refracted one (about 34
   arcminutes higher in reality) — smaller than the drawn window line.
-- The horizon-window/altitude cross-check test
-  (`tests/geometry/window.test.ts`) excludes latitude 0 exactly, where the
-  window boundary passes through both celestial poles and a finite-sample
-  polygon becomes ill-defined at the crossing; this is a limitation of that
-  *test's* polygon approximation, not of the rendered app.
+- At **the equator**, the window is constructed as a half-disc and checked
+  against the altitude formula. The center hub and its two supports obscure
+  part of the sky, including the elevated pole, as shown in the opaque
+  preview. The UI latitude range is 89°S–89°N.
+- Print files and assembled overlays have been checked digitally; a physical
+  paper assembly or laser-cut trial has not yet been performed. Example
+  SVG downloads and opaque print proofs are in the [assembly guide](docs/assembly.md).
 
 ## Data licenses
 
@@ -170,26 +179,29 @@ npm run test   # astro, geometry and export suites
 npm run lint
 npm run typecheck
 npm run build
+npx playwright install chromium firefox
+npm run test:browser  # production build, Chromium and Firefox
 ```
 
 - **Precession**: cross-checked against pyerfa/ERFA (independent library)
   and Meeus's published worked example (see Accuracy, above), plus
   round-trip tests (precess forward then back to J2000) for a range of
   stars and epochs.
-- **Geometry**: `equatorialToHorizontal`/`horizontalToEquatorial` round-trip
-  for 200 random points; the horizon window polygon is checked against the
-  direct altitude formula for ~2,000 random (latitude, date, hour, star)
-  combinations (`tests/geometry/window.test.ts`) — this is the test that
-  actually verifies "a star is inside the window exactly when its computed
-  altitude is > 0."
+- **Geometry**: horizontal/equatorial round trips; analytic altitude versus
+  horizon polygons at the equator, near it, and in both hemispheres; physical
+  cutouts versus that horizon minus the retained hub and support strip.
 - **Export**: physical page-fit dimensions verified numerically, and the
   generated SVG markup itself is checked (correct millimetre sizing, cut
   paths in red, engraved marks in black, star count matches the magnitude
   filter) — `tests/render/export.test.ts`.
 
-Machine for any benchmarking implied above: this box, 14 vCPU WSL2 Linux, 48
-GB RAM — not that anything here is performance-sensitive; the whole computed
-disc renders in well under a frame.
+- **Production browsers**: actual SVG downloads, XML parsing, preview/export
+  equivalence, exposed dates over full rotation, hub connectivity, glyph bounds,
+  keyboard and pointer alignment, loading/retry/timeout recovery, invalid date
+  drafts, offline work, and both themes at 1440, 375, and 320 pixels. Every
+  workflow monitors page errors, CSP violations, and off-origin requests.
+- The same suite can target the deployed site:
+  `PLANISPHERE_BASE_URL=https://antonsoo.github.io/planisphere/ npm run test:browser`.
 
 ## Contributing
 
