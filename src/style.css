@@ -264,6 +264,16 @@ output {
   gap: 0.6rem;
 }
 
+@media (min-width: 821px) {
+  .controls {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100dvh - 2rem);
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+}
+
 .disc-stage {
   width: min(100%, 680px);
   aspect-ratio: 1;
@@ -532,5 +542,212 @@ input[aria-invalid="true"] {
   * {
     transition-duration: 0.001ms;
     animation-duration: 0.001ms;
+  }
+}
+
+/* The finder is an observing register: the same paper, ink and brass as the wheel. */
+.star-finder {
+  width: 100%;
+  min-width: 0;
+  border-top: 1px solid var(--brass);
+  border-bottom: 1px solid var(--brass);
+  margin: 1rem 0;
+  padding: 1.1rem 0;
+}
+.star-finder h2 {
+  font: 500 1.25rem var(--display-font);
+  margin: 0;
+}
+.finder-intro {
+  margin: 0.4rem 0 1rem;
+  color: var(--ink-soft);
+}
+.star-finder fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.star-search-label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+.star-finder input[type="search"] {
+  width: 100%;
+  min-width: 0;
+  padding: 0.65rem 0.75rem;
+  font: 1rem var(--body-font);
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+}
+.star-examples,
+.star-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.7rem 0;
+}
+.star-finder button {
+  font: 0.9rem var(--body-font);
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+.star-finder button:hover {
+  background: var(--paper-deep);
+}
+.star-finder button[aria-pressed="true"] {
+  border-color: var(--oxblood);
+  box-shadow: inset 3px 0 var(--oxblood);
+}
+.star-results {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.star-results button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 0.8rem;
+}
+.star-results small,
+.star-identifiers,
+.finder-kicker {
+  font: 0.7rem var(--mono-font);
+  color: var(--ink-soft);
+}
+.star-detail header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+  border-top: 1px dashed var(--brass);
+  padding-top: 1rem;
+}
+.star-detail h3 {
+  font: 500 1.6rem var(--display-font);
+  margin: 0.25rem 0;
+  overflow-wrap: anywhere;
+}
+.finder-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.star-identifiers {
+  margin: 0.35rem 0;
+  overflow-wrap: anywhere;
+}
+.star-epoch {
+  font: 1.3rem var(--body-font);
+  color: var(--brass-ink);
+}
+.star-epoch small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+.star-visibility {
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid var(--oxblood);
+  background: color-mix(in srgb, var(--paper-deep) 60%, transparent);
+}
+.star-observation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 1.1rem 0;
+}
+.star-observation dt {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+.star-observation dd {
+  font: 0.9rem var(--mono-font);
+  margin: 0.25rem 0;
+}
+.star-coordinate-scroll {
+  width: 100%;
+  overflow: auto;
+}
+.star-coordinates {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+.star-coordinates caption {
+  text-align: left;
+  font-size: 1rem;
+  margin: 0.6rem 0;
+}
+.star-coordinates th,
+.star-coordinates td {
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid var(--brass);
+  text-align: left;
+}
+.star-coordinates td {
+  font: 0.75rem var(--mono-font);
+  white-space: nowrap;
+}
+.star-coordinates th {
+  /* Reuse the loaded body face when the first inspection opens offline. */
+  font-weight: 400;
+}
+.star-assumptions {
+  margin: 1rem 0;
+}
+.star-assumptions summary {
+  cursor: pointer;
+  color: var(--brass-ink);
+}
+.star-assumptions dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.star-assumptions dt {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.star-assumptions dd {
+  margin: 0.25rem 0;
+  font: 0.8rem var(--mono-font);
+}
+.star-assumptions p {
+  font-size: 0.88rem;
+}
+.star-locator {
+  fill: none;
+  stroke: var(--oxblood);
+  stroke-width: 0.3;
+  pointer-events: none;
+}
+.disc-stage[data-holder="lifted"] .holder,
+.disc-stage[data-holder="lifted"] .alignment-guide {
+  display: none;
+}
+@media (max-width: 600px) {
+  .star-results {
+    grid-template-columns: 1fr;
+  }
+  .star-observation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .star-assumptions dl {
+    grid-template-columns: 1fr;
   }
 }

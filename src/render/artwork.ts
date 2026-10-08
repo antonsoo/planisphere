@@ -9,6 +9,7 @@ import {
   WHEEL_RADIUS_MM,
 } from '../geometry/cutouts.js';
 import { dateRingAngleDeg, hourRingAngleDeg } from '../geometry/dial.js';
+import { printedStarRadius } from '../geometry/printedStar.js';
 import { projectStar } from '../geometry/projection.js';
 import { pathFromPoints } from './svgUtil.js';
 import type { ConstellationData, PlanisphereConfig } from './types.js';
@@ -117,12 +118,8 @@ export function buildDiscArtwork(
     const point = positions.get(star.id);
     if (!point) continue;
     const { x, y } = point;
-    const clearance = SKY_RADIUS_MM - Math.hypot(x, y) - 0.02;
-    const r = Math.min(
-      clearance,
-      Math.max(0.15, 0.14 + (5.5 - Math.max(-1.5, Math.min(5.5, star.mag))) * 0.09),
-    );
-    if (r < 0.06) continue;
+    const r = printedStarRadius(star.mag, point);
+    if (r === null) continue;
     parts.push(
       `<circle class="star" data-star="${star.id}" cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="black"/>`,
     );

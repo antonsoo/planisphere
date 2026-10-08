@@ -6,6 +6,7 @@ import { discRotationDeg } from './geometry/dial.js';
 import { buildPlanisphereSvg } from './render/buildPlanisphereSvg.js';
 import { exportDiscSvg, exportHolderSvg } from './render/exportSvg.js';
 import type { PlanisphereConfig } from './render/types.js';
+import { StarFinder } from './starFinder.js';
 
 function $<T extends Element>(id: string): T {
   const el = document.getElementById(id);
@@ -33,13 +34,28 @@ const exportDisc = $<HTMLButtonElement>('export-disc');
 const exportHolder = $<HTMLButtonElement>('export-holder');
 const fullView = $<HTMLButtonElement>('chart-full');
 const detailView = $<HTMLButtonElement>('chart-detail');
+const liftHolder = $<HTMLButtonElement>('lift-holder');
 let skyDetail = false;
+let holderLifted = false;
 let catalogue: Catalogue | null = null;
 let committed: PlanisphereConfig | null = null;
 let rotator: SVGGElement | null = null;
 let pointerId: number | null = null;
 let previousAngle = 0;
 let dragHour = 0;
+const starFinder = new StarFinder($<HTMLElement>('star-finder'), svg, {
+  locate: () => {
+    setHolderLifted(true);
+    setChartView(false);
+    $<HTMLElement>('preview').focus({ preventScroll: true });
+    svg.scrollIntoView({ block: 'center', behavior: 'instant' });
+  },
+  setHour: (hour) => setHour(hour),
+  include: (magnitude) => {
+    magInput.value = String(Math.min(5.5, Math.ceil(magnitude * 10) / 10));
+    render();
+  },
+});
 
 const formatEpoch = (year: number) => (year <= 0 ? `${1 - year} BCE` : `${year} CE`);
 const formatLatitude = (lat: number) => `${Math.abs(lat).toFixed(1)}°${lat < 0 ? 'S' : 'N'}`;
@@ -90,7 +106,10 @@ function configFromControls(): PlanisphereConfig | null {
   for (const button of [exportDisc, exportHolder, earlier, later])
     button.disabled = invalid || !catalogue;
   svg.setAttribute('aria-disabled', String(invalid || !catalogue));
-  if (!date) return null;
+  if (!date) {
+    starFinder.update(null, false);
+    return null;
+  }
   return {
     latDeg: Number(latInput.value),
     epochYear: Number(epochInput.value),
@@ -134,6 +153,7 @@ function updateReadouts(config: PlanisphereConfig) {
     `${formatLatitude(config.latDeg)} · ${formatEpoch(config.epochYear)} · ${config.date.toISOString().slice(0, 10)} · ${formatHour(config.localHour)} mean time`;
   $<HTMLElement>('date-scale-note').textContent =
     `Printed date scale: ${config.date.getUTCFullYear()}. Regenerate the wheel if you change years.`;
+  starFinder.update(config, true);
 }
 
 function endDrag() {
@@ -141,23 +161,45 @@ function endDrag() {
 }
 function setChartView(detail: boolean) {
   skyDetail = detail;
+  const title = svg.querySelector('title');
+  if (title)
+    title.textContent = holderLifted ? 'Uncovered planisphere star disc' : 'Assembled planisphere';
   $<HTMLElement>('disc-stage').dataset.view = detail ? 'detail' : 'full';
   fullView.setAttribute('aria-pressed', String(!detail));
   detailView.setAttribute('aria-pressed', String(detail));
   const boxes = [...svg.querySelectorAll<SVGGraphicsElement>('.window-cut')].map((path) =>
     path.getBBox(),
   );
-  if (detail && boxes.length) {
+  if (detail && holderLifted) {
+    svg.setAttribute('viewBox', '-65 -65 130 130');
+  } else if (detail && boxes.length) {
     const minX = Math.min(...boxes.map((box) => box.x));
     const maxX = Math.max(...boxes.map((box) => box.x + box.width));
     const height = Math.max(...boxes.map((box) => box.height));
     const size = Math.max(maxX - minX, height * 2 + 2.4) + 12;
     svg.setAttribute('viewBox', `${(minX + maxX - size) / 2} ${-size / 2} ${size} ${size}`);
   } else svg.setAttribute('viewBox', '-100 -100 200 200');
-  $<HTMLElement>('drag-hint').textContent = detail
-    ? 'Drag the sky to change mean time. Use the full instrument to see date alignment.'
-    : 'Drag the rim. The red guide aligns date and mean time.';
+  $<HTMLElement>('drag-hint').textContent = holderLifted
+    ? 'Holder lifted for inspection. Replace it to see which stars the paper windows expose.'
+    : detail
+      ? 'Drag the sky to change mean time. Use the full instrument to see date alignment.'
+      : 'Drag the rim. The red guide aligns date and mean time.';
 }
+function setHolderLifted(lifted: boolean) {
+  holderLifted = lifted;
+  $<HTMLElement>('preview-view').textContent = lifted ? 'Uncovered disc' : 'Assembled view';
+  $<HTMLElement>('disc-stage').dataset.holder = lifted ? 'lifted' : 'assembled';
+  liftHolder.setAttribute('aria-pressed', String(lifted));
+  liftHolder.textContent = lifted ? 'Replace holder' : 'Lift holder';
+  svg.setAttribute(
+    'aria-label',
+    lifted
+      ? 'Uncovered star disc for catalogue inspection'
+      : 'Rotatable assembled star wheel preview',
+  );
+  setChartView(skyDetail);
+}
+liftHolder.addEventListener('click', () => setHolderLifted(!holderLifted));
 fullView.addEventListener('click', () => setChartView(false));
 detailView.addEventListener('click', () => setChartView(true));
 function render() {
@@ -170,6 +212,7 @@ function render() {
   committed = config;
   fullView.disabled = false;
   detailView.disabled = false;
+  liftHolder.disabled = false;
   setChartView(skyDetail);
   updateReadouts(config);
 }
@@ -291,6 +334,8 @@ async function load() {
   for (const button of [earlier, later, exportDisc, exportHolder]) button.disabled = true;
   fullView.disabled = true;
   detailView.disabled = true;
+  liftHolder.disabled = true;
+  starFinder.setLoading();
   loading.hidden = false;
   loading.textContent = 'Loading the star catalogue…';
   retry.textContent = 'Restart catalogue loading';
@@ -304,6 +349,7 @@ async function load() {
     const data = await loadCatalogue(import.meta.env.BASE_URL, controller.signal);
     if (owner !== generation) return;
     catalogue = data;
+    starFinder.setCatalogue(data);
     workbench.disabled = false;
     loading.hidden = true;
     render();

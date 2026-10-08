@@ -22,7 +22,7 @@ function page(paper: 'a4' | 'letter', artwork: string, caption: string): string 
 <svg xmlns="http://www.w3.org/2000/svg" width="${w}mm" height="${h}mm" viewBox="0 0 ${w} ${h}">
   <title>${caption}</title>
   <desc>Print at 100 percent scale. Red strokes are cut outlines; black marks are engraved or printed. Check the 50 millimetre scale bar.</desc>
-  <metadata>Star data: HYG v4.1, David Nash / AstroNexus, https://github.com/astronexus/HYG-Database, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Coordinates transformed with proper motion and precession. Instrument design and code: Anton Soloviev, MIT, https://github.com/antonsoo/planisphere.</metadata>
+  <metadata>Star data: HYG v4.1, David Nash / AstroNexus, https://github.com/astronexus/HYG-Database, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Coordinates use geometric rectilinear motion with distance and radial velocity when available, then P03 precession. No light-time, relativistic or binary-orbit correction. Magnitudes remain catalogue values. Date-ring year and stellar epoch are independent. Instrument design and code: Anton Soloviev, MIT, https://github.com/antonsoo/planisphere.</metadata>
   <g font-family="Georgia, serif">
     <g class="piece" transform="translate(${w / 2},${h / 2}) scale(1,-1)">${artwork}</g>
     <g class="page-notes" fill="black" font-size="3" text-anchor="middle">

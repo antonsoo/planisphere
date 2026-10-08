@@ -1,7 +1,7 @@
 {
   "name": "planisphere",
   "version": "0.3.0",
-  "description": "Print a star wheel for any latitude and any century, precessed to the sky the Babylonians, Ptolemy, or the Maya actually saw.",
+  "description": "Print a star wheel for historical epochs and inspect its catalogue data, stellar space motion, precession, and physical horizon windows.",
   "type": "module",
   "author": "Anton Soloviev",
   "license": "MIT",

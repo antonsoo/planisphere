@@ -6,21 +6,21 @@
     <title>Planisphere · a star wheel for any latitude, any century</title>
     <meta
       name="description"
-      content="Generate an accurate, printable planisphere for any latitude and any epoch from 3000 BCE to 3000 CE, precessed with the IAU 2006/P03 model."
+      content="Print a star wheel for epochs from 3000 BCE to 3000 CE. Inspect catalogue records, stellar space motion, P03 precession, and the paper horizon windows."
     />
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="/src/style.css" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Officina, open-source tools by Anton Soloviev" />
     <meta property="og:title" content="Planisphere · a star wheel for any latitude, any century" />
-    <meta property="og:description" content="Print a star wheel for any latitude and any century: precession-accurate planispheres, ready to print or laser-cut." />
+    <meta property="og:description" content="Print a star wheel, find a star, and trace its catalogue coordinates through space motion and precession to the paper instrument." />
     <meta property="og:url" content="https://antonsoo.github.io/planisphere/" />
     <meta property="og:image" content="https://raw.githubusercontent.com/antonsoo/planisphere/main/docs/assets/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Planisphere · a star wheel for any latitude, any century" />
-    <meta name="twitter:description" content="Print a star wheel for any latitude and any century: precession-accurate planispheres, ready to print or laser-cut." />
+    <meta name="twitter:description" content="Print a star wheel, find a star, and trace its catalogue coordinates through space motion and precession to the paper instrument." />
     <meta name="twitter:image" content="https://raw.githubusercontent.com/antonsoo/planisphere/main/docs/assets/og.png" />
   </head>
   <body>
@@ -118,11 +118,12 @@
       </section>
 
       <section class="preview" id="preview" aria-label="Planisphere preview" tabindex="-1">
-        <div class="preview-heading"><span>Assembled view</span><p id="preview-setting">Your opaque-paper star wheel</p></div>
+        <div class="preview-heading"><span id="preview-view">Assembled view</span><p id="preview-setting">Your opaque-paper star wheel</p></div>
         <fieldset class="chart-view">
           <legend class="sr-only">Preview view</legend>
           <button type="button" id="chart-full" aria-pressed="true" disabled>Full instrument</button>
           <button type="button" id="chart-detail" aria-pressed="false" disabled>Sky detail</button>
+          <button type="button" id="lift-holder" aria-pressed="false" disabled>Lift holder</button>
         </fieldset>
         <div class="disc-stage" id="disc-stage">
           <svg id="disc-svg" viewBox="-260 -260 520 520" role="img" aria-label="Rotatable star wheel preview">
@@ -138,6 +139,7 @@
           <div><dt>Sidereal alignment</dt><dd id="readout-lst">—</dd></div>
           <div><dt>Visible declination limit</dt><dd id="readout-limit">—</dd></div>
         </dl>
+        <section class="star-finder" id="star-finder" aria-label="Star finder and catalogue evidence"></section>
         <div class="assembly-note">
           <h2>Make the sky turn</h2>
           <ol>
