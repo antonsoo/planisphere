@@ -59,19 +59,29 @@ def summarise(x):
 results = {}
 for key, cat in reduced.items():
     rows = cat["rows"]
-    counts = {
-        "entries": len(rows),
-        "no_position_or_no_hip": sum(1 for r in rows if r["lon"] is None or not r["hip"]),
-        "quality_5_not_identified": sum(1 for r in rows if r["q"] == 5),
-        "quality_6_repeated_entry": sum(1 for r in rows if r["q"] == 6),
-        "quality_3_4_uncertain": sum(1 for r in rows if r["q"] in (3, 4)),
-    }
+    def category(r):
+        if r["q"] == 6:
+            return "quality_6_repeated_entry"
+        if r["q"] == 5:
+            return "quality_5_not_identified"
+        if r["lon"] is None or not r["hip"]:
+            return "no_position_or_no_hipparcos_number_(not flagged 5 or 6)"
+        return "quality_3_4_uncertain" if r["q"] in (3, 4) else "quality_1_2_secure"
+
+    counts = {"entries": len(rows)}
+    for r in rows:
+        counts[category(r)] = counts.get(category(r), 0) + 1
+    for k in ("quality_6_repeated_entry", "quality_5_not_identified",
+              "no_position_or_no_hipparcos_number_(not flagged 5 or 6)", "quality_3_4_uncertain", "quality_1_2_secure"):
+        counts.setdefault(k, 0)
     ident = [r for r in rows if r["lon"] is not None and r["hip"] and r["q"] in (1, 2, 3, 4)]
     secure = [r for r in ident if r["q"] in (1, 2)]
     scored = [r for r in secure if r["inPlanisphere"]]
     counts["secure_q1_2"] = len(secure)
     counts["secure_and_in_planisphere_catalogue"] = len(scored)
-    counts["secure_not_in_planisphere_catalogue (fainter than V 5.5 or no HYG hip)"] = len(secure) - len(scored)
+    absent = [r for r in secure if not r["inPlanisphere"]]
+    counts["secure_not_in_planisphere_star_file"] = len(absent)
+    counts["secure_not_in_star_file_with_hipparcos_V_le_5.5"] = sum(1 for r in absent if r["vmag"] is not None and r["vmag"] <= 5.5)
 
     def resid(rs, lon="lonMotion", lat="latMotion"):
         dl = np.array([wrap(r[lon] - r["lon"]) * 60 for r in rs])
@@ -106,7 +116,7 @@ for key, cat in reduced.items():
         out["gauss_fit_on_editors_columns"] = {
             str(win): {"n_entries": len(secure), "lon": dict(zip(("mu", "sigma", "n"), trunc_gauss(edl, win))),
                        "lat": dict(zip(("mu", "sigma", "n"), trunc_gauss(edb, win)))}
-            for win in (50.0, 100.0)}
+            for win in sorted({FIT_WINDOW.get(key, 50.0), 100.0})}
     # Sensitivity: include q3-4.
     dl34, db34 = resid([r for r in ident if r["inPlanisphere"]])
     out["incl_uncertain_q3_4"] = {"lon": summarise(dl34), "lat": summarise(db34)}
@@ -150,10 +160,6 @@ for key, cat in reduced.items():
         m = disp >= thr
         if m.sum() < 3:
             continue
-        X = np.concatenate([mod_x[m], mod_y[m]])
-        Y = np.concatenate([rec_x[m], rec_y[m]])
-        slope = float(np.sum(X * Y) / np.sum(X * X))
-        se = float(math.sqrt(np.sum((Y - slope * X) ** 2) / (len(X) - 1) / np.sum(X * X)))
         out[f"motion_disp_ge_{thr}arcmin"] = {
             "n": int(m.sum()),
             "median_dist_with_motion": float(np.median(res_with[m])),
@@ -161,20 +167,48 @@ for key, cat in reduced.items():
             "rms_dist_with_motion": float(np.sqrt(np.mean(res_with[m] ** 2))),
             "rms_dist_without_motion": float(np.sqrt(np.mean(res_without[m] ** 2))),
             "n_improved": int(np.sum(res_with[m] < res_without[m])),
-            "slope_recorded_vs_modelled": slope,
-            "slope_se": se,
         }
-        # Same slope without entries whose residual after motion exceeds 4 robust sigma
-        # of the catalogue (copying/computing errors); the rule is stated, not tuned.
-        ok = m & (res_with < 4 * mad_sigma(dl))
-        X2 = np.concatenate([mod_x[ok], mod_y[ok]])
-        Y2 = np.concatenate([rec_x[ok], rec_y[ok]])
-        s2 = float(np.sum(X2 * Y2) / np.sum(X2 * X2))
-        out[f"motion_disp_ge_{thr}arcmin"].update({
-            "n_after_4sigma_rule": int(ok.sum()),
-            "slope_after_4sigma_rule": s2,
-            "slope_se_after_4sigma_rule": float(math.sqrt(np.sum((Y2 - s2 * X2) ** 2) / (len(X2) - 1) / np.sum(X2 * X2))),
-        })
+        # Three estimates of the slope of recorded shift on modelled shift, each with a
+        # 95% interval from a bootstrap over stars (a star brings both components).
+        idx = np.flatnonzero(m)
+        thr_arcmin = 4 * mad_sigma(dl)  # 4 robust sigma of the longitude residuals
+
+        def pooled(sel_idx):
+            return (np.concatenate([mod_x[sel_idx], mod_y[sel_idx]]),
+                    np.concatenate([rec_x[sel_idx], rec_y[sel_idx]]))
+
+        def ols(sel_idx):
+            X, Y = pooled(sel_idx)
+            return float(np.sum(X * Y) / np.sum(X * X))
+
+        def theil(sel_idx):
+            X, Y = pooled(sel_idx)
+            return float(stats.theilslopes(Y, X)[0])
+
+        def trimmed(sel_idx):
+            # Drops stars whose distance from the line recorded = modelled exceeds the threshold.
+            # That is distance from the slope being tested, and the threshold was chosen after
+            # seeing the untrimmed fits.
+            keep = sel_idx[res_with[sel_idx] < thr_arcmin]
+            return ols(keep)
+
+        rng = np.random.default_rng(20261008)
+        dropped = idx[res_with[idx] >= thr_arcmin]
+        est = {}
+        for name, fn in (("least_squares", ols), ("theil_sen", theil), ("trimmed_4sigma", trimmed)):
+            boots = [fn(rng.choice(idx, size=len(idx), replace=True)) for _ in range(1000)]
+            est[name] = {"slope": fn(idx), "ci95": [float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))]}
+        est["trimmed_4sigma"]["n_kept"] = int(len(idx) - len(dropped))
+        est["trimmed_4sigma"]["dropped"] = [
+            {"hip": int(scored[i]["hip"]), "distance_from_line_arcmin": float(res_with[i]), "modelled_arcmin": float(disp[i])}
+            for i in dropped]
+        est["trimmed_4sigma"]["threshold_arcmin"] = float(thr_arcmin)
+        # Leave-one-out range of the least-squares slope.
+        loo = [ols(np.delete(idx, k)) for k in range(len(idx))]
+        est["least_squares_leave_one_out_range"] = [float(min(loo)), float(max(loo))]
+        worst = int(np.argmin(loo)) if ols(idx) > 1 else int(np.argmax(loo))
+        est["largest_single_star_effect"] = {"hip": int(scored[idx[worst]]["hip"]), "slope_without_it": float(loo[worst])}
+        out[f"motion_disp_ge_{thr}arcmin"]["slope_recorded_vs_modelled"] = est
     sel = disp >= 5
     out["motion_scatter_ge_5arcmin"] = {
         "hip": [int(r["hip"]) for r, s in zip(scored, sel) if s],

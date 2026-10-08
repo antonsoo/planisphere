@@ -73,7 +73,7 @@ def hevelius(line):
 SPEC = {
     # Raw longitudes as printed in the file; the epoch stated by Ptolemy is
     # AD 137 (Verbunt & van Gent 2012, sect. 2.1).
-    "ptolemy_137": ("ptolemy_ulugh/ptolema.dat", ptolemy, 137.0),  # JD 1771298 = 137 Jul 20
+    "ptolemy_137": ("ptolemy_ulugh/ptolema.dat", ptolemy, 2000 + (1771298 - 2451545) / 365.25),  # JD 1771298 = 137 Jul 20
     "ulugh_beg": ("ptolemy_ulugh/ulughbeg.dat", ulugh, 2000 + (2246108 - 2451545) / 365.25),  # JD 2246108
     "tycho": ("tycho/keplere.dat", tycho, 1601.0),
     "hevelius": ("hevelius/hevelius.dat", hevelius, 1661.0),

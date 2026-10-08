@@ -66,9 +66,9 @@ def build(t):
     o.append(f'<circle cx="{lx}" cy="{ay0 - 14}" r="4" fill="{c["a"]}"/>')
     pm = R["ptolemy_128"]["motion_disp_ge_5arcmin"]
     hv = R["hevelius"]["motion_disp_ge_5arcmin"]
-    text(lx + 10, ay0 - 10, f"Ptolemy: {pm['n']} stars, slope {pm['slope_recorded_vs_modelled']:.2f}", 12)
+    text(lx + 10, ay0 - 10, f"Ptolemy: {pm["n"]} stars", 12)
     o.append(f'<circle cx="{lx + 170}" cy="{ay0 - 14}" r="4" fill="{c["b"]}"/>')
-    text(lx + 180, ay0 - 10, f"Hevelius: {hv['n']} stars, slope {hv['slope_recorded_vs_modelled']:.2f}", 12)
+    text(lx + 180, ay0 - 10, f"Hevelius: {hv["n"]} stars", 12)
     text(ax0, ay0 + aw + 54, f"Dashed line: recorded = modelled. {sum(clipped.values())} points beyond +/-40 not drawn.", 11, c["mute"])
 
     # Panel B: scatter vs catalogue epoch, log scale.

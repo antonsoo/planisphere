@@ -35,13 +35,18 @@ shifts every star.
 The pipeline was run at the epochs of Ptolemy's catalogue (-128 and AD 137),
 Ulugh Beg's (1437), Tycho Brahe's (1601) and Hevelius's (1661), and compared
 with about 4,200 recorded star positions that Verbunt and van Gent identified
-with Hipparcos stars. Planisphere reproduces the editors' own reduction to
-0.04 arcminute per star at all four epochs; the remaining scatter is the
-old observers' (robust sigma in longitude 35 arcmin for Ptolemy, 30 for Ulugh
-Beg, 2.8 for Tycho, 2.6 for Hevelius). Stellar motion is visible in the old
-positions: for the 94 Ptolemaic stars that the model says moved at least
-10 arcminutes, the recorded displacement is 1.13 &plusmn; 0.09 of the
-modelled one. This is in the source checkout, not the released version.
+with Hipparcos stars. Planisphere agrees with the editors' own per-star reduction (the same
+Hipparcos data underneath) to a robust sigma of 0.04 arcminute at all four
+epochs, with five exceptions among fast-moving Ptolemaic stars, by 1 to 19
+arcminutes. The published longitude and latitude offsets are reproduced; the
+longitude widths come out 10 to 20% wider, from the fitting. The scatter
+against the recorded positions is the old observers' (robust sigma in
+longitude 35 arcmin for Ptolemy, 30 for Ulugh Beg, 2.8 for Tycho, 2.6 for
+Hevelius). Stellar motion is detectable in the old positions but the size is
+loosely fixed: for the 94 Ptolemaic stars that the model says moved at least
+10 arcminutes, recorded over modelled displacement is 0.94 (Theil-Sen,
+95% interval 0.68 to 1.14) to 1.13 (least squares, 0.74 to 1.46), and one
+star (HIP 71681) accounts for that gap. This is in the source checkout, not the released version.
 Details, limits and the figure:
 [`studies/historical-catalogues`](studies/historical-catalogues/README.md).
 
@@ -169,8 +174,8 @@ flowchart LR
   limitations. Agreement with what people recorded is measured separately,
   in [the historical-catalogue study](studies/historical-catalogues/README.md)
   (source checkout): positions at the catalogues' epochs differ from the
-  editors' own reduction by a robust sigma of 0.04 arcminute, and the
-  residuals against the recorded positions are the catalogues' own (2.3 to
+  editors' own reduction by a robust sigma of 0.04 arcminute (five fast
+  stars differ by 1 to 19), and the residuals against the recorded positions are the catalogues' own (2.3 to
   2.8 arcminutes for Tycho and Hevelius, 16 to 35 for Ptolemy and Ulugh Beg).
   That checks the stars' positions, not horizon, refraction or visibility.
 - **Constellation lines** are self-authored from classical bright-star

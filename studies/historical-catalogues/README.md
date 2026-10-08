@@ -13,27 +13,37 @@ epoch and compares the result with the recorded longitude and latitude.
 
 ## What came out
 
-- **The pipeline reproduces the published results for all four catalogues.**
-  For Ptolemy (reduced to -128 as the editors do) the median longitude
-  residual is +9.4 arcmin and the latitude residual +0.1; for Ulugh Beg
-  -11.7 and +7.4; for Tycho -0.4 and -0.4; for Hevelius +0.1 and -1.3.
-  Offsets and widths agree with the editors' own tables (see the results
-  table). Against the editors' per-star differences (their `Dl`, `Db`
-  columns, computed from Hipparcos), planisphere differs by a robust sigma of
-  0.04 arcmin in both coordinates, at all four epochs. At 2,100 years that is
-  the sum of precession, obliquity of date and space motion, and it holds.
+- **Planisphere agrees with the editors' per-star reduction, and the
+  published offsets are reproduced.** Against the editors' own per-star
+  differences (their `Dl`, `Db` columns, computed from Hipparcos, which HYG
+  derives from) planisphere differs by a robust sigma of 0.04 arcmin in both
+  coordinates, at all four epochs. Five Ptolemy stars with proper motions of
+  637 to 4,088 mas/yr are exceptions, by 1 to 19 arcmin (the largest is
+  HIP 71681, alpha-2 Cen). Median residuals against the recorded positions
+  (Ptolemy reduced to -128 as the editors do, then Ulugh Beg, Tycho,
+  Hevelius; longitude / latitude, arcmin): +9.4 / +0.1, -11.7 / +7.4,
+  -0.4 / -0.4, +0.1 / -1.3. The Gaussian offsets match the editors' published
+  ones. The longitude widths are 10 to 20% wider than theirs, and the same
+  fit gives the same widths on the editors' own columns, so that is the
+  fitting. For Tycho and Hevelius the editors report widths of about
+  2 arcmin; our window fit, and the same fit on their columns, gives 2.6 to
+  3.0.
 - **The scatter falls from about 30 arcmin to about 2.5 arcmin** between
   Ulugh Beg (1437) and Tycho (1601) and then stays there: robust sigma in
   longitude / latitude is 35.3 / 22.5 (Ptolemy), 29.7 / 16.3 (Ulugh Beg),
   2.8 / 2.3 (Tycho), 2.6 / 2.3 (Hevelius). The floor in the two modern-era
   catalogues is the catalogues' own, more than 50 times planisphere's 0.04.
-- **Stellar motion is visible in the old observations, and the model gets its
-  size right.** Over the 94 stars in Ptolemy's catalogue (reduced to -128)
-  that planisphere says moved at least 10 arcmin, the recorded displacement
-  is 1.13 +/- 0.09 times the modelled one (0.93 +/- 0.09 after dropping one
-  entry more than 4 sigma off). Tycho's six stars with at least 10 arcmin of
-  modelled motion give 1.01 +/- 0.08; Hevelius's six give 0.78 +/- 0.10 (0.90
-  +/- 0.06 after the same rule).
+- **Stellar motion is visible in the old observations; the intervals are
+  wide.** Regressing recorded shift on modelled shift for the 94 Ptolemaic
+  stars (reduced to -128) that planisphere says moved at least 10 arcmin
+  gives 1.13 by least squares (95% bootstrap interval over stars, 0.74 to
+  1.46), 0.94 by Theil-Sen (0.68 to 1.14) and 0.93 after dropping one star
+  (0.71 to 1.09). That one star is HIP 71681, the same star planisphere and
+  the editors disagree on; its recorded longitude is 3 degrees from either
+  model. So the data are consistent with a slope of 1 and clearly not with
+  0, but they do not fix the size of the motion better than roughly 0.7 to
+  1.5. Tycho's six stars give 1.01 (0.89 to 1.14); Hevelius's six give 0.78
+  (0.54 to 1.05).
 - **Halley's three stars.** In Ptolemy, Sirius's latitude residual goes from
   -42.7 to +2.1 arcmin when motion is switched on. Arcturus does not
   improve: -38.9 without motion, +41.4 with it, because the model moves it
@@ -55,35 +65,44 @@ gitignored); the CDS terms are given under References.
 
 | Catalogue | Edition | File | Entries | Epoch used |
 |---|---|---|---|---|
-| Ptolemy | Toomer (1998) | `ptolema.dat` | 1,028 | AD 137 as printed; and JD 1674573 (24 Sept -128) after the editors' -2 deg 40 arcmin |
+| Ptolemy | Toomer (1998) | `ptolema.dat` | 1,028 | JD 1771298 (20 July 137, 137.58 as a Julian year) as printed; and JD 1674573 (24 Sept -128) after the editors' -2 deg 40 arcmin |
 | Ulugh Beg | Knobel (1917) | `ulughbeg.dat` | 1,018 | JD 2246108 (1437) |
 | Tycho Brahe | Kepler (1627), emended | `keplere.dat` | 1,007 | 1601.0 |
 | Hevelius | 1690 | `hevelius.dat` | 1,564 | 1661.0 |
 
-Epochs and the Ptolemy convention are taken from each ReadMe and from
-Verbunt & van Gent (2012), sect. 2.1 and 3, which states that the longitudes
-in Ptolemy's catalogue refer to AD 137 and that the editors subtract
-2 deg 40 arcmin to bring them to the epoch of Hipparchus (-128) before
-comparing. Both versions are scored below. The Tycho `variant.dat` file and
-the Ptolemy/Ulugh Beg/Hevelius cross-reference columns are not used.
+Epochs for Ulugh Beg, Tycho and Hevelius are taken from each ReadMe. The
+Ptolemy convention is not: the ReadMe note on `ptolema.dat` says the
+longitudes are "assumed Equinox=-128", but the file's longitudes are the
+printed ones. What fixes the convention is Verbunt & van Gent (2012), sect.
+2.1 and 3, which state that Ptolemy's longitudes refer to AD 137 and that
+the editors subtract 2 deg 40 arcmin to bring them to the epoch of
+Hipparchus (-128) before comparing, and the check that planisphere then
+reproduces their `Dl` to 0.04 arcmin (it does not without the subtraction).
+Both versions are scored below. The Tycho `variant.dat` file and the
+cross-reference columns are not used.
 
 **Which entries are scored.** The editors' identification flag `I` (1 = secure
 and nearest star, 2 = secure though not nearest, 3 = probable, 4 = possible,
 5 = not identified, 6 = repeated entry). Scored: flags 1 and 2 only. Not
-scored, with counts from `results.json`:
+scored, with counts from `results.json`. The columns are disjoint (an entry
+is counted in the first that applies, left to right) and each row sums to
+its entry count:
 
-| | Entries | No position or no Hipparcos number | Flag 5 | Flag 6 | Flags 3-4 | Flags 1-2 | Of those, in planisphere's catalogue (scored) |
+| | Entries | Flag 6 | Flag 5 | No position or no Hipparcos number (not flagged 5 or 6) | Flags 3-4 | Flags 1-2 | Of those, in planisphere's star file (scored) |
 |---|---|---|---|---|---|---|---|
-| Ptolemy | 1,028 | 4 | 1 | 3 | 15 | 1,006 | 978 |
-| Ulugh Beg | 1,018 | 6 | 3 | 0 | 15 | 997 | 964 |
-| Tycho | 1,007 | 17 | 14 | 15 | 35 | 941 | 898 |
-| Hevelius | 1,564 | 37 | 16 | 13 | 27 | 1,487 | 1,361 |
+| Ptolemy | 1,028 | 3 | 1 | 3 | 15 | 1,006 | 978 |
+| Ulugh Beg | 1,018 | 0 | 3 | 3 | 15 | 997 | 964 |
+| Tycho | 1,007 | 15 | 14 | 2 | 35 | 941 | 898 |
+| Hevelius | 1,564 | 13 | 16 | 21 | 27 | 1,487 | 1,361 |
 
-The last column is limited by planisphere's own star file, which holds stars
-to magnitude 5.5 (HYG v4.1, 2,865 stars). Fainter identified stars are not
-scored (28, 33, 43 and 126 secure entries). Scoring flags 3-4 too moves no median by more than 0.3 arcmin and no robust sigma by more than 0.5 arcmin (`incl_uncertain_q3_4`
-in `results.json`); the rms moves more, because a few uncertain entries are
-far off.
+The last column is limited by planisphere's own star file, which holds
+2,865 stars to magnitude 5.5 (HYG v4.1). The secure entries not scored
+(28, 33, 43 and 126) are mostly fainter than that, but some bright
+identified stars are simply absent from the file: by the editors' Hipparcos
+magnitudes, 8, 9, 9 and 24 of them are V 5.5 or brighter. Scoring flags 3-4
+too moves no median by more than 0.3 arcmin and no robust sigma by more
+than 0.5 arcmin (`incl_uncertain_q3_4` in `results.json`); the rms moves
+more, because a few uncertain entries are far off.
 
 ## The measure
 
@@ -103,9 +122,7 @@ parallax or radial velocity).
 absolute deviation), the fractions beyond 10, 60 and 150 arcmin, and a
 maximum-likelihood Gaussian fit truncated to a window around zero. It is
 untrimmed throughout. Where a trimmed figure appears it says so and the rule
-is: drop an entry if either component is more than 3 robust sigma from its
-median (`trimmed_3mad_rule`), or, for the motion slopes, if its distance
-after motion exceeds 4 robust sigma.
+is: drop an entry if either component is more than 3 robust sigma from its median (`trimmed_3mad_rule`), or, for the motion slopes, if its distance from the line recorded = modelled exceeds 4 robust sigma of the longitude residuals. The 4 sigma threshold was chosen after seeing the untrimmed fits, and because it removes points by their distance from the line being tested it pulls the slope toward 1; the trimmed slopes are reported beside the untrimmed and robust ones, not instead of them.
 
 ## Results
 
@@ -113,7 +130,7 @@ Untrimmed residuals, arcmin, flags 1-2, stars in planisphere's catalogue.
 
 | Catalogue (epoch) | n | Median lon | Median lat | Robust sigma lon | Robust sigma lat | > 60 arcmin | > 150 arcmin |
 |---|---|---|---|---|---|---|---|
-| Ptolemy, as printed (AD 137) | 978 | +68.8 | -0.2 | 34.6 | 22.9 | 63% / 7% | 6% / 1% |
+| Ptolemy, as printed (AD 137) | 978 | +69.3 | -0.2 | 34.6 | 22.9 | 64% / 7% | 6% / 1% |
 | Ptolemy, -2d40m (-128) | 978 | +9.4 | +0.1 | 35.3 | 22.5 | 16% / 8% | 3% / 1% |
 | Ulugh Beg (1437) | 964 | -11.7 | +7.4 | 29.7 | 16.3 | 9% / 2% | 1% / 0% |
 | Tycho (1601) | 898 | -0.4 | -0.4 | 2.8 | 2.3 | 2% / 1% | 0% / 0% |
@@ -129,8 +146,7 @@ editors report, compared with their text:
 | Ulugh Beg | +/-50 arcmin | -11.3, 26.5 | +6.8, 17.7 | text: same offsets as the 100 window; sigma 22 (lon) and, in the abstract, 18 (lat) |
 | Ulugh Beg | +/-100 arcmin | -12.0, 29.9 | +7.4, 20.9 | text: offset about -10, sigma about 26 (lon); offset about +7, sigma 21 (lat) |
 
-The editors' offsets match ours, and so do the latitude sigmas (within 0.6
-arcmin). Our longitude sigmas run 3 to 5 arcmin wider than theirs. This is
+The editors' offsets match ours, and so do the latitude sigmas (within 0.6 arcmin). Our longitude sigmas run 3 to 5 arcmin (10 to 20%) wider than theirs. This is
 not the pipeline: per star we agree with their `Dl`, `Db` to 0.04 arcmin, and
 running our fit on the editors' own `Dl`, `Db` columns for every flag 1-2
 entry gives the same widths we get (Ptolemy 30.0 and 34.9 for the 50 and 100
@@ -138,10 +154,9 @@ arcmin windows, Ulugh Beg 26.6 and 30.2; `gauss_fit_on_editors_columns` in
 `results.json`). So the difference is in how the fit is done (they fit
 histograms by Poisson maximum likelihood; we fit the individual residuals,
 truncated to a window centred on zero), and we did not reproduce their
-procedure further.
+procedure further. For Tycho and Hevelius the editors give widths of about 2 arcmin (abstracts). Our robust sigma is 2.3 to 2.8; a Gaussian fit in a +/-10 arcmin window (our choice) gives 2.9 / 2.6 and 2.9 / 2.6, and the same fit on the editors' own columns 3.0 / 2.7 and 3.0 / 2.7, so the stated 2 arcmin is narrower than anything we can get from their data with this fit.
 
-Ptolemy as printed, at AD 137, gives a median longitude residual of +68.8
-arcmin, about 1.1 degrees. That is the "about 1 degree too small" the paper
+Ptolemy as printed, at AD 137, gives a median longitude residual of +69.3 arcmin, about 1.2 degrees. That is the "about 1 degree too small" the paper
 describes (sect. 2.1); our figure is not an independent measurement of it.
 The paper's own explanation set (copying from Hipparchus with a wrong
 precession correction, or a zero point error) is not something this data
@@ -175,32 +190,59 @@ least 10 arcmin (5 arcmin in parentheses). "Distance" is the angular
 distance between the computed and recorded position after removing the
 catalogue's median offset, with and without space motion.
 
-| Catalogue | n | Median distance, motion off / on | Rms distance, off / on | Entries improved | Slope recorded / modelled |
-|---|---|---|---|---|---|
-| Ptolemy -128 | 94 (215) | 33.8 / 29.6 (30.8 / 29.7) | 53.8 / 40.0 (52.2 / 46.2) | 57 (119) | 1.13 +/- 0.09 (1.11 +/- 0.10) |
-| Ulugh Beg | 13 (37) | 28.4 / 18.3 (22.6 / 19.4) | 35.7 / 29.5 (33.4 / 30.5) | 9 (22) | 1.18 +/- 0.34 (1.19 +/- 0.31) |
-| Tycho | 6 (25) | 16.1 / 2.2 (9.1 / 3.3) | 19.1 / 4.8 (19.6 / 17.9) | 5 (20) | 1.01 +/- 0.08 (0.78 +/- 0.24) |
-| Hevelius | 6 (19) | 13.7 / 3.2 (8.1 / 2.6) | 16.3 / 7.4 (10.8 / 4.6) | 5 (17) | 0.78 +/- 0.10 (0.82 +/- 0.05) |
+| Catalogue | n | Median distance, motion off / on | Rms distance, off / on | Entries improved |
+|---|---|---|---|---|
+| Ptolemy -128 | 94 (215) | 33.8 / 29.6 (30.8 / 29.7) | 53.8 / 40.0 (52.2 / 46.2) | 57 (119) |
+| Ulugh Beg | 13 (37) | 28.4 / 18.3 (22.6 / 19.4) | 35.7 / 29.5 (33.4 / 30.5) | 9 (22) |
+| Tycho | 6 (25) | 16.1 / 2.2 (9.1 / 3.3) | 19.1 / 4.8 (19.6 / 17.9) | 5 (20) |
+| Hevelius | 6 (19) | 13.7 / 3.2 (8.1 / 2.6) | 16.3 / 7.4 (10.8 / 4.6) | 5 (17) |
 
 The slope regresses the recorded shift (recorded position minus the static
-prediction) on the modelled shift (motion on minus motion off), both
-components of both coordinates pooled, longitude scaled by cos(latitude).
-The quoted uncertainty is the ordinary least-squares standard error and
-assumes the residuals are independent and equal in size, which is rough;
-read it as a guide. After the 4-sigma rule the slopes are: Ptolemy 0.93 and
-0.95 (n 93 and 212), Tycho 1.03 +/- 0.06 for the 5 arcmin set (22 stars; two
-Tycho entries are 40 to 60 arcmin off and own most of the drag in the
-untrimmed 0.78), Hevelius 0.90 and 0.91 (n 5 and 18). Ulugh Beg is
-unchanged. Hevelius's untrimmed slopes sit below 1 beyond their stated
-errors (0.78, 0.82); two stars (mu Cas, HIP 5336, and HIP 104214 in Cygnus, whose
-modelled shifts are 21 and 29 arcmin and whose recorded ones are 9 and 22)
-account for much of it, and we did not look for a cause.
+prediction, catalogue offset removed) on the modelled shift (motion on minus
+motion off), both components pooled, longitude scaled by cos(latitude). If
+the model is right and the catalogue sees the motion, the slope is 1. Three
+estimates, each with a 95% interval from 1,000 bootstrap resamples over
+stars (a star carries both components, so stars, not components, are
+resampled; seed in `analyze.py`):
 
-For Ptolemy the effect is clear in the pooled slope (about 12 standard
-errors from zero) and modest in the per-star view: 57 of 94 stars end up
-closer with motion on, 61%, because a 30 arcmin catalogue scatter hides most
+| Catalogue | Modelled shift at least (arcmin) | Stars | Least squares | Theil-Sen | Trimmed at 4 sigma |
+|---|---|---|---|---|---|
+| Ptolemy -128 | 10 | 94 | 1.13 (0.74 to 1.46) | 0.94 (0.68 to 1.14) | 0.93 (0.71 to 1.09); 93 kept, dropped: 71681 |
+| Ptolemy -128 | 5 | 215 | 1.11 (0.75 to 1.44) | 0.99 (0.73 to 1.22) | 0.95 (0.76 to 1.09); 212 kept, dropped: 68895, 61084, 71681 |
+| Ulugh Beg | 10 | 13 | 1.18 (0.61 to 1.95) | 1.26 (0.41 to 2.80) | 1.18 (0.68 to 1.93); 13 kept, dropped: none |
+| Ulugh Beg | 5 | 37 | 1.19 (0.69 to 1.85) | 1.02 (0.38 to 1.95) | 1.19 (0.64 to 1.88); 37 kept, dropped: none |
+| Tycho | 10 | 6 | 1.01 (0.89 to 1.14) | 1.05 (0.73 to 1.19) | 1.01 (0.87 to 1.14); 6 kept, dropped: none |
+| Tycho | 5 | 25 | 0.78 (0.17 to 1.05) | 1.01 (0.80 to 1.16) | 1.03 (0.94 to 1.14); 22 kept, dropped: 46853, 7918, 64394 |
+| Hevelius | 10 | 6 | 0.78 (0.54 to 1.05) | 0.80 (0.37 to 1.07) | 0.90 (0.80 to 1.14); 5 kept, dropped: 5336 |
+| Hevelius | 5 | 19 | 0.82 (0.64 to 1.02) | 0.95 (0.76 to 1.11) | 0.91 (0.82 to 1.06); 18 kept, dropped: 5336 |
+
+Theil-Sen is the median of pairwise slopes (scipy, with an intercept). The
+trimmed column drops stars whose distance from the line recorded = modelled
+exceeds 4 robust sigma of the catalogue's longitude residuals (141 arcmin for
+Ptolemy, 119 for Ulugh Beg, 11 for Tycho, 10 for Hevelius). That rule
+removes points by their distance from the slope being tested, and the
+threshold was chosen after seeing the untrimmed fits, so the trimmed slope
+is pulled toward 1 and its interval (which re-applies the rule in each
+resample) is not a clean test; read it as a sensitivity check.
+
+What the intervals support: every interval includes 1, and the Ptolemy and
+Tycho (10 arcmin) ones exclude 0 by a wide margin. The Ptolemy least-squares
+slope of 1.13 is carried by one star: leave-one-out gives 0.93 to 1.18, and
+the low end is dropping HIP 71681 (alpha-2 Cen, modelled shift 128 arcmin,
+recorded longitude about 3 degrees off), the same star on which planisphere
+and the editors disagree by 19 arcmin. The Tycho 5 arcmin least-squares
+0.78 is likewise pulled by HIP 46853 and 7918, whose recorded positions are
+65 and 55 arcmin from the line (a copying or computing error in the
+catalogue, in the editors' terms; they are not removed from the
+untrimmed numbers). Hevelius's 0.78 (six stars) drops to 0.90 without
+HIP 5336 (mu Cas). Ulugh Beg's 13 and 37 stars give intervals from about
+0.4 to 2.8.
+
+The per-star view is weaker for Ptolemy: 57 of 94 stars end up closer with
+motion on (61%), because a 30 arcmin catalogue scatter hides most
 individual shifts. For Tycho and Hevelius, whose scatter is 2.5 arcmin, the
-fast stars are plainly better with motion on.
+fast stars are plainly better with motion on (median distance 16.1 to 2.2
+and 13.7 to 3.2 arcmin in the 10 arcmin sets).
 
 ## Halley
 
@@ -212,8 +254,7 @@ one popular account says he compared his own positions with the Almagest and
 Hipparchus's catalogue and found these three stars differed in latitude
 ([Koberlein](https://briankoberlein.com/blog/even-the-stars-move/)). Both
 are secondary sources; we did not read Halley's paper, and we did not match
-his numbers. What we can show is what planisphere's model does to those three
-stars in each catalogue (latitude residual, arcmin, flags 1-2):
+his numbers. We picked these three stars because they are Halley's three, not by looking at the residuals. What we can show is what planisphere's model does to them in each catalogue (latitude residual, arcmin, flags 1-2):
 
 | Star (entry) | Ptolemy off / on | Ulugh Beg off / on | Tycho off / on | Hevelius off / on | Modelled latitude shift, Ptolemy |
 |---|---|---|---|---|---|
@@ -223,8 +264,7 @@ stars in each catalogue (latitude residual, arcmin, flags 1-2):
 
 Without motion, the three stars sit 34 to 43 arcmin from the Ptolemaic
 position in latitude, against a latitude scatter of 22.5 arcmin for the whole
-catalogue: each is a 1.5 to 1.9 sigma miss, and three in the same direction
-is the pattern. With motion, Sirius lands on its recorded latitude; Arcturus
+catalogue: each is a 1.5 to 1.9 sigma miss, and three in the same direction is the pattern (a post-hoc pattern in three stars, not a test). With motion, Sirius lands on its recorded latitude; Arcturus
 overshoots by as much as it undershot; Aldebaran's motion is too small
 (7 arcmin) to account for its 34. The Ptolemaic latitude of Arcturus is
 within 2 sigma of both predictions, so the old catalogue alone cannot say
@@ -236,8 +276,7 @@ Nothing in the astronomy. The comparison would have exposed an error in the
 obliquity of date, the ecliptic frame, the epoch handling or the order of
 motion and precession; a wrong obliquity alone would show as a longitude
 trend with a different shape and an offset that the editors' tables do not
-have. Agreement at 0.04 arcmin per star with an independent reduction at four
-epochs between -128 and 1661 rules those out for the ordinary stars.
+have. Agreement at 0.04 arcmin per star with the editors' reduction at four epochs between -128 and 1661 rules those out for the ordinary stars.
 
 The change is a missing piece, not a fix: planisphere could only produce
 equatorial positions, and every old catalogue is ecliptic. `src/astro/ecliptic.ts`
@@ -251,7 +290,7 @@ accuracy section now carries these results in place of the disclaimer.
 - The five high-proper-motion stars where we differ from the editors by more
   than 1 arcmin. Either the editors or planisphere propagate such stars
   differently; this data cannot say which is nearer the sky.
-- Hevelius's motion slope below 1, which rests on six to nineteen stars.
+- Hevelius's least-squares motion slope below 1, which rests on six to nineteen stars.
 - Fainter stars. Planisphere's catalogue stops at magnitude 5.5, so the
   identified faint stars (126 of Hevelius's 1,487 secure entries) are not
   scored. The same method with the full Hipparcos catalogue would score them.
@@ -266,20 +305,26 @@ accuracy section now carries these results in place of the disclaimer.
   star was visible. It shows that star positions in ecliptic coordinates at
   four epochs agree with what four catalogues recorded.
 - The yardstick is the editors' identifications and editions, with their
-  flags 1-2. Different identifications would give different residuals.
-  We did not check any identification ourselves.
-- Agreement with the editors' reduction (0.04 arcmin) shows that the two
-  pipelines are equivalent for ordinary stars. It does not test the
+  flags 1-2. Different identifications would give different residuals. We
+  did not check any identification ourselves. The editors also apply proper
+  motion to the Hipparcos positions before they look for the nearest star
+  (A&A 544, A31, sect. 3), so their secure identifications are not
+  independent of a motion model. For Ptolemy, where the scatter is 30 arcmin
+  and the shifts are tens of arcmin, that pulls the recorded-against-modelled
+  slope toward 1; we cannot say by how much.
+- Agreement with the editors' reduction (0.04 arcmin robust sigma) shows that the two pipelines are equivalent for ordinary stars, on the same Hipparcos-derived data; it is not an independent measurement. It does not test the
   Hipparcos data itself: planisphere's inputs are HYG v4.1, whose own provenance was not checked here.
 - The Ptolemy and Ulugh Beg scatters are dominated by the astronomers'
   measurements, so they say nothing about planisphere's own accuracy beyond
   the 0.04 arcmin per-star agreement. For Tycho and Hevelius the figure is
   2.3 to 2.8 arcmin and is the catalogue's.
 - Time scale: epochs are Julian years used as TT, with no delta T
-  correction for the Earth's rotation. We did not evaluate its effect.
+  correction. The effect is negligible here: precession is 50.3 arcsec a
+  year, so even a whole day of delta T would move a longitude by 0.14
+  arcsec, 0.002 arcmin, against catalogue scatter of 2 arcmin or more.
 - Four catalogues are four points. The fall in scatter between 1437 and
   1601 is large; we do not offer a fit.
-- Some Hevelius slopes are below 1 and we did not explain them.
+- Hevelius's least-squares slopes are below 1 (0.78, 0.82); the intervals include 1 and we did not look for a cause.
 - Halley's account is from two secondary web pages and we did not match
   his numbers.
 
