@@ -12,3 +12,6 @@ scripts/vendor/hygdata_v41.csv
 
 # scripts/generate_fixtures.py's throwaway Python environment
 .venv-oracle/
+
+# studies/*/fetch.py downloads (regenerate with the study's fetch script)
+/studies/*/cache/

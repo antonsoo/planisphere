@@ -1,0 +1,60 @@
+{
+ "retrieved": "2026-10-08",
+ "user_agent": "planisphere-study/0.1 (historical catalogue comparison; read-only)",
+ "files": [
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/544/A31/ReadMe",
+   "path": "cache/ptolemy_ulugh/ReadMe",
+   "bytes": 9482,
+   "sha256": "7fa48aff3545d90f57286849529983cc4376e5cec5fa70c80df1fa11c30c0aba"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/544/A31/ptolema.dat",
+   "path": "cache/ptolemy_ulugh/ptolema.dat",
+   "bytes": 79232,
+   "sha256": "d405be669287fb814aebc7a5dcde3a329afdcd34e8bb728314b6608142c0d75f"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/544/A31/ulughbeg.dat",
+   "path": "cache/ptolemy_ulugh/ulughbeg.dat",
+   "bytes": 88676,
+   "sha256": "2be587b900207ca7c23d9775f19e87fa7217636f00f7e7d5a235151b8eb45dbf"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A28/ReadMe",
+   "path": "cache/tycho/ReadMe",
+   "bytes": 8569,
+   "sha256": "53cf542d6ffd011b25166d5917acb98f409522238241a008573d8291ae59690b"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A28/keplere.dat",
+   "path": "cache/tycho/keplere.dat",
+   "bytes": 90630,
+   "sha256": "3077af7f9c14112dd737c2cbdce0e589bf905e269a177f1bb976b1882b486bab"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A28/variant.dat",
+   "path": "cache/tycho/variant.dat",
+   "bytes": 7872,
+   "sha256": "92a940ec7480667b15b51fede54a5aa21292616639c289b6df812f2c36ff1c3f"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A28/names.dat",
+   "path": "cache/tycho/names.dat",
+   "bytes": 39105,
+   "sha256": "90efb677d384c5b033d70ccdb82c3bbe31b69b4a0c2a6f3f78f7e62dfe94cd2a"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A29/ReadMe",
+   "path": "cache/hevelius/ReadMe",
+   "bytes": 7371,
+   "sha256": "7b8978f78c7469e4a284390862ea3be4cc7facaac25818faedf6ef959dd9d5ce"
+  },
+  {
+   "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/516/A29/hevelius.dat",
+   "path": "cache/hevelius/hevelius.dat",
+   "bytes": 145452,
+   "sha256": "efdcd6550602f5a619998ead52e72c1127409a8b7dcab8e50820d2db96d3c54a"
+  }
+ ]
+}

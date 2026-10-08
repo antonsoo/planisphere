@@ -20,6 +20,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- `src/astro/ecliptic.ts`: P03 mean obliquity of date and equatorial to
+  ecliptic conversion, tested against pyerfa. Not used by the app yet.
+- `studies/historical-catalogues`: planisphere's pipeline compared with the
+  Ptolemy, Ulugh Beg, Tycho Brahe and Hevelius catalogues (Verbunt and van
+  Gent editions). It reproduces the editors' reduction to 0.04 arcminute per
+  star and sees stellar motion in the old observations (recorded/modelled
+  displacement 1.13 +/- 0.09 for 94 Ptolemaic stars). Scripts, pinned
+  manifest, results and figures; the data files are not committed.
 - Catalogue search by name, designation, constellation, HIP or HYG ID;
   coordinates before and after motion and precession; explicit motion inputs
   and model limits; downloadable JSON evidence tied to the chart settings.

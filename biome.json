@@ -10,6 +10,8 @@
       "!**/public/data",
       "!**/fonts",
       "!**/docs/space-motion-verification.json",
+      "!**/studies/*/results.json",
+      "!**/studies/*/manifest.json",
       "!**/docs/assets/print-*.svg"
     ]
   },

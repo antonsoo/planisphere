@@ -30,6 +30,26 @@ and [`gnomon`](https://antonsoo.github.io/gnomon/) (sundials).
 Same latitude, same magnitude limit, 2726 years apart — precession visibly
 shifts every star.
 
+## Checked against what people measured
+
+The pipeline was run at the epochs of Ptolemy's catalogue (-128 and AD 137),
+Ulugh Beg's (1437), Tycho Brahe's (1601) and Hevelius's (1661), and compared
+with about 4,200 recorded star positions that Verbunt and van Gent identified
+with Hipparcos stars. Planisphere reproduces the editors' own reduction to
+0.04 arcminute per star at all four epochs; the remaining scatter is the
+old observers' (robust sigma in longitude 35 arcmin for Ptolemy, 30 for Ulugh
+Beg, 2.8 for Tycho, 2.6 for Hevelius). Stellar motion is visible in the old
+positions: for the 94 Ptolemaic stars that the model says moved at least
+10 arcminutes, the recorded displacement is 1.13 &plusmn; 0.09 of the
+modelled one. This is in the source checkout, not the released version.
+Details, limits and the figure:
+[`studies/historical-catalogues`](studies/historical-catalogues/README.md).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/historical-catalogues-dark.svg">
+  <img src="docs/assets/historical-catalogues-light.svg" alt="Recorded against modelled stellar-motion shift, and the residual scatter of four historical catalogues">
+</picture>
+
 ## Quickstart
 
 ```sh
@@ -145,8 +165,14 @@ flowchart LR
   tangential fallback. Catalogue uncertainty, binary orbits, light-time,
   relativistic effects and changes in brightness are not modeled. These
   error numbers quantify agreement with a reference calculation using the
-  same inputs, not accuracy of reconstructed ancient skies. The
-  [audit guide](docs/stellar-motion.md) includes commands and limitations.
+  same inputs. The [audit guide](docs/stellar-motion.md) includes commands and
+  limitations. Agreement with what people recorded is measured separately,
+  in [the historical-catalogue study](studies/historical-catalogues/README.md)
+  (source checkout): positions at the catalogues' epochs differ from the
+  editors' own reduction by a robust sigma of 0.04 arcminute, and the
+  residuals against the recorded positions are the catalogues' own (2.3 to
+  2.8 arcminutes for Tycho and Hevelius, 16 to 35 for Ptolemy and Ulugh Beg).
+  That checks the stars' positions, not horizon, refraction or visibility.
 - **Constellation lines** are self-authored from classical bright-star
   asterisms (see [`docs/constellations.md`](docs/constellations.md)), not
   the official 88-constellation IAU boundaries/figures — 24 of the most
