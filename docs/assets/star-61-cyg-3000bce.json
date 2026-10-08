@@ -1,0 +1,90 @@
+{
+  "tool": "planisphere",
+  "schemaVersion": 1,
+  "catalogue": {
+    "name": "HYG v4.1",
+    "license": "CC BY-SA 4.0",
+    "referenceEpoch": 2000,
+    "referenceEquinox": 2000,
+    "sourceCommit": "c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+    "sourceSha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+    "record": {
+      "id": 103879,
+      "hip": 104214,
+      "name": null,
+      "bayer": null,
+      "flam": 61,
+      "con": "Cyg",
+      "ra": 316.72191,
+      "dec": 38.749415,
+      "pmRa": 4155.1,
+      "pmDec": 3258.9,
+      "distancePc": 3.4865,
+      "radialVelocityKmSec": -64.8,
+      "mag": 5.2,
+      "bv": 1.069
+    }
+  },
+  "settings": {
+    "latDeg": 32.5,
+    "epochYear": -2999,
+    "magLimit": 5.5,
+    "showConstellations": true,
+    "showNames": true,
+    "date": "2026-10-07",
+    "localHour": 16.75,
+    "yearNumbering": "astronomical; 0 = 1 BCE",
+    "timeBasis": "local mean solar time; printed daily scale"
+  },
+  "model": {
+    "motion": "rectilinear geometric space motion before P03 precession",
+    "referenceEpoch": 2000,
+    "epochConvention": "JD 2451545.0 + (epochYear - 2000) * 365.25 days",
+    "axes": "Catalogue and motion-only coordinates are treated as mean J2000; final coordinates use mean axes of the selected epoch.",
+    "perspective": "catalogue distance and radial velocity",
+    "zeroRadialVelocity": null,
+    "limits": [
+      "No light-time, relativistic, binary-orbit, refraction or nutation correction.",
+      "Magnitude is held at its catalogue value.",
+      "Visibility refers to the star center and the geometric horizon, not observing conditions.",
+      "Date-ring year and stellar epoch are independent settings."
+    ]
+  },
+  "units": {
+    "raDec": "degrees",
+    "pmRaPmDec": "milliarcseconds per Julian year; pmRa includes cos(dec)",
+    "distancePc": "parsecs",
+    "radialVelocityKmSec": "km/s, receding positive",
+    "discPointMm": "millimetres, unrotated disc; mirrored RA, y up",
+    "holderPointMm": "millimetres, fixed holder; y up"
+  },
+  "result": {
+    "position": {
+      "ra": 261.6195208408034,
+      "dec": 27.029059758419173
+    },
+    "moved": {
+      "ra": 310.3616202123883,
+      "dec": 34.45868820544066
+    },
+    "motionDisplacementDeg": 6.666220530870744,
+    "hourAngleDeg": 5.292730163370948,
+    "altitudeDeg": 82.85822850355595,
+    "azimuthDeg": 221.37017304842556,
+    "discPointMm": {
+      "x": -3.7333264674475397,
+      "y": 25.341778766451363
+    },
+    "holderPointMm": {
+      "x": 25.506084608106423,
+      "y": 2.3628638395866055
+    },
+    "onDisc": true,
+    "includedByMagnitude": true,
+    "aboveHorizon": true,
+    "behindHub": false,
+    "behindSupport": false,
+    "throughWindow": true,
+    "state": "in-window"
+  }
+}

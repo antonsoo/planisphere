@@ -1,0 +1,96 @@
+{
+  "browser": "Chromium 153.0.8010.12",
+  "files": [
+    {
+      "name": "hero-babylon-700bce.png",
+      "bytes": 227702,
+      "sha256": "7db389dd562a285cfde0c2d1c37a4202450e569dd30e301659b659cbad37fe1d"
+    },
+    {
+      "name": "hero-babylon-today.png",
+      "bytes": 222270,
+      "sha256": "577edbd1d965a5569125845e83406f008892351aaf826e7228e6a719b8c45059"
+    },
+    {
+      "name": "star-finder-paper.png",
+      "bytes": 1038218,
+      "sha256": "504614ef7ac201693e5b6a3cf6ab66449355498b4e8c6f008c23e6928a4735f1"
+    },
+    {
+      "name": "star-finder-register.png",
+      "bytes": 341894,
+      "sha256": "b6daf80ffe7e56f817d4cc84ef5623c5ede1b4b5545bc54e9829e58dd9877ad8"
+    },
+    {
+      "name": "star-61-cyg-3000bce.json",
+      "bytes": 2763,
+      "sha256": "75053e312484dcbd3c0c5b9a5d0639cd2634f6a99a33ac9107ae7be941674a28"
+    },
+    {
+      "name": "star-61-cyg-3000bce-disc.svg",
+      "bytes": 323271,
+      "sha256": "1e3cef139deb907038043b75b8e01520b599c205f0aeacb17c2601866171c8f6"
+    },
+    {
+      "name": "star-61-cyg-holder.svg",
+      "bytes": 93766,
+      "sha256": "9f208ba63444fe1f4b5a20d4f716ff999332fe448b6353d015e03c5341fe55fb"
+    },
+    {
+      "name": "star-finder-night.png",
+      "bytes": 270666,
+      "sha256": "c7ca59c6bd96798cef6947064f4dc012e1cb1c885e27c6b715225bb474a36369"
+    },
+    {
+      "name": "star-finder-mobile.png",
+      "bytes": 227546,
+      "sha256": "bddba39f74984d52d0748ee904d5fc3801b0cfa0ac3d2f2f7e687156abf82923"
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 1440,
+      "theme": "ink",
+      "violations": 0
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "violations": 0
+    },
+    {
+      "width": 375,
+      "theme": "ink",
+      "violations": 0
+    },
+    {
+      "width": 375,
+      "theme": "night",
+      "violations": 0
+    },
+    {
+      "width": 320,
+      "theme": "ink",
+      "violations": 0
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "violations": 0
+    }
+  ],
+  "runtimeErrors": [],
+  "offOriginRequests": [],
+  "cspViolations": [],
+  "timeControlWithInspection": {
+    "samples": 96,
+    "includesSynchronousLayout": true,
+    "medianMs": 3.2999999821186066,
+    "p95Ms": 4.5999999940395355,
+    "maxMs": 10.199999988079071,
+    "viewport": {
+      "width": 320,
+      "height": 1100
+    }
+  }
+}

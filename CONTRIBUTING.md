@@ -37,6 +37,28 @@ python3 scripts/build_constellations.py
 These are dev-time data-generation scripts; they are not part of the app's
 build, lint, or test pipeline.
 
+The fetch script verifies a pinned HYG revision and checksum before replacing
+the local CSV. Distance and radial velocity are retained; HYG's dubious-distance
+sentinel becomes null. Keep unknown values distinct from measured zero.
+
+## Checking stellar motion
+
+The [motion guide](docs/stellar-motion.md) derives the model, describes its
+limits, and documents the independent ERFA comparison across the entire
+catalogue. After installing the JS dependencies:
+
+```sh
+node scripts/export-star-positions.mjs > /tmp/planisphere-positions.json
+uv run --with numpy==2.5.3 --with pyerfa==2.0.1.5 --no-project python scripts/verify-space-motion.py /tmp/planisphere-positions.json
+```
+
+For visual review, build and start `npm run preview -- --host 127.0.0.1 --port 4205 --strictPort`,
+then run `node scripts/capture-star-finder.mjs` in another
+terminal. It captures production UI, actual downloads, accessibility audits
+and a file-hash manifest. Review each image before committing it. The browser
+suite checks that evidence coordinates reach the actual printed SVG point and
+that the holder's material agrees with the finder.
+
 ## License
 
 MIT. Contributions are accepted under the same license.

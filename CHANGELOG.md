@@ -4,6 +4,32 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Fixed
+
+- Stellar motion now propagates a Cartesian space vector before precession,
+  retaining HYG distance and radial velocity when available. The previous
+  RA/Dec addition clamped pole crossings and misplaced 61 Cyg by about 0.89
+  degrees at 3000 BCE. The new model agrees with ERFA within 0.26 arcsecond
+  over 20,055 sampled catalogue positions; this measures model agreement,
+  not historical observational accuracy.
+- Missing or dubious HYG distances remain unknown. Zero radial velocities
+  are preserved without claiming they are measured zero. Catalogue generation
+  now verifies a pinned source revision and SHA-256.
+
+### Added
+
+- Catalogue search by name, designation, constellation, HIP or HYG ID;
+  coordinates before and after motion and precession; explicit motion inputs
+  and model limits; downloadable JSON evidence tied to the chart settings.
+- Lift/replace the paper holder and locate a selected star. The finder
+  distinguishes geometric altitude, magnitude filtering, the hub and supports,
+  and stars outside this latitude's sky field. A visible-time action searches
+  the instrument's quarter-hour settings. Inspection marks stay out of prints.
+- Reproducible catalogue-wide ERFA comparison, retained regression fixtures,
+  and production-browser checks of evidence versus the actual SVG and cutouts.
+
 ## [0.3.0] - 2026-10-04
 
 ### Fixed

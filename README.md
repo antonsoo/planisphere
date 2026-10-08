@@ -1,18 +1,18 @@
 # Planisphere
 
-**Print a star wheel for any latitude and any century.** See the sky over
-Babylon in 700 BCE, then cut it out and turn it.
+**Print a star wheel and inspect the astronomy behind every point.**
+Compare stellar epochs from 3000 BCE to 3000 CE, then cut out the instrument.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](LICENSE)
 [![Live demo](https://img.shields.io/badge/Live%20demo-antonsoo.github.io%2Fplanisphere-8a6a2f)](https://antonsoo.github.io/planisphere/)
 
 A planisphere is a rotating star chart: dial in a date and time and a window
-shows the stars above your horizon. Every commercial one is printed for one
-latitude and the present epoch. This app generates an accurate, printable,
-laser-cuttable planisphere for **any latitude** and **any epoch from 3000
-BCE to 3000 CE** — precession and proper motion included — so you can hold
-the sky that Ptolemy, the Babylonian astronomers at Uruk, or the Maya
-astronomers at Chichén Itzá actually saw. It pairs with the same owner's
+shows the stars above your horizon. Its disc depends on latitude and stellar
+epoch. This app generates both the disc and its physical holder, then lets
+you trace a star from its catalogue record through motion and precession to
+the printed point. The historical view is a model with explicit limits,
+including an independent Gregorian date scale; it is not a reconstruction
+of ancient observing conditions. It pairs with
 [`horologium`](https://antonsoo.github.io/horologium/) (ancient calendars)
 and [`gnomon`](https://antonsoo.github.io/gnomon/) (sundials).
 
@@ -44,9 +44,16 @@ a static site, nothing to install.
 ## Features
 
 - **Bright-star catalogue**: 2,865 stars to magnitude 5.5, reduced from the
-  HYG v4.1 database (RA/Dec J2000, proper motion, B-V colour index).
+  HYG v4.1 database (J2000 coordinates, proper motion, distance, radial
+  velocity, and B-V colour index), with pinned source revision and checksum.
 - **Precession + proper motion** for any epoch from 3000 BCE to 3000 CE
-  (IAU 2006/P03 model), applied live as you move the epoch slider.
+  (IAU 2006/P03 model), applied live as you move the epoch slider. Motion
+  propagates a Cartesian space vector with perspective when distance and
+  radial velocity are available.
+- **Find and inspect a star** by name, designation, constellation or HIP/HYG
+  ID. Lift the holder to locate it, see why it is hidden, choose a visible
+  quarter-hour setting, and download the catalogue inputs and computed
+  coordinates as JSON. The locator is excluded from print files.
 - **24 self-authored constellation figures** for the most recognizable
   constellations, every line endpoint verified against the catalogue.
 - **Any latitude**, with a preset list including ancient sites: Babylon,
@@ -62,7 +69,12 @@ a static site, nothing to install.
   (red = cut, black = engrave), daily month/day marks, quarter-hour ticks,
   compass letters, bright-star names, and an independent 50 mm scale bar.
 
-<img src="docs/assets/preview-night.png" alt="Planisphere app interface, night-sky theme, Babylon 700 BCE">
+<img src="docs/assets/star-finder-register.png" alt="61 Cyg inspection at 3000 BCE, with catalogue, motion-only and precessed coordinates">
+
+Try **61 Cyg** at **3000 BCE** to see a large motion correction, or **Polaris**
+at **2000 CE** to see a star that is above the horizon but hidden by the hub.
+The [finder and motion guide](docs/stellar-motion.md) explains the states,
+source data, downloadable evidence and numerical audit.
 
 ## How it works
 
@@ -70,7 +82,7 @@ a static site, nothing to install.
 flowchart LR
     A[HYG v4.1 CSV] -->|build_catalogue.py| B[stars.json]
     A -->|build_constellations.py| C[constellations.json]
-    B --> D[proper motion]
+    B --> D[Cartesian space motion]
     D --> E[precession to epoch]
     E --> F[polar azimuthal-\nequidistant projection]
     F --> G[SVG disc + holder]
@@ -81,7 +93,8 @@ flowchart LR
 1. **Star data.** `scripts/build_catalogue.py` filters the HYG v4.1 CSV to
    stars brighter than magnitude 5.5 and writes a compact
    `public/data/stars.json` (RA/Dec J2000, proper motion in mas/yr,
-   magnitude, B-V). `scripts/constellation_lines.py` +
+   distance in parsecs, radial velocity in km/s, magnitude and B-V). Missing
+   or dubious distances remain null. `scripts/constellation_lines.py` +
    `scripts/build_constellations.py` resolve a self-authored set of
    constellation stick figures against the same catalogue — see
    [`docs/constellations.md`](docs/constellations.md) for why we didn't use
@@ -91,7 +104,9 @@ flowchart LR
    [Capitaine, Wallace & Chapront (2003), A&A 412, 567-586](https://syrte.obspm.fr/iau2006/aa03_412_P03.pdf),
    adopted by IAU 2006 Resolution B1. Proper motion
    (`src/astro/properMotion.ts`) is applied first, at J2000, using the
-   Hipparcos/HYG convention (`pmRa` already includes `cos(dec)`).
+   Hipparcos/HYG convention (`pmRa` already includes `cos(dec)`). The
+   tangent-vector formulation crosses coordinate poles without clamping.
+   See [the derivation and ERFA comparison](docs/stellar-motion.md).
 3. **Geometry.** The star disc uses a polar azimuthal-equidistant
    projection centred on the observer's elevated celestial pole, extending
    to the faintest declination that ever rises at that latitude. The disc
@@ -114,25 +129,24 @@ flowchart LR
 
 ## Accuracy and limitations
 
-- **Precession**: the P03 model is stated by its authors to be accurate to
-  a few milliarcseconds per century near J2000, degrading gracefully over
-  longer spans; it's explicitly designed to be usable "for a span of
-  several millennia." This app's `precessionAngles()` is cross-checked
-  against **pyerfa**'s independent C-library implementation
-  (`erfa.p06e`) to sub-microarcsecond agreement across the app's full
-  epoch range (`tests/fixtures/precession-angles.oracle.json`,
-  generated by `scripts/generate_precession_fixtures.py`), and against
-  Meeus's own worked example (*Astronomical Algorithms*, ch. 20, theta
-  Persei to 2028 Nov 13.19) to within 0.15 arcsecond — the small gap is a
-  measured, documented difference between the IAU 1976 model Meeus uses
-  and the P03/2006 model this app uses, not a bug (see
-  `tests/astro/precession.test.ts`). No frame-bias correction is applied
-  (~20 mas fixed offset, irrelevant at print scale).
-- **Proper motion** is a flat linear approximation (undo the `cos(dec)`
-  projection, add `mu * dt`), not rigorous great-circle propagation. Over
-  5000 years this is visibly wrong for the handful of very-high-proper-
-  motion stars (e.g. Barnard's Star, ~10.3"/yr) but well under plotting
-  precision for the vast majority of the catalogue.
+- **Precession**: P03 classical Euler angles agree with ERFA's `p06e`
+  implementation to sub-microarcsecond precision in the retained fixture.
+  The full position pipeline also uses independent C-library matrix operations
+  as a reference. A different IAU 2006 representation, ERFA's bias-removed
+  Fukushima-Williams `pmat06`, differs by up to **9.42 arcseconds** across the
+  sampled millennial epochs. Formula agreement does not establish physical
+  accuracy over thousands of years. Frame bias, nutation and aberration are
+  omitted. Meeus's theta Persei worked example remains a separate cross-check.
+- **Stellar motion**: geometric, constant Cartesian space velocity, followed
+  by precession. The complete catalogue at seven epochs gives **20,055
+  comparisons** with ERFA `pmsafe`: maximum motion error **0.259403 arcsecond**.
+  For 61 Cyg at 3000 BCE, the old angular-addition model missed by about
+  **0.89 degrees**. Distance is unknown for **54** stars; these use a disclosed
+  tangential fallback. Catalogue uncertainty, binary orbits, light-time,
+  relativistic effects and changes in brightness are not modeled. These
+  error numbers quantify agreement with a reference calculation using the
+  same inputs, not accuracy of reconstructed ancient skies. The
+  [audit guide](docs/stellar-motion.md) includes commands and limitations.
 - **Constellation lines** are self-authored from classical bright-star
   asterisms (see [`docs/constellations.md`](docs/constellations.md)), not
   the official 88-constellation IAU boundaries/figures — 24 of the most
@@ -150,8 +164,9 @@ flowchart LR
   remains a separate setting, so historical epochs can be compared on the
   same modern seasonal scale. The date input supports years 0001–9999;
   epoch selection supports 3000 BCE–3000 CE.
-- **Geometric horizon**, not the atmospherically refracted one (about 34
-  arcminutes higher in reality) — smaller than the drawn window line.
+- **Geometric horizon**: atmospheric refraction and observing conditions are
+  omitted. Finder visibility describes the star center and the paper cutouts,
+  not whether the star can actually be observed.
 - At **the equator**, the window is constructed as a half-disc and checked
   against the altitude formula. The center hub and its two supports obscure
   part of the sky, including the elevated pole, as shown in the opaque
@@ -187,6 +202,9 @@ npm run test:browser  # production build, Chromium and Firefox
   and Meeus's published worked example (see Accuracy, above), plus
   round-trip tests (precess forward then back to J2000) for a range of
   stars and epochs.
+- **Space motion**: 49 retained ERFA reference cases cover seven stars and
+  seven epochs, with a separate script checking all 2865 stars. Pole crossings,
+  missing distances and catalogue reference epochs are also exercised.
 - **Geometry**: horizontal/equatorial round trips; analytic altitude versus
   horizon polygons at the equator, near it, and in both hemispheres; physical
   cutouts versus that horizon minus the retained hub and support strip.
@@ -200,8 +218,15 @@ npm run test:browser  # production build, Chromium and Firefox
   keyboard and pointer alignment, loading/retry/timeout recovery, invalid date
   drafts, offline work, and both themes at 1440, 375, and 320 pixels. Every
   workflow monitors page errors, CSP violations, and off-origin requests.
+  Finder downloads are compared with an ERFA reference and actual preview/print
+  points; hub/window states, first-use offline search, escaped labels, invalid
+  drafts, magnitude recovery and keyboard focus are exercised.
 - The same suite can target the deployed site:
   `PLANISPHERE_BASE_URL=https://antonsoo.github.io/planisphere/ npm run test:browser`.
+
+The [2026-10-08 verification record](docs/verification-2026-10-08.md) covers
+the local unreleased finder/motion work, with reviewed screenshots and real
+downloads. It does not assert that the live demo includes these changes.
 
 ## Contributing
 
