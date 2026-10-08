@@ -4,6 +4,7 @@ import type { ConstellationData } from '../render/types.js';
 export interface Catalogue {
   stars: CatalogueStar[];
   constellations: ConstellationData[];
+  provenance: Record<string, string | number | null>;
 }
 const MAX_BYTES = 2_000_000;
 const record = (value: unknown): value is Record<string, unknown> =>
@@ -28,6 +29,11 @@ export function validateCatalogue(starFile: unknown, constellationFile: unknown)
     starFile.stars.length > 10_000
   )
     throw new Error('Invalid star catalogue.');
+  if (
+    (starFile.epoch !== undefined && starFile.epoch !== 2000) ||
+    (starFile.equinox !== undefined && starFile.equinox !== 2000)
+  )
+    throw new Error('The star catalogue must use epoch and equinox J2000.0.');
   const ids = new Set<number>();
   for (const star of starFile.stars) {
     if (
@@ -44,6 +50,12 @@ export function validateCatalogue(starFile: unknown, constellationFile: unknown)
       Math.abs(star.pmRa) > 1_000_000 ||
       !finite(star.pmDec) ||
       Math.abs(star.pmDec) > 1_000_000 ||
+      (star.distancePc !== undefined &&
+        star.distancePc !== null &&
+        (!finite(star.distancePc) || star.distancePc <= 0 || star.distancePc >= 100000)) ||
+      (star.radialVelocityKmSec !== undefined &&
+        star.radialVelocityKmSec !== null &&
+        (!finite(star.radialVelocityKmSec) || Math.abs(star.radialVelocityKmSec) > 10000)) ||
       !finite(star.mag) ||
       star.mag < -10 ||
       star.mag > 20 ||
@@ -88,6 +100,20 @@ export function validateCatalogue(starFile: unknown, constellationFile: unknown)
   return {
     stars: starFile.stars as CatalogueStar[],
     constellations: constellationFile.constellations as ConstellationData[],
+    provenance: {
+      name: shortText(starFile.catalogue) ? starFile.catalogue : 'Unspecified catalogue',
+      license: shortText(starFile.catalogueLicense) ? starFile.catalogueLicense : null,
+      referenceEpoch: 2000,
+      referenceEquinox: 2000,
+      sourceCommit:
+        typeof starFile.sourceCommit === 'string' && /^[a-f0-9]{40}$/.test(starFile.sourceCommit)
+          ? starFile.sourceCommit
+          : null,
+      sourceSha256:
+        typeof starFile.sourceSha256 === 'string' && /^[a-f0-9]{64}$/.test(starFile.sourceSha256)
+          ? starFile.sourceSha256
+          : null,
+    },
   };
 }
 

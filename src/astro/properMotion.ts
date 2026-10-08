@@ -1,41 +1,73 @@
-import { clampDeclination, normalizeDegrees, RAD_PER_DEG } from './constants.js';
+import { DEG_PER_RAD, normalizeDegrees, RAD_PER_DEG } from './constants.js';
 import type { EquatorialCoord } from './precession.js';
 
+const RADIANS_PER_MAS = RAD_PER_DEG / 3_600_000;
+// Julian year, exact IAU astronomical unit, and parsec = 648000/pi AU.
+const KM_S_TO_PC_YEAR = (365.25 * 86400) / ((149597870.7 * 648000) / Math.PI);
+
+export interface SpaceMotion {
+  /** Missing/dubious parallax must be null, not HYG's 100000 pc sentinel. */
+  distancePc: number | null;
+  /** Positive is receding. Null assumes zero radial velocity. */
+  radialVelocityKmSec: number | null;
+}
+
 /**
- * Applies linear proper motion to a J2000.0 position, using the Hipparcos/
- * HYG convention: `pmRaMasPerYear` is mu_alpha* = (d(alpha)/dt) * cos(dec),
- * i.e. it is already the star's actual angular rate across the sky in the
- * RA direction, not the raw rate of change of the RA coordinate. Both
- * components are in milliarcseconds/year.
+ * Rectilinear space motion in the J2000 Cartesian frame, projected back onto
+ * the celestial sphere. pmRa is mu_alpha* (already includes cos(dec)), in
+ * mas per Julian year. Tangent basis vectors avoid division at either pole.
  *
- * This is a flat tangent-plane approximation (add mu * dt, undoing the
- * cos(dec) projection for RA), not the rigorous great-circle propagation
- * used by professional astrometry pipelines. Over the multi-millennial
- * spans this app allows, that approximation grows visibly wrong for the
- * rare, very-high-proper-motion stars (e.g. Barnard's Star, ~10.3"/yr) --
- * see README "Accuracy and limitations". For the vast majority of stars in
- * the bundled catalogue (proper motion a few tens of mas/yr) the resulting
- * position error over 5000 years is well under the disc's plotting
- * precision.
+ * Dividing the space vector by its initial distance leaves a unit direction
+ * plus tangential angular velocity and (rv/distance) along that direction.
+ * When distance is unknown, omit the perspective term. This is geometric,
+ * constant-velocity propagation, without light-time/relativistic or orbital
+ * corrections; docs/stellar-motion.md quantifies comparison with ERFA.
  */
 export function applyProperMotion(
   coord: EquatorialCoord,
   pmRaMasPerYear: number,
   pmDecMasPerYear: number,
   years: number,
+  space: SpaceMotion = { distancePc: null, radialVelocityKmSec: null },
 ): EquatorialCoord {
-  const decRad = clampDeclination(coord.dec) * RAD_PER_DEG;
-  const cosDec = Math.cos(decRad);
+  if (
+    ![coord.ra, coord.dec, pmRaMasPerYear, pmDecMasPerYear, years].every(Number.isFinite) ||
+    Math.abs(coord.dec) > 90 ||
+    (space.distancePc !== null &&
+      (!Number.isFinite(space.distancePc) ||
+        space.distancePc <= 0 ||
+        space.distancePc >= 100000)) ||
+    (space.radialVelocityKmSec !== null && !Number.isFinite(space.radialVelocityKmSec))
+  )
+    throw new RangeError(
+      'Stellar motion requires finite coordinates, rates, and a usable distance or null.',
+    );
 
-  const deltaDecDeg = (pmDecMasPerYear * years) / 3_600_000;
-  const newDec = clampDeclination(coord.dec + deltaDecDeg);
-
-  // Guard the pole: mu_alpha* / cos(dec) diverges as dec -> +/-90. No star in
-  // the bundled catalogue is within a fraction of a degree of the pole with
-  // non-negligible proper motion, but clamp defensively rather than emit NaN.
-  const safeCosDec = Math.abs(cosDec) < 1e-6 ? Math.sign(cosDec || 1) * 1e-6 : cosDec;
-  const deltaRaDeg = (pmRaMasPerYear * years) / 3_600_000 / safeCosDec;
-  const newRa = normalizeDegrees(coord.ra + deltaRaDeg);
-
-  return { ra: newRa, dec: newDec };
+  if (years === 0)
+    return {
+      ra: coord.ra >= 0 && coord.ra < 360 ? coord.ra : normalizeDegrees(coord.ra),
+      dec: coord.dec,
+    };
+  const a = coord.ra * RAD_PER_DEG;
+  const d = coord.dec * RAD_PER_DEG;
+  const ca = Math.cos(a);
+  const sa = Math.sin(a);
+  const cd = Math.cos(d);
+  const sd = Math.sin(d);
+  const east = pmRaMasPerYear * RADIANS_PER_MAS * years;
+  const north = pmDecMasPerYear * RADIANS_PER_MAS * years;
+  const radial =
+    space.distancePc === null || space.radialVelocityKmSec === null
+      ? 0
+      : ((space.radialVelocityKmSec * KM_S_TO_PC_YEAR) / space.distancePc) * years;
+  const x = (1 + radial) * cd * ca - east * sa - north * sd * ca;
+  const y = (1 + radial) * cd * sa + east * ca - north * sd * sa;
+  const z = (1 + radial) * sd + north * cd;
+  const length = Math.hypot(x, y, z);
+  if (!Number.isFinite(length) || length === 0)
+    throw new RangeError('Stellar propagation reaches an undefined position.');
+  return {
+    ra: normalizeDegrees(Math.atan2(y, x) * DEG_PER_RAD),
+    dec: Math.atan2(z, Math.hypot(x, y)) * DEG_PER_RAD,
+  };
 }

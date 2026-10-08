@@ -13,12 +13,16 @@ export interface CatalogueStar {
   dec: number;
   pmRa: number;
   pmDec: number;
+  /** HYG distance from parallax; undefined/null means unavailable or dubious. */
+  distancePc?: number | null;
+  /** Catalogue radial velocity; zero is not a guarantee of a measured zero. */
+  radialVelocityKmSec?: number | null;
   mag: number;
   bv: number | null;
 }
 
 /**
- * Computes a star's apparent mean position for a given epoch: apply proper
+ * Computes a star's mean position for a given epoch: apply space
  * motion first (from J2000.0 to the target date), then precess the result
  * (also from J2000.0 to the target date). This ordering matches Meeus's
  * worked example (ch. 20/21): proper motion is applied at the *starting*
@@ -26,7 +30,10 @@ export interface CatalogueStar {
  */
 export function positionAtEpoch(star: CatalogueStar, epochYear: number): EquatorialCoord {
   const years = epochYear - 2000;
-  const moved = applyProperMotion({ ra: star.ra, dec: star.dec }, star.pmRa, star.pmDec, years);
+  const moved = applyProperMotion({ ra: star.ra, dec: star.dec }, star.pmRa, star.pmDec, years, {
+    distancePc: star.distancePc ?? null,
+    radialVelocityKmSec: star.radialVelocityKmSec ?? null,
+  });
   const t = epochYearToJulianCenturies(epochYear);
   return precessFromJ2000(moved, t);
 }

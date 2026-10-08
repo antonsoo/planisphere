@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -23,7 +24,9 @@ DEFAULT_INPUT = REPO_ROOT / "scripts" / "vendor" / "hygdata_v41.csv"
 DEFAULT_OUTPUT = REPO_ROOT / "public" / "data" / "stars.json"
 
 MAGNITUDE_LIMIT = 5.5
-GENERATED_AT = "2026-09-24"
+GENERATED_AT = "2026-10-08"
+SOURCE_COMMIT = "c7f7f883fe678cc7680169a50ccd7dcc49b060ce"
+SOURCE_SHA256 = "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd"
 
 
 def _blank(value: str | None) -> bool:
@@ -33,7 +36,10 @@ def _blank(value: str | None) -> bool:
 def _parse_float(value: str | None) -> float | None:
     if _blank(value):
         return None
-    return float(value)
+    parsed = float(value)
+    if not math.isfinite(parsed):
+        raise ValueError(f"Non-finite catalogue number: {value!r}")
+    return parsed
 
 
 def _parse_int(value: str | None) -> int | None:
@@ -62,6 +68,12 @@ def build_star_records(rows: list[dict]) -> list[dict]:
 
         pmra = _parse_float(row.get("pmra")) or 0.0
         pmdec = _parse_float(row.get("pmdec")) or 0.0
+        distance = _parse_float(row.get("dist"))
+        # HYG documents 100000 pc as missing or dubious parallax, not a distance.
+        if distance is not None and (distance <= 0 or distance >= 100000):
+            distance = None
+        radial_velocity = _parse_float(row.get("rv"))
+        color_index = _parse_float(row.get("ci"))
 
         star = {
             "id": int(row["id"]),
@@ -74,8 +86,10 @@ def build_star_records(rows: list[dict]) -> list[dict]:
             "dec": round(dec_deg, 6),
             "pmRa": round(pmra, 3),
             "pmDec": round(pmdec, 3),
+            "distancePc": distance,
+            "radialVelocityKmSec": radial_velocity,
             "mag": round(mag, 3),
-            "bv": (lambda v: round(v, 3) if v is not None else None)(_parse_float(row.get("ci"))),
+            "bv": round(color_index, 3) if color_index is not None else None,
         }
         stars.append(star)
     return stars
@@ -99,10 +113,14 @@ def main() -> None:
     named = sum(1 for s in stars if s["name"] is not None)
     with_hip = sum(1 for s in stars if s["hip"] is not None)
 
+    source_sha256 = hashlib.sha256(args.input.read_bytes()).hexdigest()
     output = {
         "catalogue": "HYG v4.1",
         "catalogueUrl": "https://github.com/astronexus/HYG-Database",
         "catalogueLicense": "CC BY-SA 4.0",
+        "sourceCommit": SOURCE_COMMIT if source_sha256 == SOURCE_SHA256 else None,
+        "sourceSha256": source_sha256,
+        "motionModel": "rectilinear-space-motion",
         "epoch": 2000.0,
         "equinox": 2000.0,
         "magnitudeLimit": MAGNITUDE_LIMIT,

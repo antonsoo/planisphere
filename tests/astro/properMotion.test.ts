@@ -1,37 +1,70 @@
 import { describe, expect, it } from 'vitest';
 import { applyProperMotion } from '../../src/astro/properMotion.js';
+import { positionAtEpoch } from '../../src/astro/starPosition.js';
+import oracle from '../fixtures/space-motion.oracle.json' with { type: 'json' };
 
-describe('applyProperMotion', () => {
-  it('is a no-op over zero years', () => {
-    const r = applyProperMotion({ ra: 123.4, dec: -12.3 }, 500, -300, 0);
-    expect(r.ra).toBeCloseTo(123.4, 10);
-    expect(r.dec).toBeCloseTo(-12.3, 10);
-  });
+function separationArcsec(a: { ra: number; dec: number }, b: { ra: number; dec: number }): number {
+  const rad = Math.PI / 180;
+  const halfChord =
+    Math.sin(((a.dec - b.dec) * rad) / 2) ** 2 +
+    Math.cos(a.dec * rad) * Math.cos(b.dec * rad) * Math.sin(((a.ra - b.ra) * rad) / 2) ** 2;
+  return ((2 * Math.asin(Math.sqrt(Math.max(0, Math.min(1, halfChord))))) / rad) * 3600;
+}
 
-  it('moves declination linearly with pmDec', () => {
-    const r = applyProperMotion({ ra: 10, dec: 0 }, 0, 1000, 100);
-    // 1000 mas/yr * 100 yr = 100,000 mas = 100 arcsec = 100/3600 deg
-    expect(r.dec).toBeCloseTo(100 / 3600, 9);
+describe('Cartesian stellar propagation', () => {
+  it('keeps the catalogue coordinates at J2000 without rounding them', () => {
+    expect(applyProperMotion({ ra: 123.4, dec: -12.3 }, 500, -300, 0)).toEqual({
+      ra: 123.4,
+      dec: -12.3,
+    });
   });
-
-  it('divides pmRa by cos(dec) to get the RA coordinate rate (Hipparcos convention)', () => {
-    const r = applyProperMotion({ ra: 10, dec: 60 }, 1000, 0, 100);
-    const deltaRaDeg = (1000 * 100) / 3_600_000 / Math.cos((60 * Math.PI) / 180);
-    expect(r.ra).toBeCloseTo(10 + deltaRaDeg, 9);
+  it('crosses the north pole rather than pinning the star at declination 90', () => {
+    const result = applyProperMotion({ ra: 10, dec: 89.5 }, 0, 3_600_000, 1);
+    expect(result.ra).toBeCloseTo(190, 9);
+    expect(result.dec).toBeCloseTo(89.50010152, 7);
+    expect(applyProperMotion({ ra: 10, dec: -89.5 }, 0, -3_600_000, 1).dec).toBeCloseTo(
+      -result.dec,
+      10,
+    );
   });
-
-  it("matches Barnard's Star's well-known ~10.3\"/yr total proper motion over one year", () => {
-    // Barnard's Star: pmRA*cos(dec) ~ -798.71 mas/yr, pmDec ~ 10337.77 mas/yr
-    // (values as commonly tabulated, e.g. Hipparcos catalogue).
-    const start = { ra: 269.452, dec: 4.6933 };
-    const r = applyProperMotion(start, -798.71, 10337.77, 1);
-    const totalArcsec = Math.sqrt((-798.71 / 1000) ** 2 + (10337.77 / 1000) ** 2);
-    expect(totalArcsec).toBeCloseTo(10.38, 1);
-    expect(r.dec).toBeGreaterThan(start.dec);
+  it('defines a finite tangent direction even when the starting coordinate is exactly a pole', () => {
+    const atPole = applyProperMotion({ ra: 0, dec: 90 }, 3_600_000, 0, 1);
+    expect(atPole.ra).toBeCloseTo(90, 9);
+    expect(atPole.dec).toBeLessThan(90);
+    expect(separationArcsec(atPole, { ra: 0, dec: 90 })).toBeCloseTo(3599.63453, 4);
   });
-
-  it('clamps declination at the pole instead of overshooting', () => {
-    const r = applyProperMotion({ ra: 0, dec: 89.999 }, 0, 100_000_000, 1);
-    expect(r.dec).toBeLessThanOrEqual(90);
+  it('does not fabricate perspective when distance is unavailable', () => {
+    const a = applyProperMotion({ ra: 30, dec: 40 }, 5000, 4000, -4999);
+    const b = applyProperMotion({ ra: 30, dec: 40 }, 5000, 4000, -4999, {
+      distancePc: null,
+      radialVelocityKmSec: 300,
+    });
+    expect(b).toEqual(a);
   });
+  it('rejects non-finite motion and HYG sentinel distances instead of emitting coordinates', () => {
+    expect(() => applyProperMotion({ ra: 0, dec: 91 }, 0, 0, 1)).toThrow(RangeError);
+    expect(() => applyProperMotion({ ra: 0, dec: 0 }, Infinity, 0, 1)).toThrow(RangeError);
+    expect(() =>
+      applyProperMotion({ ra: 0, dec: 0 }, 0, 0, 1, { distancePc: 100000, radialVelocityKmSec: 0 }),
+    ).toThrow(RangeError);
+  });
+  it.each(oracle.cases)(
+    'agrees with independent ERFA for HIP $star.hip, epoch $year',
+    ({ star, year, motionRa, motionDec, meanRa, meanDec }) => {
+      const moved = applyProperMotion(
+        { ra: star.ra, dec: star.dec },
+        star.pmRa,
+        star.pmDec,
+        year - 2000,
+        {
+          distancePc: star.distancePc,
+          radialVelocityKmSec: star.radialVelocityKmSec,
+        },
+      );
+      expect(separationArcsec(moved, { ra: motionRa, dec: motionDec })).toBeLessThan(0.35);
+      expect(
+        separationArcsec(positionAtEpoch(star, year), { ra: meanRa, dec: meanDec }),
+      ).toBeLessThan(0.35);
+    },
+  );
 });
