@@ -1,0 +1,115 @@
+{
+  "pyerfa": "2.0.1.5",
+  "numpy": "2.5.3",
+  "catalogueSha256": "ca403ac08652c82aa68fdaa2b659ce6f472e19bdb3fc949141aa4bac64420d07",
+  "catalogueSourceSha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+  "stars": 2865,
+  "positions": 20055,
+  "unknownDistances": 54,
+  "maxMotionErrorArcsec": 0.2594023012479046,
+  "maxMeanErrorArcsec": 0.2594023012438281,
+  "maxFukushimaWilliamsErrorArcsec": 9.419406498815098,
+  "maxTangentialFallbackErrorArcsec": 3.12947496746077e-9,
+  "worstPriorApproximation": [
+    {
+      "id": 103879,
+      "name": "61 Cyg",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 3199.024121285696,
+      "motionErrorArcsec": 0.2594023012479046,
+      "meanErrorArcsec": 0.2594023012438281,
+      "fukushimaWilliamsErrorArcsec": 8.86180183956795
+    },
+    {
+      "id": 108526,
+      "name": "Eps Ind",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 3014.673888315822,
+      "motionErrorArcsec": 0.09804102819359611,
+      "meanErrorArcsec": 0.09804102824658688,
+      "fukushimaWilliamsErrorArcsec": 3.207153895225838
+    },
+    {
+      "id": 71453,
+      "name": "Toliman",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 2088.4381870352854,
+      "motionErrorArcsec": 0.0720817821672845,
+      "meanErrorArcsec": 0.07208178208112717,
+      "fukushimaWilliamsErrorArcsec": 8.203054370351447
+    },
+    {
+      "id": 71456,
+      "name": "Rigil Kentaurus",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 2088.2983775444113,
+      "motionErrorArcsec": 0.07208178218133865,
+      "meanErrorArcsec": 0.07208178220279125,
+      "fukushimaWilliamsErrorArcsec": 8.202977753026252
+    },
+    {
+      "id": 5325,
+      "name": "30 Cas",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 1480.6744335902658,
+      "motionErrorArcsec": 0.20080234184628667,
+      "meanErrorArcsec": 0.20080234176757641,
+      "fukushimaWilliamsErrorArcsec": 9.419406498815098
+    },
+    {
+      "id": 15471,
+      "name": "82 G. Eri",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 1448.6511528429594,
+      "motionErrorArcsec": 0.1757998043786618,
+      "meanErrorArcsec": 0.17579980442350462,
+      "fukushimaWilliamsErrorArcsec": 8.448397522496574
+    },
+    {
+      "id": 2016,
+      "name": "Bet Hyi",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 1404.9126184891004,
+      "motionErrorArcsec": 0.0056592303935982516,
+      "meanErrorArcsec": 0.0056592304542346875,
+      "fukushimaWilliamsErrorArcsec": 6.820948638395356
+    },
+    {
+      "id": 103879,
+      "name": "61 Cyg",
+      "year": -699,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 955.6902339868301,
+      "motionErrorArcsec": 0.07762638132660143,
+      "meanErrorArcsec": 0.07762638135595609,
+      "fukushimaWilliamsErrorArcsec": 0.16424588008261723
+    },
+    {
+      "id": 19799,
+      "name": "Keid",
+      "year": -2999,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 948.1744975244377,
+      "motionErrorArcsec": 0.07106427157325039,
+      "meanErrorArcsec": 0.0710642715317515,
+      "fukushimaWilliamsErrorArcsec": 9.13695721479972
+    },
+    {
+      "id": 108526,
+      "name": "Eps Ind",
+      "year": -699,
+      "distanceKnown": true,
+      "oldMotionErrorArcsec": 887.9961224381929,
+      "motionErrorArcsec": 0.02773163878459413,
+      "meanErrorArcsec": 0.027731638833096924,
+      "fukushimaWilliamsErrorArcsec": 0.081612084063087
+    }
+  ]
+}

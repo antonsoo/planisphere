@@ -255,9 +255,10 @@ npm run test:browser  # production build, Chromium and Firefox
 - The same suite can target the deployed site:
   `PLANISPHERE_BASE_URL=https://antonsoo.github.io/planisphere/ npm run test:browser`.
 
-The [2026-10-08 verification record](docs/verification-2026-10-08.md) covers
-the local unreleased finder/motion work, with reviewed screenshots and real
-downloads. It does not assert that the live demo includes these changes.
+The [2026-10-10 source verification](docs/verification-2026-10-10.md) covers
+the current finder/motion work, including a fresh independent comparison and
+actual browser downloads. It does not assert that the live demo includes
+these changes.
 
 ## Contributing
 
