@@ -71,11 +71,40 @@ quarter-hour control. Apply the date rollover too. A civil clock at UTC+3
 reading 21:00 gives the same result. Use your clock's current offset,
 including daylight saving if it applies.
 
+In the source checkout, expand **Convert a civil clock** under Local mean time:
+
+1. Enter the civil date/time and its explicit UTC offset (`-07:00`, `+05:45`,
+   or `+00:00` for UTC). Include daylight saving in that offset.
+2. Check longitude: east is positive, west negative. A city preset fills it;
+   changing to custom latitude clears the preset longitude. Enter your own
+   longitude without changing the latitude of the wheel.
+3. Inspect UTC, unrounded mean time and the proposed wheel setting. **Apply
+   date and mean time** changes both chart controls together. Draft inputs
+   leave the existing chart and its downloads intact.
+
+For example, `2026-07-01 00:15` at UTC−07:00 and longitude −122.42° converts
+to mean time `2026-06-30 23:05:19.2`; the wheel uses `2026-06-30 23:00`.
+Quarter-hour rounding can itself cross midnight or New Year. Changing the
+resulting year regenerates the printed annual scale, without changing the
+stellar epoch. [Retained browser downloads and independent calculations](../studies/clock-conversion/README.md).
+
+Offsets must be explicit signed hours/minutes between −14:00 and +14:00.
+The calculator accepts Gregorian years 0001–9999 and rejects conversions
+outside that range. It does not determine whether the supplied offset was
+legally in effect, or whether a local clock time was skipped or repeated.
+The entered offset selects the interpretation. Historical offsets with seconds
+and leap-second clock inputs are not supported. The calculation uses UTC as an
+approximation to UT1, which is the Earth-rotation basis for mean solar time;
+see [USNO's distinction](https://aa.usno.navy.mil/faq/UT). This is a paper-wheel
+setting helper, not a precision time-scale converter. It does not add the
+equation of time used for apparent solar time.
+
 The app initially rounds the current mean time at the default Babylon site
 to the nearest quarter-hour, including a possible date rollover. Changing
 location retains the date and time you entered; supply the new site's mean
-time. Custom latitude has no longitude, so no civil-time conversion can be
-inferred from that setting.
+time directly or apply a new conversion. Custom latitude has no longitude,
+so conversion requires an explicit longitude rather than inferring it from
+the latitude.
 
 The annual scale uses the mean Sun at 00:00 UTC for each date. It omits the
 Sun's motion during that day, atmospheric refraction, and other small

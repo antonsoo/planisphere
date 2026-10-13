@@ -20,6 +20,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Civil-clock conversion with an explicit UTC offset and longitude, a preview
+  of UTC/mean/rounded time, and atomic application of date and mean time to the
+  wheel. Midnight and year rollover update the annual scale; incomplete drafts
+  preserve the existing instrument and downloads.
+
 - `src/astro/ecliptic.ts`: P03 mean obliquity of date and equatorial to
   ecliptic conversion, tested against pyerfa. Not used by the app yet.
 - `studies/historical-catalogues`: planisphere's pipeline compared with the

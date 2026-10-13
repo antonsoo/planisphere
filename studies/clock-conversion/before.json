@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "efa33746b52f0d77b98af29604fe18f06a1082b0",
+  "scenario": "Entering a civil clock directly in the existing mean-time control (the original UI tells the user to convert externally).",
+  "civilClock": "2026-07-01T00:15",
+  "utcOffset": "-07:00",
+  "longitudeDeg": -122.42,
+  "observed": {
+    "controls": [
+      {
+        "id": "lat",
+        "type": "range"
+      },
+      {
+        "id": "epoch",
+        "type": "range"
+      },
+      {
+        "id": "mag",
+        "type": "range"
+      },
+      {
+        "id": "show-constellations",
+        "type": "checkbox"
+      },
+      {
+        "id": "show-names",
+        "type": "checkbox"
+      },
+      {
+        "id": "date",
+        "type": "date"
+      },
+      {
+        "id": "hour",
+        "type": "range"
+      }
+    ],
+    "setting": "37.8\u00b0N \u00b7 2026 CE \u00b7 2026-07-01 \u00b7 00:15 mean time",
+    "rotation": "rotate(282.8188)",
+    "hint": "Use solar mean time for your site, rather than your civil/DST clock. See time conversion and accuracy."
+  }
+}

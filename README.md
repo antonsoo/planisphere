@@ -87,6 +87,10 @@ a static site, nothing to install.
   or use the keyboard time control and 15-minute buttons. The opaque holder,
   exposed daily date scale, and connected pivot match the printed assembly.
   **Sky detail** enlarges the windows for close inspection.
+- **Convert a civil clock** with an explicit UTC offset and longitude. Preview
+  UTC, local mean time and the nearest quarter-hour, then apply both date and
+  time together, including midnight and year rollover. The selected offset
+  must include daylight saving; no local time-zone rule is guessed.
 - **Ink & paper / night-sky themes**, keyboard-accessible, responsive down
   to 320px, with persistent theme selection.
 - **Scale-exact SVG export** of the star disc and the horizon-window
@@ -185,7 +189,12 @@ flowchart LR
 - **Date/hour rings** read local *mean solar time*, ignoring the equation
   of time (up to about &plusmn;16 minutes) and longitude/timezone — the same
   simplification every paper planisphere makes, because a printed ring
-  can't encode either. Enter your own local mean time directly. The date
+  can't encode either. Enter local mean time directly, or use **Convert a civil
+  clock** with the UTC offset in effect on your chosen date and an east-positive
+  longitude. Conversion approximates UT1 with UTC, omits the equation of time,
+  and rounds to the nearest quarter-hour (ties later). It does not validate
+  historical zone rules, skipped/repeated civil times or leap seconds.
+  [Conversion evidence and examples](studies/clock-conversion/README.md). The date
   marks are placed by the mean Sun and checked against an independent
   sidereal-time formula (`tests/geometry/dial.test.ts`); each mark stands
   for 0h UT, so a reading late in the day trails the sky by up to a degree

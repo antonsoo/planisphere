@@ -1,4 +1,5 @@
 import './fonts/fonts.css';
+import { ClockConverter } from './clockConverter.js';
 import { angleDelta, formatHour, parseDateInput, quarterHour } from './controls.js';
 import { CITIES, DEFAULT_CITY_ID } from './data/cities.js';
 import { type Catalogue, loadCatalogue } from './data/loadCatalogue.js';
@@ -43,6 +44,13 @@ let rotator: SVGGElement | null = null;
 let pointerId: number | null = null;
 let previousAngle = 0;
 let dragHour = 0;
+const clockConverter = new ClockConverter($<HTMLElement>('clock-converter'), (date, hour) => {
+  if (!catalogue) return false;
+  dateInput.value = date;
+  hourInput.value = String(hour);
+  render();
+  return true;
+});
 const starFinder = new StarFinder($<HTMLElement>('star-finder'), svg, {
   locate: () => {
     setHolderLifted(true);
@@ -71,8 +79,9 @@ custom.textContent = 'Custom latitude';
 citySelect.appendChild(custom);
 const initialCity = CITIES.find((city) => city.id === DEFAULT_CITY_ID);
 if (!initialCity) throw new Error('Missing default site');
-function chooseCity() {
+function chooseCity(updateLongitude = true) {
   const city = CITIES.find((item) => item.id === citySelect.value);
+  if (updateLongitude) clockConverter.setLongitude(city?.lon ?? null);
   if (!city) {
     cityNote.textContent =
       'The holder is cut for your chosen latitude. Enter local mean time for your site.';
@@ -203,6 +212,7 @@ liftHolder.addEventListener('click', () => setHolderLifted(!holderLifted));
 fullView.addEventListener('click', () => setChartView(false));
 detailView.addEventListener('click', () => setChartView(true));
 function render() {
+  clockConverter.clearApplied();
   endDrag();
   if (!catalogue) return;
   const config = configFromControls();
@@ -217,6 +227,7 @@ function render() {
   updateReadouts(config);
 }
 function setHour(hour: number) {
+  clockConverter.clearApplied();
   hourInput.value = String(quarterHour(hour));
   updateControlOutputs();
   if (!catalogue || !committed || !parseDateInput(dateInput.value)) return;
@@ -233,8 +244,9 @@ citySelect.addEventListener('change', () => {
   render();
 });
 latInput.addEventListener('input', () => {
+  const wasPreset = citySelect.value !== 'custom';
   citySelect.value = 'custom';
-  chooseCity();
+  chooseCity(wasPreset);
   render();
 });
 for (const input of [epochInput, magInput, dateInput]) input.addEventListener('input', render);

@@ -196,7 +196,8 @@ a {
 }
 
 select,
-input[type="date"] {
+input[type="date"],
+.clock-converter input {
   width: 100%;
   font-family: var(--body-font);
   font-size: 0.95rem;
@@ -205,6 +206,33 @@ input[type="date"] {
   border-radius: 3px;
   background: var(--paper);
   color: var(--ink);
+}
+
+.clock-converter {
+  margin-top: 0.75rem;
+  border-top: 1px dashed var(--brass);
+  padding-top: 0.65rem;
+}
+.clock-converter summary {
+  color: var(--oxblood);
+  cursor: pointer;
+}
+.control-group .clock-converter label {
+  margin-top: 0.8rem;
+}
+.clock-converter input {
+  min-width: 0;
+  max-width: 100%;
+}
+.clock-result {
+  border-left: 2px solid var(--brass);
+  padding: 0.45rem 0.65rem;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+.clock-result p {
+  margin: 0.3rem 0;
 }
 
 .row {
@@ -255,6 +283,10 @@ output {
 
 .export-btn:hover {
   filter: brightness(1.12);
+}
+
+.clock-converter .export-btn {
+  width: 100%;
 }
 
 .preview {

@@ -1,0 +1,203 @@
+{
+  "oracle": "Python datetime calendar arithmetic with Decimal longitude conversion; round to the nearest quarter-hour, ties later. Cases are controlled inputs, not recorded observing sessions.",
+  "cases": [
+    {
+      "name": "west-midnight",
+      "civil": "2026-07-01T00:15",
+      "offset": "-07:00",
+      "longitude": "-122.42",
+      "utc": "2026-07-01T07:15:00.000Z",
+      "meanTime": "2026-06-30T23:05:19.200Z",
+      "wheelDate": "2026-06-30",
+      "wheelHour": 23.0,
+      "roundingSeconds": -319.2
+    },
+    {
+      "name": "summer-evening",
+      "civil": "2026-06-01T21:00",
+      "offset": "-07:00",
+      "longitude": "-122.42",
+      "utc": "2026-06-02T04:00:00.000Z",
+      "meanTime": "2026-06-01T19:50:19.200Z",
+      "wheelDate": "2026-06-01",
+      "wheelHour": 19.75,
+      "roundingSeconds": -319.2
+    },
+    {
+      "name": "babylon",
+      "civil": "2026-10-12T21:00",
+      "offset": "+03:00",
+      "longitude": "44.42",
+      "utc": "2026-10-12T18:00:00.000Z",
+      "meanTime": "2026-10-12T20:57:40.800Z",
+      "wheelDate": "2026-10-12",
+      "wheelHour": 21.0,
+      "roundingSeconds": 139.2
+    },
+    {
+      "name": "kathmandu-leap",
+      "civil": "2024-03-01T00:01",
+      "offset": "+05:45",
+      "longitude": "85.324",
+      "utc": "2024-02-29T18:16:00.000Z",
+      "meanTime": "2024-02-29T23:57:17.760Z",
+      "wheelDate": "2024-03-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 162.24
+    },
+    {
+      "name": "dateline",
+      "civil": "2026-01-01T00:05",
+      "offset": "+14:00",
+      "longitude": "-157.4",
+      "utc": "2025-12-31T10:05:00.000Z",
+      "meanTime": "2025-12-30T23:35:24.000Z",
+      "wheelDate": "2025-12-30",
+      "wheelHour": 23.5,
+      "roundingSeconds": -324.0
+    },
+    {
+      "name": "east-edge",
+      "civil": "2026-12-31T23:59",
+      "offset": "-12:00",
+      "longitude": "180",
+      "utc": "2027-01-01T11:59:00.000Z",
+      "meanTime": "2027-01-01T23:59:00.000Z",
+      "wheelDate": "2027-01-02",
+      "wheelHour": 0.0,
+      "roundingSeconds": 60.0
+    },
+    {
+      "name": "west-edge",
+      "civil": "2026-01-01T00:00",
+      "offset": "+14:00",
+      "longitude": "-180",
+      "utc": "2025-12-31T10:00:00.000Z",
+      "meanTime": "2025-12-30T22:00:00.000Z",
+      "wheelDate": "2025-12-30",
+      "wheelHour": 22.0,
+      "roundingSeconds": 0.0
+    },
+    {
+      "name": "round-next-year",
+      "civil": "2026-12-31T23:59",
+      "offset": "+00:00",
+      "longitude": "0",
+      "utc": "2026-12-31T23:59:00.000Z",
+      "meanTime": "2026-12-31T23:59:00.000Z",
+      "wheelDate": "2027-01-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 60.0
+    },
+    {
+      "name": "half-quarter-before-epoch",
+      "civil": "1900-01-01T00:00",
+      "offset": "+00:00",
+      "longitude": "1.875",
+      "utc": "1900-01-01T00:00:00.000Z",
+      "meanTime": "1900-01-01T00:07:30.000Z",
+      "wheelDate": "1900-01-01",
+      "wheelHour": 0.25,
+      "roundingSeconds": 450.0
+    },
+    {
+      "name": "half-quarter-after-epoch",
+      "civil": "2026-01-01T00:00",
+      "offset": "+00:00",
+      "longitude": "1.875",
+      "utc": "2026-01-01T00:00:00.000Z",
+      "meanTime": "2026-01-01T00:07:30.000Z",
+      "wheelDate": "2026-01-01",
+      "wheelHour": 0.25,
+      "roundingSeconds": 450.0
+    },
+    {
+      "name": "year-one",
+      "civil": "0001-01-02T01:02",
+      "offset": "+00:00",
+      "longitude": "0",
+      "utc": "0001-01-02T01:02:00.000Z",
+      "meanTime": "0001-01-02T01:02:00.000Z",
+      "wheelDate": "0001-01-02",
+      "wheelHour": 1.0,
+      "roundingSeconds": -120.0
+    },
+    {
+      "name": "year-99",
+      "civil": "0099-12-31T23:59",
+      "offset": "+00:00",
+      "longitude": "0",
+      "utc": "0099-12-31T23:59:00.000Z",
+      "meanTime": "0099-12-31T23:59:00.000Z",
+      "wheelDate": "0100-01-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 60.0
+    },
+    {
+      "name": "last-year",
+      "civil": "9999-12-30T23:59",
+      "offset": "+00:00",
+      "longitude": "0",
+      "utc": "9999-12-30T23:59:00.000Z",
+      "meanTime": "9999-12-30T23:59:00.000Z",
+      "wheelDate": "9999-12-31",
+      "wheelHour": 0.0,
+      "roundingSeconds": 60.0
+    },
+    {
+      "name": "negative-half",
+      "civil": "1900-01-01T00:00",
+      "offset": "+00:00",
+      "longitude": "-1.875",
+      "utc": "1900-01-01T00:00:00.000Z",
+      "meanTime": "1899-12-31T23:52:30.000Z",
+      "wheelDate": "1900-01-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 450.0
+    },
+    {
+      "name": "negative-zero-offset",
+      "civil": "2026-01-01T12:00",
+      "offset": "-00:00",
+      "longitude": "0",
+      "utc": "2026-01-01T12:00:00.000Z",
+      "meanTime": "2026-01-01T12:00:00.000Z",
+      "wheelDate": "2026-01-01",
+      "wheelHour": 12.0,
+      "roundingSeconds": 0.0
+    },
+    {
+      "name": "half-hour-offset",
+      "civil": "2026-07-01T00:10",
+      "offset": "+09:30",
+      "longitude": "138.6",
+      "utc": "2026-06-30T14:40:00.000Z",
+      "meanTime": "2026-06-30T23:54:24.000Z",
+      "wheelDate": "2026-07-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 336.0
+    },
+    {
+      "name": "february-century",
+      "civil": "1900-03-01T00:00",
+      "offset": "+00:00",
+      "longitude": "-0.13",
+      "utc": "1900-03-01T00:00:00.000Z",
+      "meanTime": "1900-02-28T23:59:28.800Z",
+      "wheelDate": "1900-03-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 31.2
+    },
+    {
+      "name": "february-400",
+      "civil": "2000-03-01T00:00",
+      "offset": "+00:00",
+      "longitude": "-0.13",
+      "utc": "2000-03-01T00:00:00.000Z",
+      "meanTime": "2000-02-29T23:59:28.800Z",
+      "wheelDate": "2000-03-01",
+      "wheelHour": 0.0,
+      "roundingSeconds": 31.2
+    }
+  ]
+}

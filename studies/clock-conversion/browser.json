@@ -1,0 +1,771 @@
+{
+  "servedFiles": [
+    {
+      "path": "assets/cinzel-latin-DMUuCU8H.woff2",
+      "bytes": 25904,
+      "sha256": "09941fb1c169c38fd414536b37690057fc01b3117a5c63dd6571186540c8f370"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-CG36JvV6.woff2",
+      "bytes": 14540,
+      "sha256": "8fc2606f8ae6c569f444e138dba052d9a6e3f0657f9031796503bbb94eced600"
+    },
+    {
+      "path": "assets/index-BOfIciC4.js",
+      "bytes": 39265,
+      "sha256": "16792ca2614a0cd15665ea519905cb16faa42dcccb2da08ec4ce3d856068f9ed"
+    },
+    {
+      "path": "assets/index-NopBB8z-.css",
+      "bytes": 27656,
+      "sha256": "b6d17fa638c4a414a73548a15a21813490d872a8b52aced7500f8b7d9a3950ea"
+    },
+    {
+      "path": "assets/jetbrains-mono-cyrillic-Buze_B52.woff2",
+      "bytes": 8872,
+      "sha256": "e17cfd15fb96909d64095015f958207063a0c07191da3512df7d560a781aebdf"
+    },
+    {
+      "path": "assets/jetbrains-mono-greek-D3oMJlXt.woff2",
+      "bytes": 6836,
+      "sha256": "0a557721b1f8b36d3f3f84442689a71ca4a744300abcb46a1953f51bfc663b66"
+    },
+    {
+      "path": "assets/jetbrains-mono-latin-6fWv1k7M.woff2",
+      "bytes": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+    },
+    {
+      "path": "assets/jetbrains-mono-latin-ext-DIC32ArD.woff2",
+      "bytes": 11624,
+      "sha256": "db5ff4db83e580426280e9337a58dc57d3a83784a1b03ad80914651594441d52"
+    },
+    {
+      "path": "assets/jetbrains-mono-vietnamese-BehTv68k.woff2",
+      "bytes": 5888,
+      "sha256": "c89b9cc0bc6262bd4f8d8494b6961601f3aefa829d08c2e3635f4d501d3a47c2"
+    },
+    {
+      "path": "assets/spectral-400-cyrillic-Bx9Tn3WZ.woff2",
+      "bytes": 15372,
+      "sha256": "26ed02d522d35ca1630be575f96df8fb290882061571a87ef3ab7fc323d28f87"
+    },
+    {
+      "path": "assets/spectral-400-cyrillic-ext-B4-YHs9i.woff2",
+      "bytes": 6520,
+      "sha256": "2063ca386de935a6ee88de6503ccbaa66bfd4588ca8e6516748f67f8b642122b"
+    },
+    {
+      "path": "assets/spectral-400-latin-CTVgUekv.woff2",
+      "bytes": 21696,
+      "sha256": "cf8daee3b83c1e662196c6e34e444bc41344d54bfeb4fb5351e197de6ce94539"
+    },
+    {
+      "path": "assets/spectral-400-latin-ext-XDLFwhqg.woff2",
+      "bytes": 20240,
+      "sha256": "fc4b2566ccd9714a72c2137f822311cb0131296c83c8ee93848ae6f887969e85"
+    },
+    {
+      "path": "assets/spectral-400-vietnamese-C7CRHYqk.woff2",
+      "bytes": 7676,
+      "sha256": "e8c68397acd8950ca955de46c130c6a393ea087d50e677bace1def6460f44883"
+    },
+    {
+      "path": "assets/spectral-500-cyrillic-ext-bcG1qx3J.woff2",
+      "bytes": 6724,
+      "sha256": "aeb9fb4f370161bf5ee60f3492a9592ea06cdb3d3f51b1c79ab11c8e0f81dc80"
+    },
+    {
+      "path": "assets/spectral-500-cyrillic-medSbGbm.woff2",
+      "bytes": 16616,
+      "sha256": "48a05ffb93237d6d238ef45e0e906218fc6816f573fc0202c6f160813510369b"
+    },
+    {
+      "path": "assets/spectral-500-latin-ext-CC9VEg_t.woff2",
+      "bytes": 20644,
+      "sha256": "747fb031bc07d1d88891efbab9d64ec5106407499fe8eb227c9bc47b3e5f77cd"
+    },
+    {
+      "path": "assets/spectral-500-latin-nNjq7_Cd.woff2",
+      "bytes": 22836,
+      "sha256": "2b70215ed40f2c73bbc7bb53cff9c8975a244c8462569e60989c77b8c5a87a00"
+    },
+    {
+      "path": "assets/spectral-500-vietnamese-qnENts6X.woff2",
+      "bytes": 7728,
+      "sha256": "682ecba3ca9a91afe404b4f8148d3f057a41fd002ad3d7c94cae52dcf7350ae8"
+    },
+    {
+      "path": "assets/spectral-600-cyrillic-Dl75bDKp.woff2",
+      "bytes": 16908,
+      "sha256": "a8297883e0f04031243b893bee1b629eb43dd90b3957e89d61b67109d655b04f"
+    },
+    {
+      "path": "assets/spectral-600-cyrillic-ext-CvRHnPuy.woff2",
+      "bytes": 6792,
+      "sha256": "91038132400ffcf3db691aab8961e83e0c49e896e14f4509b064be49ca7822f6"
+    },
+    {
+      "path": "assets/spectral-600-latin-DE3OxvnQ.woff2",
+      "bytes": 22936,
+      "sha256": "33faca8b5795a0de1af77cbc43a050a3655c4b1e03e04847fdef4d19d2e361d2"
+    },
+    {
+      "path": "assets/spectral-600-latin-ext-DKlDBbgb.woff2",
+      "bytes": 20824,
+      "sha256": "dea6bd9ca650814af1f750b7474d7205b7fe0e4c79a6b58c6f7157d90dc8815c"
+    },
+    {
+      "path": "assets/spectral-600-vietnamese-ZNiwCzjU.woff2",
+      "bytes": 7872,
+      "sha256": "84e2cc86832a0b2036ba03f00b79ef455083b3d459bafb4c8afab05f728b9335"
+    },
+    {
+      "path": "assets/spectral-italic-cyrillic-C6o5RXh-.woff2",
+      "bytes": 16284,
+      "sha256": "800e7c4478044bd0861ddd67b822ac1bb18220e0ccb90c029fe88052262c99d4"
+    },
+    {
+      "path": "assets/spectral-italic-cyrillic-ext-CZOVIkJA.woff2",
+      "bytes": 7292,
+      "sha256": "2ffe627c5122156c7d49c79d69065ea98a90685fed57271648a44ea34452a7c7"
+    },
+    {
+      "path": "assets/spectral-italic-latin-CDO25mTW.woff2",
+      "bytes": 22712,
+      "sha256": "db397149a9f73fd6a41dd2fdf3314cf8a9daf0485134465cc268cac578766b71"
+    },
+    {
+      "path": "assets/spectral-italic-latin-ext-BgTM1Mst.woff2",
+      "bytes": 20644,
+      "sha256": "f554218b51a0eadc0709d6027e684ad9b5b21ddc4f3dfd4ba171ba2b41b0c99f"
+    },
+    {
+      "path": "assets/spectral-italic-vietnamese-DO3bsfcj.woff2",
+      "bytes": 7820,
+      "sha256": "4248dc09c3ff0a927c12158f48d35b982c3686c12c0218abee02f56373775b73"
+    },
+    {
+      "path": "assets/spectral-sc-cyrillic-B9a3aygX.woff2",
+      "bytes": 22188,
+      "sha256": "4efdffd2b0e2dee51046f0e6641041416316e25c677a44674afe3fe1dff86bf6"
+    },
+    {
+      "path": "assets/spectral-sc-cyrillic-ext-DDqdkx5w.woff2",
+      "bytes": 8480,
+      "sha256": "5454861cab4a36394f453480f72c0a3a2ad3320a3a4e5815ebc23ca1bfa302b3"
+    },
+    {
+      "path": "assets/spectral-sc-latin-ext-yZF7wNpv.woff2",
+      "bytes": 25620,
+      "sha256": "1fc3eeb15cda5e105f52093a137685520cbfb6af987f0457801574975875ff18"
+    },
+    {
+      "path": "assets/spectral-sc-latin-n_hpP58H.woff2",
+      "bytes": 29212,
+      "sha256": "2d31b6fa66bbce4821bc83298714394cebd4023e384f1f6557eff96ab08258b1"
+    },
+    {
+      "path": "assets/spectral-sc-vietnamese-Cd790y9G.woff2",
+      "bytes": 9068,
+      "sha256": "ed16ef9de3a52e13e9f6397e977b838627ef40f956735d437d56fe20159c0d59"
+    },
+    {
+      "path": "data/constellations.json",
+      "bytes": 2442,
+      "sha256": "9e975cbcfcdbcb2597ce6be2d89e30b653f050555d858e875a833141d7386253"
+    },
+    {
+      "path": "data/stars.json",
+      "bytes": 583844,
+      "sha256": "ca403ac08652c82aa68fdaa2b659ce6f472e19bdb3fc949141aa4bac64420d07"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10830,
+      "sha256": "a54f47f57da90c4e30265828fddfef23413fe53b6346598f5f2f10711759ecd3"
+    }
+  ],
+  "workflows": [
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "width": 1440,
+      "offline": true,
+      "observations": [
+        {
+          "input": {
+            "civil": "2026-07-01T00:15",
+            "offset": "-07:00",
+            "longitude": "-122.42"
+          },
+          "name": "west-midnight",
+          "date": "2026-06-30",
+          "hour": 23,
+          "setting": "37.8°N · 2026 CE · 2026-06-30 · 23:00 mean time",
+          "rotation": 263.0832,
+          "alignmentErrorDeg": 0.000035065204201600864,
+          "pageOverflow": false,
+          "applyMs": 45.76943800000004,
+          "downloads": [
+            {
+              "file": "chromium-1440-west-midnight-disc.svg",
+              "bytes": 303949,
+              "sha256": "329fe6ae4b30b197fdbe36da60eb4ebef71465e49530423605996bf24dae5a56",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2026",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-1440-west-midnight-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-01-01T00:05",
+            "offset": "+14:00",
+            "longitude": "-157.4"
+          },
+          "name": "dateline",
+          "date": "2025-12-30",
+          "hour": 23.5,
+          "setting": "37.8°N · 2026 CE · 2025-12-30 · 23:30 mean time",
+          "rotation": 91.1953,
+          "alignmentErrorDeg": -0.00012974519381714344,
+          "pageOverflow": false,
+          "applyMs": 42.521216000000095,
+          "downloads": [
+            {
+              "file": "chromium-1440-dateline-disc.svg",
+              "bytes": 303945,
+              "sha256": "f78956ba112de8850fec4e9ef8b5828f2b5715e6a1fc6bdfc2d6fd2ddeb81b55",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2025",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-1440-dateline-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-12-31T23:59",
+            "offset": "+00:00",
+            "longitude": "0"
+          },
+          "name": "round-next-year",
+          "date": "2027-01-01",
+          "hour": 0,
+          "setting": "37.8°N · 2026 CE · 2027-01-01 · 00:00 mean time",
+          "rotation": 100.4279,
+          "alignmentErrorDeg": -0.00006355328605422983,
+          "pageOverflow": false,
+          "applyMs": 46.661215000000084,
+          "downloads": [
+            {
+              "file": "chromium-1440-round-next-year-disc.svg",
+              "bytes": 303948,
+              "sha256": "74ed5d3fd04b90a8015f3b8dba315a9d229a43bbb80b0a76588dfdad0ee024b4",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2027",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-1440-round-next-year-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "width": 375,
+      "offline": true,
+      "observations": [
+        {
+          "input": {
+            "civil": "2026-07-01T00:15",
+            "offset": "-07:00",
+            "longitude": "-122.42"
+          },
+          "name": "west-midnight",
+          "date": "2026-06-30",
+          "hour": 23,
+          "setting": "37.8°N · 2026 CE · 2026-06-30 · 23:00 mean time",
+          "rotation": 263.0832,
+          "alignmentErrorDeg": 0.000035065204201600864,
+          "pageOverflow": false,
+          "applyMs": 45.427128000000266,
+          "downloads": [
+            {
+              "file": "chromium-375-west-midnight-disc.svg",
+              "bytes": 303949,
+              "sha256": "329fe6ae4b30b197fdbe36da60eb4ebef71465e49530423605996bf24dae5a56",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2026",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-375-west-midnight-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-01-01T00:05",
+            "offset": "+14:00",
+            "longitude": "-157.4"
+          },
+          "name": "dateline",
+          "date": "2025-12-30",
+          "hour": 23.5,
+          "setting": "37.8°N · 2026 CE · 2025-12-30 · 23:30 mean time",
+          "rotation": 91.1953,
+          "alignmentErrorDeg": -0.00012974519381714344,
+          "pageOverflow": false,
+          "applyMs": 40.52089799999885,
+          "downloads": [
+            {
+              "file": "chromium-375-dateline-disc.svg",
+              "bytes": 303945,
+              "sha256": "f78956ba112de8850fec4e9ef8b5828f2b5715e6a1fc6bdfc2d6fd2ddeb81b55",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2025",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-375-dateline-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-12-31T23:59",
+            "offset": "+00:00",
+            "longitude": "0"
+          },
+          "name": "round-next-year",
+          "date": "2027-01-01",
+          "hour": 0,
+          "setting": "37.8°N · 2026 CE · 2027-01-01 · 00:00 mean time",
+          "rotation": 100.4279,
+          "alignmentErrorDeg": -0.00006355328605422983,
+          "pageOverflow": false,
+          "applyMs": 37.88330499999938,
+          "downloads": [
+            {
+              "file": "chromium-375-round-next-year-disc.svg",
+              "bytes": 303948,
+              "sha256": "74ed5d3fd04b90a8015f3b8dba315a9d229a43bbb80b0a76588dfdad0ee024b4",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2027",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "chromium-375-round-next-year-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "width": 1440,
+      "offline": true,
+      "observations": [
+        {
+          "input": {
+            "civil": "2026-07-01T00:15",
+            "offset": "-07:00",
+            "longitude": "-122.42"
+          },
+          "name": "west-midnight",
+          "date": "2026-06-30",
+          "hour": 23,
+          "setting": "37.8°N · 2026 CE · 2026-06-30 · 23:00 mean time",
+          "rotation": 263.0832,
+          "alignmentErrorDeg": 0.000035065204201600864,
+          "pageOverflow": false,
+          "applyMs": 63.07730900000024,
+          "downloads": [
+            {
+              "file": "firefox-1440-west-midnight-disc.svg",
+              "bytes": 303949,
+              "sha256": "329fe6ae4b30b197fdbe36da60eb4ebef71465e49530423605996bf24dae5a56",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2026",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-1440-west-midnight-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-01-01T00:05",
+            "offset": "+14:00",
+            "longitude": "-157.4"
+          },
+          "name": "dateline",
+          "date": "2025-12-30",
+          "hour": 23.5,
+          "setting": "37.8°N · 2026 CE · 2025-12-30 · 23:30 mean time",
+          "rotation": 91.1953,
+          "alignmentErrorDeg": -0.00012974519381714344,
+          "pageOverflow": false,
+          "applyMs": 72.3796340000008,
+          "downloads": [
+            {
+              "file": "firefox-1440-dateline-disc.svg",
+              "bytes": 303945,
+              "sha256": "f78956ba112de8850fec4e9ef8b5828f2b5715e6a1fc6bdfc2d6fd2ddeb81b55",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2025",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-1440-dateline-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-12-31T23:59",
+            "offset": "+00:00",
+            "longitude": "0"
+          },
+          "name": "round-next-year",
+          "date": "2027-01-01",
+          "hour": 0,
+          "setting": "37.8°N · 2026 CE · 2027-01-01 · 00:00 mean time",
+          "rotation": 100.4279,
+          "alignmentErrorDeg": -0.00006355328605422983,
+          "pageOverflow": false,
+          "applyMs": 70.52379099999962,
+          "downloads": [
+            {
+              "file": "firefox-1440-round-next-year-disc.svg",
+              "bytes": 303948,
+              "sha256": "74ed5d3fd04b90a8015f3b8dba315a9d229a43bbb80b0a76588dfdad0ee024b4",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2027",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-1440-round-next-year-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "width": 375,
+      "offline": true,
+      "observations": [
+        {
+          "input": {
+            "civil": "2026-07-01T00:15",
+            "offset": "-07:00",
+            "longitude": "-122.42"
+          },
+          "name": "west-midnight",
+          "date": "2026-06-30",
+          "hour": 23,
+          "setting": "37.8°N · 2026 CE · 2026-06-30 · 23:00 mean time",
+          "rotation": 263.0832,
+          "alignmentErrorDeg": 0.000035065204201600864,
+          "pageOverflow": false,
+          "applyMs": 63.775158000000374,
+          "downloads": [
+            {
+              "file": "firefox-375-west-midnight-disc.svg",
+              "bytes": 303949,
+              "sha256": "329fe6ae4b30b197fdbe36da60eb4ebef71465e49530423605996bf24dae5a56",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2026",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-375-west-midnight-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-01-01T00:05",
+            "offset": "+14:00",
+            "longitude": "-157.4"
+          },
+          "name": "dateline",
+          "date": "2025-12-30",
+          "hour": 23.5,
+          "setting": "37.8°N · 2026 CE · 2025-12-30 · 23:30 mean time",
+          "rotation": 91.1953,
+          "alignmentErrorDeg": -0.00012974519381714344,
+          "pageOverflow": false,
+          "applyMs": 69.89621299999999,
+          "downloads": [
+            {
+              "file": "firefox-375-dateline-disc.svg",
+              "bytes": 303945,
+              "sha256": "f78956ba112de8850fec4e9ef8b5828f2b5715e6a1fc6bdfc2d6fd2ddeb81b55",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2025",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-375-dateline-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        },
+        {
+          "input": {
+            "civil": "2026-12-31T23:59",
+            "offset": "+00:00",
+            "longitude": "0"
+          },
+          "name": "round-next-year",
+          "date": "2027-01-01",
+          "hour": 0,
+          "setting": "37.8°N · 2026 CE · 2027-01-01 · 00:00 mean time",
+          "rotation": 100.4279,
+          "alignmentErrorDeg": -0.00006355328605422983,
+          "pageOverflow": false,
+          "applyMs": 66.21102999999857,
+          "downloads": [
+            {
+              "file": "firefox-375-round-next-year-disc.svg",
+              "bytes": 303948,
+              "sha256": "74ed5d3fd04b90a8015f3b8dba315a9d229a43bbb80b0a76588dfdad0ee024b4",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Star wheel · 37.8°N · epoch 2026 CE · date scale 2027",
+                "days": 365,
+                "hasSelectedDate": true,
+                "part": "disc"
+              }
+            },
+            {
+              "file": "firefox-375-round-next-year-holder.svg",
+              "bytes": 94338,
+              "sha256": "36777456c63fdea56aec8a0d698f2fa40dc3caeebc0ac73dce467c1ac3f7eb57",
+              "inspected": {
+                "parseError": false,
+                "width": "210mm",
+                "height": "297mm",
+                "title": "Holder · 37.8°N · retain both supports and the centre hub",
+                "days": 0,
+                "hasSelectedDate": false,
+                "part": "holder"
+              }
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    }
+  ]
+}
