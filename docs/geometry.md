@@ -83,9 +83,11 @@ app's behaviour before 0.2.0.
 
 Combining the two: `discRotationDeg(date, hour) = RA_meanSun(date) + (hour - 12) * 15`,
 which is exactly the LST used everywhere else. A date mark stands for one
-instant (0h UT that day), and the Sun moves about 0.99 degrees a day, so a
-reading late in the day trails the true sidereal time by up to about a
-degree (4 minutes); `tests/geometry/dial.test.ts` checks the rotation
+instant (0h UT that day), and the mean Sun moves about 0.99 degrees a day.
+The elapsed UTC days since that mark are `(localMeanHour - longitudeEast/15)/24`.
+That interval can be negative or exceed one day, so a one-degree bound would
+not hold at every longitude. Converting a civil clock does not remove this
+date-ring approximation. `tests/geometry/dial.test.ts` checks the rotation
 against an independent sidereal-time formula to 0.02 degrees once that is
 accounted for. `tests/geometry/window.test.ts`
 exercises this same function, so the rendered rings and the visibility test
@@ -152,8 +154,8 @@ edge. Browser tests also measure the actual exported text's glyph bounds.
 - The date ring is calibrated from the **selected Gregorian year**, with
   every day represented, including leap day. It is not a perpetual scale.
   The star-position epoch is independent of this annual calibration.
-- A date mark stands for 00:00 UTC. The mean Sun's motion later that day
-  adds up to about a degree of alignment error. The existing independent
+- A date mark stands for 00:00 UTC. Omitted mean-Sun motion depends on elapsed
+  UTC time since that mark, including the longitude term above. The existing independent
   Greenwich sidereal-time cross-check retains its 0.02-degree tolerance
   after accounting for that motion. [USNO's sidereal-time reference](https://aa.usno.navy.mil/faq/GAST)
   explains the relation between Greenwich and east-positive local time.

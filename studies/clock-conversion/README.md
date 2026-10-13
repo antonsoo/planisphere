@@ -79,6 +79,19 @@ The browser receipt also byte-compares all 37 served build files with local
 rendering overhead; these are observations on a 14-vCPU WSL2 machine, not a
 portable performance guarantee.
 
+## Clean build
+
+[The verification receipt](verification.json) records a fresh archive of
+implementation commit `03e75dd26d9d0eebb9b1f0a689b50ac439deaf69`, installed with
+Node 24.21.0. Lint, types, 502 unit/numerical checks, production build, the
+independent Python oracle and all 76 Chromium/Firefox browser checks passed.
+All 173 tracked archive files remained unchanged. All 37 rebuilt app files
+match the served files exercised in the retained offline browser workflows.
+
+The twelve measured Apply interactions had a median 54.9 ms including browser
+automation, event handling and rendering. The receipt retains each observation.
+No registry release or hosted deployment accompanied this source work.
+
 ## Reproduce
 
 ```sh

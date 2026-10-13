@@ -197,8 +197,10 @@ flowchart LR
   [Conversion evidence and examples](studies/clock-conversion/README.md). The date
   marks are placed by the mean Sun and checked against an independent
   sidereal-time formula (`tests/geometry/dial.test.ts`); each mark stands
-  for 0h UT, so a reading late in the day trails the sky by up to a degree
-  (4 minutes).
+  for 0h UT. The omitted mean-Sun motion is about 0.99 degrees per elapsed
+  UTC day since that mark. The elapsed interval depends on longitude as well
+  as mean time and can exceed one day; clock conversion does not remove this
+  printed-ring approximation.
 - **The date ring is Gregorian and year-specific**, including leap day.
   Changing its year regenerates the annual scale. The star-position epoch
   remains a separate setting, so historical epochs can be compared on the

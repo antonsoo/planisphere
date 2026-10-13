@@ -1,0 +1,55 @@
+{
+  "implementationCommit": "03e75dd26d9d0eebb9b1f0a689b50ac439deaf69",
+  "cleanArchiveFilesUnchanged": 173,
+  "checks": {
+    "node": "v24.21.0",
+    "checks": [
+      {
+        "name": "install",
+        "exit": 0
+      },
+      {
+        "name": "lint",
+        "exit": 0
+      },
+      {
+        "name": "types",
+        "exit": 0
+      },
+      {
+        "name": "unit",
+        "exit": 0
+      },
+      {
+        "name": "build",
+        "exit": 0
+      },
+      {
+        "name": "oracle",
+        "exit": 0
+      },
+      {
+        "name": "browser",
+        "exit": 0
+      }
+    ]
+  },
+  "unitChecks": 502,
+  "browserChecks": 76,
+  "oracleCases": 18,
+  "browserTestedFilesRebuiltIdentically": 37,
+  "sourceBrowserWorkflowCount": 4,
+  "offlineConversions": 12,
+  "downloadedSvgCount": 24,
+  "applyTimingsMs": {
+    "scope": "Browser automation plus event handling, wheel rendering and waiting for the new controls; 14-vCPU WSL2 machine. These are individual end-to-end observations, not a microbenchmark.",
+    "samples": [
+      45.76943800000004, 42.521216000000095, 46.661215000000084, 45.427128000000266,
+      40.52089799999885, 37.88330499999938, 63.07730900000024, 72.3796340000008, 70.52379099999962,
+      63.775158000000374, 69.89621299999999, 66.21102999999857
+    ],
+    "median": 54.86926200000016,
+    "maximum": 72.3796340000008
+  },
+  "boundary": "Source only. Package version remains 0.3.0. No registry release or hosted deployment. Physical assembly and observing accuracy are not established."
+}
