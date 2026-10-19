@@ -21,16 +21,17 @@ async function checkAlignment(page) {
       /rotate\(([^)]+)/.exec(document.querySelector('.disc-rotator').getAttribute('transform'))[1],
     );
     const angle = (Math.atan2(y, x) * 180) / Math.PI + rotation;
-    const expected = (Number(document.querySelector('#hour').value) - 12) * 15;
+    const sign = Number(document.querySelector('#lat').value) >= 0 ? 1 : -1;
+    const expected = sign * (Number(document.querySelector('#hour').value) - 12) * 15;
     const difference = ((angle - expected + 540) % 360) - 180;
     return {
       difference,
       rotation,
-      readout: Number.parseFloat(document.querySelector('#readout-lst').textContent),
+      readout: sign * Number.parseFloat(document.querySelector('#readout-lst').textContent),
     };
   });
   expect(Math.abs(result.difference)).toBeLessThan(0.002);
-  expect(Math.abs(result.rotation - result.readout)).toBeLessThan(0.051);
+  expect(Math.abs(((result.rotation - result.readout + 540) % 360) - 180)).toBeLessThan(0.051);
 }
 
 test('initial site mean time rounds across midnight with the correct date', async ({ page }) => {
@@ -79,6 +80,58 @@ test('pointer rotation changes the actual mean time without a stale offset', asy
   await page.locator('#hour').focus();
   await page.locator('#hour').press('ArrowRight');
   await expect(page.locator('#hour-value')).toHaveText('15:15');
+  await checkAlignment(page);
+});
+
+test('southern sky preserves compass and constellation handedness through downloads and dragging', async ({
+  page,
+}, testInfo) => {
+  await load(page);
+  await range(page, '#lat', -33.9);
+  await range(page, '#epoch', 2000);
+  const disc = await download(page, 'disc', testInfo);
+  const holder = await download(page, 'holder', testInfo);
+  const areas = await page.evaluate(
+    ({ disc, holder }) => {
+      const parser = new DOMParser();
+      const stars = parser.parseFromString(disc, 'image/svg+xml');
+      const overlay = parser.parseFromString(holder, 'image/svg+xml');
+      const cross = [60530, 62239, 60893].map((id) => {
+        const node = stars.querySelector(`[data-star="${id}"]`);
+        return { x: Number(node.getAttribute('cx')), y: Number(node.getAttribute('cy')) };
+      });
+      const compass = [...overlay.querySelectorAll('.cardinal-label')].map((node) => {
+        const [x, y] = /translate\(([^,]+),([^)]+)/
+          .exec(node.getAttribute('transform'))
+          .slice(1)
+          .map(Number);
+        return { x, y };
+      });
+      const area = (points) =>
+        points.reduce((sum, p, i) => {
+          const q = points[(i + 1) % points.length];
+          return sum + p.x * q.y - q.x * p.y;
+        }, 0) / 2;
+      return { cross: area(cross), compass: area(compass) };
+    },
+    { disc, holder },
+  );
+  // Acrux/Mimosa/Gacrux's orientation comes from the independent ENU oracle.
+  expect(areas.cross).toBeLessThan(0);
+  expect(areas.compass).toBeGreaterThan(0);
+  await page.locator('#disc-svg').scrollIntoViewIfNeeded();
+  const points = await page.locator('#disc-svg').evaluate((svg) =>
+    [new DOMPoint(60, 0), new DOMPoint(0, 60)].map((p) => {
+      const { x, y } = p.matrixTransform(svg.getScreenCTM());
+      return { x, y };
+    }),
+  );
+  await page.mouse.move(points[0].x, points[0].y);
+  await page.mouse.down();
+  await page.mouse.move(points[1].x, points[1].y, { steps: 12 });
+  await page.mouse.up();
+  await expect(page.locator('#hour-value')).toHaveText('03:00');
+  expect(await page.evaluate(() => window.getSelection().toString())).toBe('');
   await checkAlignment(page);
 });
 

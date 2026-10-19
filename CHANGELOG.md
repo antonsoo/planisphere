@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- Southern charts preserve the sky's handedness: the disc plots positive
+  right ascension around the south pole, and its date/hour scales, compass
+  lettering, rotation, dragging and finder coordinates use the same orientation.
+  Previously southern constellation shapes were reflected despite passing
+  horizon visibility checks. Regenerate both southern print pieces.
 - Stellar motion now propagates a Cartesian space vector before precession,
   retaining HYG distance and radial velocity when available. The previous
   RA/Dec addition clamped pole crossings and misplaced 61 Cyg by about 0.89

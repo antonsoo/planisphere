@@ -17,7 +17,7 @@ export function cardinalMarkers(lat: number): (Point & { label: string })[] {
     const p =
       lat === 0 && label === 'S'
         ? { x: SKY_RADIUS_MM, y: 0 }
-        : projectPoint(decDeg, hourAngleDeg, sign, scale);
+        : projectPoint(decDeg, sign * hourAngleDeg, sign, scale);
     const dx = altitude({ x: p.x + 0.01, y: p.y }) - altitude({ x: p.x - 0.01, y: p.y });
     const dy = altitude({ x: p.x, y: p.y + 0.01 }) - altitude({ x: p.x, y: p.y - 0.01 });
     const norm = Math.hypot(dx, dy);

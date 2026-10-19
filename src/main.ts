@@ -3,7 +3,7 @@ import { ClockConverter } from './clockConverter.js';
 import { angleDelta, formatHour, parseDateInput, quarterHour } from './controls.js';
 import { CITIES, DEFAULT_CITY_ID } from './data/cities.js';
 import { type Catalogue, loadCatalogue } from './data/loadCatalogue.js';
-import { discRotationDeg } from './geometry/dial.js';
+import { discRotationDeg, hourRingAngleDeg, localSiderealTimeDeg } from './geometry/dial.js';
 import { buildPlanisphereSvg } from './render/buildPlanisphereSvg.js';
 import { exportDiscSvg, exportHolderSvg } from './render/exportSvg.js';
 import type { PlanisphereConfig } from './render/types.js';
@@ -144,7 +144,7 @@ function updateControlOutputs() {
 }
 
 function updateReadouts(config: PlanisphereConfig) {
-  const angle = ((config.localHour - 12) * 15 * Math.PI) / 180;
+  const angle = (hourRingAngleDeg(config.localHour, config.latDeg >= 0 ? 1 : -1) * Math.PI) / 180;
   const guide = svg.querySelector('.alignment-guide');
   for (const [name, value] of Object.entries({
     x1: 75.5 * Math.cos(angle),
@@ -155,7 +155,7 @@ function updateReadouts(config: PlanisphereConfig) {
     guide?.setAttribute(name, value.toFixed(3));
   updateControlOutputs();
   $<HTMLElement>('readout-lst').textContent =
-    `${discRotationDeg(config.date, config.localHour).toFixed(1)}°`;
+    `${localSiderealTimeDeg(config.date, config.localHour).toFixed(1)}°`;
   $<HTMLElement>('readout-limit').textContent =
     `dec ${(config.latDeg >= 0 ? -(90 - config.latDeg) : 90 + config.latDeg).toFixed(1)}°`;
   $<HTMLElement>('preview-setting').textContent =
@@ -235,7 +235,7 @@ function setHour(hour: number) {
   committed = { ...committed, localHour };
   rotator?.setAttribute(
     'transform',
-    `rotate(${discRotationDeg(committed.date, localHour).toFixed(4)})`,
+    `rotate(${discRotationDeg(committed.date, localHour, committed.latDeg >= 0 ? 1 : -1).toFixed(4)})`,
   );
   updateReadouts(committed);
 }
@@ -279,6 +279,8 @@ svg.addEventListener('pointerdown', (event) => {
     return;
   const angle = pointerAngle(event);
   if (angle === null) return;
+  // A wheel drag must not start native selection of the printed SVG labels.
+  event.preventDefault();
   pointerId = event.pointerId;
   previousAngle = angle;
   dragHour = committed.localHour;
@@ -288,9 +290,10 @@ svg.addEventListener('pointermove', (event) => {
   if (pointerId !== event.pointerId) return;
   const angle = pointerAngle(event);
   if (angle === null) return;
-  // The global SVG y-flip reverses rotation; update mean time itself so the
+  // The SVG y-flip and southern sky reverse rotation; update mean time so the
   // control, readout and printed date/hour alignment always describe one state.
-  dragHour -= angleDelta(previousAngle, angle) / 15;
+  dragHour -=
+    (angleDelta(previousAngle, angle) * (committed && committed.latDeg < 0 ? -1 : 1)) / 15;
   previousAngle = angle;
   setHour(dragHour);
 });

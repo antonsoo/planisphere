@@ -27,6 +27,12 @@ rotating wheel: star field + exposed outer date scale
 
 ## Cut and assemble
 
+Southern instruments generated before the handedness correction need **both
+pieces replaced**. Their stars and compass letters were reflected. Rotating
+the old wheel or combining an old piece with a corrected piece cannot repair
+the instrument. The example southern downloads below have been regenerated;
+[digital before/after evidence](../studies/sky-handedness/README.md).
+
 1. Print both SVGs at **100% / actual size**, with fit-to-page disabled. Check
    that the calibration line at the bottom of *each* sheet measures 50 mm.
    If a print application imports SVGs at another scale, correct that scale
@@ -128,8 +134,10 @@ laser-cut trial has not been performed.
 
 ## Laser workflow
 
-Keep the exported left/right orientation: plotting negative right ascension
-is essential to the date/hour alignment. Configure the red strokes as cuts
+Keep the exported left/right orientation: the north-pole disc plots negative
+right ascension and the south-pole disc positive right ascension. The rings
+also reverse between hemispheres; do not mirror either piece in the cutter.
+Configure the red strokes as cuts
 and black strokes/fills as engraving in your cutter's software, with the
 50 mm scale bar as an independent size check. Do not treat page captions or
 the scale bar as cuts. Prototype on paper before choosing material thickness,

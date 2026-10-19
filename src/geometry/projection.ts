@@ -38,14 +38,17 @@ export function rhoForDeclination(decDeg: number, hemisphereSign: HemisphereSign
 }
 
 /**
- * Projects a star onto the rotating disc. The disc plots RA *mirrored*
- * (theta = -RA), not RA directly. This is not a stylistic choice: turning
- * the physical disc by a single rigid rotation R can only add a constant to
+ * Projects a star onto the rotating disc as viewed from inside the sky.
+ * The north-pole chart plots theta = -RA; the south-pole chart plots +RA.
+ * Both the pole and the angular direction change between hemispheres:
+ * theta = -hemisphereSign * RA. Keeping -RA at the south pole reflects
+ * constellation shapes even though the horizon still exposes the right stars.
+ * Turning the physical disc by a rigid rotation R can only add a constant to
  * every plotted angle, but the displayed angle a star needs in order to
- * line up with the (fixed-shape) horizon window is the hour angle
- * H = LST - RA, which *subtracts* RA. Only a mirrored disc (theta = R - RA)
- * can reproduce H for every star at once with one rotation (R = LST). See
- * docs/geometry.md and tests/geometry/window.test.ts, which checks this
+ * line up with the (fixed-shape) horizon window is hemisphereSign * H,
+ * where H = LST - RA. Rotation R = hemisphereSign * LST then works for
+ * every star at once. See docs/geometry.md and tests/geometry/window.test.ts,
+ * which checks this
  * against the horizon window built independently in horizonWindow.ts.
  */
 export function projectStar(
@@ -54,5 +57,5 @@ export function projectStar(
   hemisphereSign: HemisphereSign,
   scale: number,
 ): Point {
-  return projectPoint(decDeg, -raDeg, hemisphereSign, scale);
+  return projectPoint(decDeg, -hemisphereSign * raDeg, hemisphereSign, scale);
 }

@@ -1,0 +1,334 @@
+{
+  "catalogueSha256": "ca403ac08652c82aa68fdaa2b659ce6f472e19bdb3fc949141aa4bac64420d07",
+  "toleranceMm": 0.002,
+  "checked": 2668,
+  "incorrect": 1164,
+  "maxErrorMm": 118.25466619360441,
+  "wrongCompasses": 16,
+  "cases": [
+    {
+      "latitudeDeg": -89,
+      "lstDeg": 0,
+      "checked": 49,
+      "incorrect": 49,
+      "maxErrorMm": 117.40582016196238,
+      "cardinalAreaMm2": -8151.224099149422,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -89,
+      "lstDeg": 73,
+      "checked": 49,
+      "incorrect": 49,
+      "maxErrorMm": 100.06978470901942,
+      "cardinalAreaMm2": -8151.224099149422,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -89,
+      "lstDeg": 181,
+      "checked": 49,
+      "incorrect": 49,
+      "maxErrorMm": 117.13641359311607,
+      "cardinalAreaMm2": -8151.224099149422,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -89,
+      "lstDeg": 299,
+      "checked": 49,
+      "incorrect": 49,
+      "maxErrorMm": 103.02502283260257,
+      "cardinalAreaMm2": -8151.224099149422,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -65,
+      "lstDeg": 0,
+      "checked": 63,
+      "incorrect": 63,
+      "maxErrorMm": 109.52581363422078,
+      "cardinalAreaMm2": -5276.397998863288,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -65,
+      "lstDeg": 73,
+      "checked": 63,
+      "incorrect": 63,
+      "maxErrorMm": 113.49955867900293,
+      "cardinalAreaMm2": -5276.397998863288,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -65,
+      "lstDeg": 181,
+      "checked": 63,
+      "incorrect": 63,
+      "maxErrorMm": 109.82652779425982,
+      "cardinalAreaMm2": -5276.397998863288,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -65,
+      "lstDeg": 299,
+      "checked": 63,
+      "incorrect": 63,
+      "maxErrorMm": 118.25466619360441,
+      "cardinalAreaMm2": -5276.397998863288,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -33.9,
+      "lstDeg": 0,
+      "checked": 85,
+      "incorrect": 85,
+      "maxErrorMm": 116.19995167640212,
+      "cardinalAreaMm2": -3335.763271596261,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -33.9,
+      "lstDeg": 73,
+      "checked": 85,
+      "incorrect": 85,
+      "maxErrorMm": 113.75531087494936,
+      "cardinalAreaMm2": -3335.763271596261,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -33.9,
+      "lstDeg": 181,
+      "checked": 85,
+      "incorrect": 85,
+      "maxErrorMm": 116.15222845814864,
+      "cardinalAreaMm2": -3335.763271596261,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -33.9,
+      "lstDeg": 299,
+      "checked": 85,
+      "incorrect": 85,
+      "maxErrorMm": 117.87093044731597,
+      "cardinalAreaMm2": -3335.763271596261,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -0.1,
+      "lstDeg": 0,
+      "checked": 94,
+      "incorrect": 94,
+      "maxErrorMm": 94.36800744785243,
+      "cardinalAreaMm2": -2073.003413780254,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -0.1,
+      "lstDeg": 73,
+      "checked": 94,
+      "incorrect": 94,
+      "maxErrorMm": 101.09110942198318,
+      "cardinalAreaMm2": -2073.003413780254,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -0.1,
+      "lstDeg": 181,
+      "checked": 94,
+      "incorrect": 94,
+      "maxErrorMm": 94.32924047896634,
+      "cardinalAreaMm2": -2073.003413780254,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": -0.1,
+      "lstDeg": 299,
+      "checked": 94,
+      "incorrect": 94,
+      "maxErrorMm": 118.12117375829706,
+      "cardinalAreaMm2": -2073.003413780254,
+      "overheadCompass": false
+    },
+    {
+      "latitudeDeg": 0,
+      "lstDeg": 0,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006553118106873776,
+      "cardinalAreaMm2": 2070,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0,
+      "lstDeg": 73,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006553118106760453,
+      "cardinalAreaMm2": 2070,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0,
+      "lstDeg": 181,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006553118106597015,
+      "cardinalAreaMm2": 2070,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0,
+      "lstDeg": 299,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006553118106557061,
+      "cardinalAreaMm2": 2070,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0.1,
+      "lstDeg": 0,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0007004740196742992,
+      "cardinalAreaMm2": 2073.0034137802545,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0.1,
+      "lstDeg": 73,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0007004740196741447,
+      "cardinalAreaMm2": 2073.0034137802545,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0.1,
+      "lstDeg": 181,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0007004740196739305,
+      "cardinalAreaMm2": 2073.0034137802545,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 0.1,
+      "lstDeg": 299,
+      "checked": 94,
+      "incorrect": 0,
+      "maxErrorMm": 0.0007004740196745534,
+      "cardinalAreaMm2": 2073.0034137802545,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 32.5,
+      "lstDeg": 0,
+      "checked": 85,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006573440854743771,
+      "cardinalAreaMm2": 3271.8165799345607,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 32.5,
+      "lstDeg": 73,
+      "checked": 85,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006573440854769737,
+      "cardinalAreaMm2": 3271.8165799345607,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 32.5,
+      "lstDeg": 181,
+      "checked": 85,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006573440854884788,
+      "cardinalAreaMm2": 3271.8165799345607,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 32.5,
+      "lstDeg": 299,
+      "checked": 85,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006573440854801267,
+      "cardinalAreaMm2": 3271.8165799345607,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 65,
+      "lstDeg": 0,
+      "checked": 57,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006771556422435589,
+      "cardinalAreaMm2": 5276.397998863298,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 65,
+      "lstDeg": 73,
+      "checked": 57,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006771556422298489,
+      "cardinalAreaMm2": 5276.397998863298,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 65,
+      "lstDeg": 181,
+      "checked": 57,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006771556422231405,
+      "cardinalAreaMm2": 5276.397998863298,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 65,
+      "lstDeg": 299,
+      "checked": 57,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006771556422270364,
+      "cardinalAreaMm2": 5276.397998863298,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 89,
+      "lstDeg": 0,
+      "checked": 46,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006717716355426634,
+      "cardinalAreaMm2": 8151.224099149422,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 89,
+      "lstDeg": 73,
+      "checked": 46,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006717716355396199,
+      "cardinalAreaMm2": 8151.224099149422,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 89,
+      "lstDeg": 181,
+      "checked": 46,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006717716355511812,
+      "cardinalAreaMm2": 8151.224099149422,
+      "overheadCompass": true
+    },
+    {
+      "latitudeDeg": 89,
+      "lstDeg": 299,
+      "checked": 46,
+      "incorrect": 0,
+      "maxErrorMm": 0.0006717716355492293,
+      "cardinalAreaMm2": 8151.224099149422,
+      "overheadCompass": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "settings": {
+    "latitudeDeg": -33.9,
+    "epoch": 2026,
+    "date": "2024-02-29",
+    "localMeanHour": 21,
+    "paper": "letter"
+  },
+  "rotation": "rotate(246.6884)",
+  "files": [
+    {
+      "name": "print-southern-disc-letter.svg",
+      "bytes": 315903,
+      "sha256": "d6fdbe65fe37f8ecea1cf544fdeec737585f9ce4ff9a60a82cdaa4213125b4ea"
+    },
+    {
+      "name": "print-southern-holder-letter.svg",
+      "bytes": 93965,
+      "sha256": "ee0a8dfed692be4f17de51f89a1a5d226acf4c8071989f7c1a8be4429cdd5ee1"
+    }
+  ]
+}

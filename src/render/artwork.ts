@@ -10,6 +10,7 @@ import {
 } from '../geometry/cutouts.js';
 import { dateRingAngleDeg, hourRingAngleDeg } from '../geometry/dial.js';
 import { printedStarRadius } from '../geometry/printedStar.js';
+import type { HemisphereSign } from '../geometry/projection.js';
 import { projectStar } from '../geometry/projection.js';
 import { pathFromPoints } from './svgUtil.js';
 import type { ConstellationData, PlanisphereConfig } from './types.js';
@@ -47,14 +48,14 @@ export function gregorianDate(year: number, month: number, day: number): Date {
   return date;
 }
 
-export function buildDateScale(year: number): string {
+export function buildDateScale(year: number, hemisphereSign: HemisphereSign = 1): string {
   const parts = ['<g class="date-ring">'];
   for (let month = 0; month < 12; month++) {
     const days = gregorianDate(year, month + 1, 0).getUTCDate();
     for (let day = 1; day <= days; day++) {
       const date = gregorianDate(year, month, day);
       const major = day === 1 || day % 5 === 0;
-      const angle = dateRingAngleDeg(date);
+      const angle = dateRingAngleDeg(date, hemisphereSign);
       parts.push(
         tick(
           angle,
@@ -70,7 +71,7 @@ export function buildDateScale(year: number): string {
     parts.push(
       label(
         MONTHS[month] ?? '',
-        dateRingAngleDeg(gregorianDate(year, month, 16)),
+        dateRingAngleDeg(gregorianDate(year, month, 16), hemisphereSign),
         93,
         2.2,
         'class="month-label"',
@@ -95,7 +96,7 @@ export function buildDiscArtwork(
       return [star.id, projectStar(position.dec, position.ra, sign, scale)] as const;
     }),
   );
-  const parts = [buildDateScale(config.date.getUTCFullYear())];
+  const parts = [buildDateScale(config.date.getUTCFullYear(), sign)];
   if (config.showConstellations) {
     for (const constellation of constellations) {
       for (const chain of constellation.lines) {
@@ -158,6 +159,7 @@ export function holderMaterialPath(latDeg: number): string {
 }
 
 export function buildHolderArtwork(config: PlanisphereConfig): string {
+  const sign = config.latDeg >= 0 ? 1 : -1;
   const parts = [
     `<circle class="holder-edge" r="${HOLDER_RADIUS_MM}" fill="none" stroke="red" stroke-width="0.2"/>`,
     `<circle class="pivot-cut" r="${PIVOT_RADIUS_MM}" fill="none" stroke="red" stroke-width="0.2"/>`,
@@ -170,7 +172,7 @@ export function buildHolderArtwork(config: PlanisphereConfig): string {
     const hour = quarter / 4;
     parts.push(
       tick(
-        hourRingAngleDeg(hour),
+        hourRingAngleDeg(hour, sign),
         quarter % 4 === 0 ? 75.5 : quarter % 2 === 0 ? 77.2 : 78.4,
         79.5,
         'class="hour-tick" stroke="black" stroke-width="0.12"',
@@ -178,7 +180,13 @@ export function buildHolderArtwork(config: PlanisphereConfig): string {
     );
     if (quarter % 4 === 0)
       parts.push(
-        label(String(hour).padStart(2, '0'), hourRingAngleDeg(hour), 72.5, 3, 'class="hour-label"'),
+        label(
+          String(hour).padStart(2, '0'),
+          hourRingAngleDeg(hour, sign),
+          72.5,
+          3,
+          'class="hour-label"',
+        ),
       );
   }
   parts.push(

@@ -5,6 +5,10 @@ opaque holder, and retained center pivot. Browser, print-geometry, clean-install
 and hosted-asset checks below passed. A physical paper/cutter trial has not
 been performed.
 
+The visibility checks below did not test sky handedness. The southern
+charts were later found to be reflected; their downloadable examples have
+been replaced. See the [correction and independent projection](../studies/sky-handedness/README.md).
+
 ## Source and build
 
 - Application source: `bba74cca66d194bd2619fd2840cde21a277cd28c`.

@@ -2,7 +2,7 @@
 
 This is the derivation behind `src/geometry/`. It explains three things a
 reader can't get from the code comments alone: why the star disc is
-mirrored, where the date/hour rings come from, and why the horizon window is
+oriented differently at each pole, where the date/hour rings come from, and why the horizon window is
 a fixed shape.
 
 ## Projection
@@ -25,51 +25,51 @@ latitude `phi`: `dec_min = -(90 - |phi|)`, i.e. `rho_max = 180 - |phi|`. That
 edge is where `scale = discRadius / rho_max` comes from
 (`src/render/artwork.ts`).
 
-## Why the star disc is mirrored
+## Sky orientation at each pole
 
 A real planisphere is two rigid pieces: a star disc that rotates, and a
-holder with a horizon-shaped window cut into it, which stays still. Turning
-the disc to "now" must make exactly the stars above the horizon appear in
-the window.
+holder with a horizon-shaped window cut into it. The chart is viewed from
+inside the celestial sphere, looking out. Its orientation must preserve
+constellation shapes and compass directions, as well as visibility.
 
-A star's position on the sky, relative to the local meridian, is its **hour
-angle** `H = LST - RA` (LST = local sidereal time, which advances as time
-passes). For the window to expose the right stars, a star's angle on the
-*assembled* instrument must equal `H`.
+Let `s = +1` for a north-pole chart and `s = -1` for a south-pole chart.
+The star's hour angle is `H = LST - RA`. In the fixed holder its plotted
+angle is `s * H`. A rigid wheel rotation adds the same angle to every star:
 
-Rotating the physical disc by some angle `R` can only *add* `R` to every
-star's plotted angle — a single rigid rotation cannot depend on each star
-individually. If the disc plotted angle = RA directly, the displayed angle
-after turning it by `R` would be `RA + R`, which can never equal
-`LST - RA` for every star at once (the RA term has the wrong sign). If
-instead the disc plots angle = `-RA` (mirrored), turning it by `R = LST`
-gives displayed angle `LST - RA = H` for *every* star simultaneously. That's
-`projectStar()` in `src/geometry/projection.ts`, and it's why the printed
-disc looks left-right flipped compared to a normal star atlas.
+| Angle in the y-up artwork | North pole | South pole |
+| --- | --- | --- |
+| Star on unrotated disc | `-RA` | `+RA` |
+| Physical wheel rotation | `+LST` | `-LST` |
+| Star in fixed holder | `+H` | `-H` |
 
-Because the mirroring falls out of "one rotation must work for every star",
-the holder's window can be built once, in the fixed `H` coordinate, and
-never needs to change with time — see `buildHorizonWindowPolygon()` in
-`src/geometry/horizonWindow.ts`. `tests/geometry/window.test.ts` checks that
-this construction agrees with the direct trigonometric altitude formula
-(`sin(alt) = sin(dec)sin(lat) + cos(dec)cos(lat)cos(H)`) for thousands of
-random (date, hour, star, latitude) combinations.
+Thus `theta_disc = -s * RA` and `R = s * LST` work for all stars at once.
+The horizon window depends on `cos(H)`, so reflecting a chart preserves
+its altitude and window-membership results while reversing every asymmetric
+star pattern. Visibility tests cannot establish sky orientation.
+
+The earlier implementation used the north-pole angular direction at both
+poles. Its southern charts were reflected. The independent local ENU camera
+in [the handedness study](../studies/sky-handedness/README.md) checks the
+viewing direction explicitly. It uses right/up basis vectors whose cross
+product points away from the sky, toward the viewer. Compass letters now
+run N/E/S/W counterclockwise in the y-up artwork in both hemispheres (the
+outer SVG y-flip reverses this on screen).
 
 ## Date ring and hour ring
 
 The hour ring is on the fixed holder. By definition of local mean solar
 time, the mean Sun's hour angle is `(hour - 12) * 15` degrees (0 at local
 noon, 180 at local midnight), so the hour ring is a plain linear scale,
-independent of date: `hourRingAngleDeg(hour) = (hour - 12) * 15`.
+independent of date: `hourRingAngleDeg(hour, s) = s * (hour - 12) * 15`.
 
 The date ring is on the rotating disc, alongside the stars, so it uses the
-same mirrored convention. At local mean midnight on a given date, the mean
-Sun's hour angle is 180 degrees, so `LST(midnight) = RA_meanSun(date) + 180`.
-Requiring that turning the disc by `R = LST(midnight)` aligns that date's
+same hemisphere-dependent angular convention. At local mean midnight on a
+given date, the mean Sun's hour angle is 180 degrees, so `LST(midnight) = RA_meanSun(date) + 180`.
+Requiring that turning the disc by `R = s * LST(midnight)` aligns that date's
 mark with the holder's `hour = 0` mark gives:
 
 ```
-dateRingAngleDeg(date) = -RA_meanSun(date)        (mod 360)
+dateRingAngleDeg(date, s) = -s * RA_meanSun(date)        (mod 360)
 ```
 
 `RA_meanSun(date)` is the Sun's geometric mean longitude L0 (Meeus,
@@ -81,8 +81,9 @@ apparent solar time and make them read up to 16 minutes (4 degrees of
 rotation) off the local mean time the user is told to enter; that was this
 app's behaviour before 0.2.0.
 
-Combining the two: `discRotationDeg(date, hour) = RA_meanSun(date) + (hour - 12) * 15`,
-which is exactly the LST used everywhere else. A date mark stands for one
+Combining the two: `LST = RA_meanSun(date) + (hour - 12) * 15`, and physical
+rotation is `discRotationDeg(date, hour, s) = s * LST`. The sidereal alignment
+readout continues to show LST in either hemisphere. A date mark stands for one
 instant (0h UT that day), and the mean Sun moves about 0.99 degrees a day.
 The elapsed UTC days since that mark are `(localMeanHour - longitudeEast/15)/24`.
 That interval can be negative or exceed one day, so a one-degree bound would
@@ -96,7 +97,7 @@ are provably using the same rotation.
 ## Horizon and retained material
 
 For the elevated-pole projection, let `a = abs(latitude)` and let `theta`
-be the fixed frame's hour angle. Solving the altitude-zero equation gives
+be the fixed frame's angle `s * H`. Solving the altitude-zero equation gives
 
 ```text
 rho_horizon(theta) = 90 + atan2(cos(a) * cos(theta), sin(a))

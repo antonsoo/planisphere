@@ -13,8 +13,8 @@ export function horizonRadius(theta: number, latDeg: number, scale: number): num
  * The horizon window's boundary, in the *holder's* fixed frame (hour angle
  * as the angular coordinate, not RA) -- this shape does not depend on date
  * or time, only on latitude. See projection.ts's projectStar() docstring
- * for why the star disc must be mirrored for this fixed-window / rotating-
- * disc split to work.
+ * for the hemisphere-dependent angular orientation of this fixed-window /
+ * rotating-disc split. The boundary is symmetric about y=0 in either case.
  */
 export function buildHorizonWindowPolygon(
   latDeg: number,

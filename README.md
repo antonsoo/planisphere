@@ -16,6 +16,12 @@ of ancient observing conditions. It pairs with
 [`horologium`](https://antonsoo.github.io/horologium/) (ancient calendars)
 and [`gnomon`](https://antonsoo.github.io/gnomon/) (sundials).
 
+**Southern chart correction in this checkout:** the earlier south-pole
+projection reflected constellation shapes and compass directions. The wheel,
+date/hour scales and drag direction now follow an outward-looking sky map in
+both hemispheres. Replace both pieces of a previously generated southern
+instrument. [Independent projection, original downloads and correction](studies/sky-handedness/README.md).
+
 <table>
 <tr>
 <td width="50%"><img src="docs/assets/hero-babylon-700bce.png" alt="Star disc for Babylon, epoch 700 BCE"></td>
@@ -139,7 +145,8 @@ flowchart LR
 3. **Geometry.** The star disc uses a polar azimuthal-equidistant
    projection centred on the observer's elevated celestial pole, extending
    to the faintest declination that ever rises at that latitude. The disc
-   is mirrored (plots `-RA`, not `RA`) so that a single physical rotation
+   plots `-RA` around the north pole and `+RA` around the south pole, with
+   matching ring and rotation directions. A single physical rotation
    correctly aligns every star's hour angle at once — the horizon window is
    then a *fixed* shape, cut once per latitude. Full derivation, including
    where the date/hour rings come from, is in
@@ -250,6 +257,8 @@ npm run test:browser  # production build, Chromium and Firefox
 - **Geometry**: horizontal/equatorial round trips; analytic altitude versus
   horizon polygons at the equator, near it, and in both hemispheres; physical
   cutouts versus that horizon minus the retained hub and support strip.
+  An independent local sky camera also checks constellation handedness;
+  a reflected chart can pass every visibility test.
 - **Export**: physical page-fit dimensions verified numerically, and the
   generated SVG markup itself is checked (correct millimetre sizing, cut
   paths in red, engraved marks in black, star count matches the magnitude

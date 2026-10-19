@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { normalizeDegrees } from '../../src/astro/constants.js';
-import { discRotationDeg } from '../../src/geometry/dial.js';
+import { discRotationDeg, localSiderealTimeDeg } from '../../src/geometry/dial.js';
 import { altitudeDeg } from '../../src/geometry/horizontal.js';
 import { buildHorizonWindowPolygon, pointInPolygon } from '../../src/geometry/horizonWindow.js';
-import { projectPoint } from '../../src/geometry/projection.js';
+import { projectPoint, projectStar } from '../../src/geometry/projection.js';
 import { isVisible } from '../../src/geometry/visibility.js';
 
 function mulberry32(seed: number) {
@@ -41,11 +41,16 @@ describe('horizon window matches the analytic altitude test', () => {
         const date = new Date(Date.UTC(2026, 0, 1 + Math.floor(rand() * 365)));
         const hour = rand() * 24;
 
-        const lst = discRotationDeg(date, hour);
+        const lst = localSiderealTimeDeg(date, hour);
         const analyticVisible = isVisible(dec, ra, lat, lst);
 
         const H = normalizeDegrees(lst - ra);
-        const starPointInWindowFrame = projectPoint(dec, H, hemisphereSign, scale);
+        const discPoint = projectStar(dec, ra, hemisphereSign, scale);
+        const rotation = (discRotationDeg(date, hour, hemisphereSign) * Math.PI) / 180;
+        const starPointInWindowFrame = {
+          x: discPoint.x * Math.cos(rotation) - discPoint.y * Math.sin(rotation),
+          y: discPoint.x * Math.sin(rotation) + discPoint.y * Math.cos(rotation),
+        };
         const geometricVisible = pointInPolygon(starPointInWindowFrame, polygon);
 
         // Points extremely close to the horizon (< 0.3 deg true altitude) can

@@ -1,0 +1,413 @@
+{
+  "expectation": "reflected",
+  "workflows": [
+    {
+      "engine": "chromium",
+      "version": "153.0.8010.12",
+      "width": 1440,
+      "offline": true,
+      "points": [
+        {
+          "label": "N",
+          "x": 64.5,
+          "y": 0
+        },
+        {
+          "label": "E",
+          "x": -3.0950000286102295,
+          "y": -40.22800064086914
+        },
+        {
+          "label": "S",
+          "x": -18.422000885009766,
+          "y": 0
+        },
+        {
+          "label": "W",
+          "x": -3.0950000286102295,
+          "y": 40.22800064086914
+        }
+      ],
+      "stars": [
+        {
+          "id": 60530,
+          "x": -10.973,
+          "y": 1.279
+        },
+        {
+          "id": 62239,
+          "x": -12.179,
+          "y": 2.573
+        },
+        {
+          "id": 60893,
+          "x": -13.381,
+          "y": 1.831
+        }
+      ],
+      "rotation": "rotate(189.7147)",
+      "sidereal": "189.7\u00b0",
+      "setting": "33.9\u00b0S \u00b7 2000 CE \u00b7 2026-05-17 \u00b7 21:00 mean time",
+      "compassAreaMm2": -3335.7863047443243,
+      "triangleAreaMm2": 1.2251200000000022,
+      "expectedTriangleSign": -1,
+      "dragHour": 15,
+      "downloads": [
+        {
+          "file": "chromium-1440-disc.svg",
+          "bytes": 315765,
+          "sha256": "9b52c76e22b168be674ffa0c78995e8694958d2070a61511fd3a17a9ba369c8c",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": -10.973,
+              "y": 1.279
+            },
+            {
+              "x": -12.179,
+              "y": 2.573
+            },
+            {
+              "x": -13.381,
+              "y": 1.831
+            }
+          ]
+        },
+        {
+          "file": "chromium-1440-holder.svg",
+          "bytes": 93933,
+          "sha256": "baaedfa33d7b8c7bcc3f8fc4959a9f0ed018dc1f8309010f3fee8680db224168",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": 64.5,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": -40.228
+            },
+            {
+              "x": -18.422,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": 40.228
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "chromium",
+      "version": "153.0.8010.12",
+      "width": 375,
+      "offline": true,
+      "points": [
+        {
+          "label": "N",
+          "x": 64.5,
+          "y": 0
+        },
+        {
+          "label": "E",
+          "x": -3.0950000286102295,
+          "y": -40.22800064086914
+        },
+        {
+          "label": "S",
+          "x": -18.422000885009766,
+          "y": 0
+        },
+        {
+          "label": "W",
+          "x": -3.0950000286102295,
+          "y": 40.22800064086914
+        }
+      ],
+      "stars": [
+        {
+          "id": 60530,
+          "x": -10.973,
+          "y": 1.279
+        },
+        {
+          "id": 62239,
+          "x": -12.179,
+          "y": 2.573
+        },
+        {
+          "id": 60893,
+          "x": -13.381,
+          "y": 1.831
+        }
+      ],
+      "rotation": "rotate(189.7147)",
+      "sidereal": "189.7\u00b0",
+      "setting": "33.9\u00b0S \u00b7 2000 CE \u00b7 2026-05-17 \u00b7 21:00 mean time",
+      "compassAreaMm2": -3335.7863047443243,
+      "triangleAreaMm2": 1.2251200000000022,
+      "expectedTriangleSign": -1,
+      "dragHour": 15,
+      "downloads": [
+        {
+          "file": null,
+          "bytes": 315765,
+          "sha256": "9b52c76e22b168be674ffa0c78995e8694958d2070a61511fd3a17a9ba369c8c",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": -10.973,
+              "y": 1.279
+            },
+            {
+              "x": -12.179,
+              "y": 2.573
+            },
+            {
+              "x": -13.381,
+              "y": 1.831
+            }
+          ]
+        },
+        {
+          "file": null,
+          "bytes": 93933,
+          "sha256": "baaedfa33d7b8c7bcc3f8fc4959a9f0ed018dc1f8309010f3fee8680db224168",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": 64.5,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": -40.228
+            },
+            {
+              "x": -18.422,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": 40.228
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "firefox",
+      "version": "155.0",
+      "width": 1440,
+      "offline": true,
+      "points": [
+        {
+          "label": "N",
+          "x": 64.5,
+          "y": 0
+        },
+        {
+          "label": "E",
+          "x": -3.0950000286102295,
+          "y": -40.22800064086914
+        },
+        {
+          "label": "S",
+          "x": -18.422000885009766,
+          "y": 0
+        },
+        {
+          "label": "W",
+          "x": -3.0950000286102295,
+          "y": 40.22800064086914
+        }
+      ],
+      "stars": [
+        {
+          "id": 60530,
+          "x": -10.973,
+          "y": 1.279
+        },
+        {
+          "id": 62239,
+          "x": -12.179,
+          "y": 2.573
+        },
+        {
+          "id": 60893,
+          "x": -13.381,
+          "y": 1.831
+        }
+      ],
+      "rotation": "rotate(189.7147)",
+      "sidereal": "189.7\u00b0",
+      "setting": "33.9\u00b0S \u00b7 2000 CE \u00b7 2026-05-17 \u00b7 21:00 mean time",
+      "compassAreaMm2": -3335.7863047443243,
+      "triangleAreaMm2": 1.2251200000000022,
+      "expectedTriangleSign": -1,
+      "dragHour": 15,
+      "downloads": [
+        {
+          "file": null,
+          "bytes": 315765,
+          "sha256": "9b52c76e22b168be674ffa0c78995e8694958d2070a61511fd3a17a9ba369c8c",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": -10.973,
+              "y": 1.279
+            },
+            {
+              "x": -12.179,
+              "y": 2.573
+            },
+            {
+              "x": -13.381,
+              "y": 1.831
+            }
+          ]
+        },
+        {
+          "file": null,
+          "bytes": 93933,
+          "sha256": "baaedfa33d7b8c7bcc3f8fc4959a9f0ed018dc1f8309010f3fee8680db224168",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": 64.5,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": -40.228
+            },
+            {
+              "x": -18.422,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": 40.228
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    },
+    {
+      "engine": "firefox",
+      "version": "155.0",
+      "width": 375,
+      "offline": true,
+      "points": [
+        {
+          "label": "N",
+          "x": 64.5,
+          "y": 0
+        },
+        {
+          "label": "E",
+          "x": -3.0950000286102295,
+          "y": -40.22800064086914
+        },
+        {
+          "label": "S",
+          "x": -18.422000885009766,
+          "y": 0
+        },
+        {
+          "label": "W",
+          "x": -3.0950000286102295,
+          "y": 40.22800064086914
+        }
+      ],
+      "stars": [
+        {
+          "id": 60530,
+          "x": -10.973,
+          "y": 1.279
+        },
+        {
+          "id": 62239,
+          "x": -12.179,
+          "y": 2.573
+        },
+        {
+          "id": 60893,
+          "x": -13.381,
+          "y": 1.831
+        }
+      ],
+      "rotation": "rotate(189.7147)",
+      "sidereal": "189.7\u00b0",
+      "setting": "33.9\u00b0S \u00b7 2000 CE \u00b7 2026-05-17 \u00b7 21:00 mean time",
+      "compassAreaMm2": -3335.7863047443243,
+      "triangleAreaMm2": 1.2251200000000022,
+      "expectedTriangleSign": -1,
+      "dragHour": 15,
+      "downloads": [
+        {
+          "file": null,
+          "bytes": 315765,
+          "sha256": "9b52c76e22b168be674ffa0c78995e8694958d2070a61511fd3a17a9ba369c8c",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": -10.973,
+              "y": 1.279
+            },
+            {
+              "x": -12.179,
+              "y": 2.573
+            },
+            {
+              "x": -13.381,
+              "y": 1.831
+            }
+          ]
+        },
+        {
+          "file": null,
+          "bytes": 93933,
+          "sha256": "baaedfa33d7b8c7bcc3f8fc4959a9f0ed018dc1f8309010f3fee8680db224168",
+          "valid": true,
+          "width": "210mm",
+          "points": [
+            {
+              "x": 64.5,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": -40.228
+            },
+            {
+              "x": -18.422,
+              "y": 0
+            },
+            {
+              "x": -3.095,
+              "y": 40.228
+            }
+          ]
+        }
+      ],
+      "pageErrors": [],
+      "externalRequests": []
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { normalizeDegrees } from '../astro/constants.js';
+import type { HemisphereSign } from './projection.js';
 import { meanSunRaDeg } from './sun.js';
 
 /**
@@ -12,17 +13,21 @@ export function localSiderealTimeDeg(date: Date, localHour: number): number {
   return normalizeDegrees(meanSunRaDeg(date) + (localHour - 12) * 15);
 }
 
-/** Native (mirrored, disc-frame) angle of a calendar date's mark on the date ring. */
-export function dateRingAngleDeg(date: Date): number {
-  return normalizeDegrees(-meanSunRaDeg(date));
+/** Native disc-frame angle of a date mark; reversed around the southern pole. */
+export function dateRingAngleDeg(date: Date, hemisphereSign: HemisphereSign = 1): number {
+  return normalizeDegrees(-hemisphereSign * meanSunRaDeg(date));
 }
 
 /** Fixed holder-frame angle of an hour mark (0-24h local mean time) on the hour ring. */
-export function hourRingAngleDeg(localHour: number): number {
-  return normalizeDegrees((localHour - 12) * 15);
+export function hourRingAngleDeg(localHour: number, hemisphereSign: HemisphereSign = 1): number {
+  return normalizeDegrees(hemisphereSign * (localHour - 12) * 15);
 }
 
-/** The disc rotation (degrees, same sense as projectStar's mirrored theta) for a date+hour. */
-export function discRotationDeg(date: Date, localHour: number): number {
-  return localSiderealTimeDeg(date, localHour);
+/** Physical rotation in the y-up artwork frame; LST itself is hemisphere-independent. */
+export function discRotationDeg(
+  date: Date,
+  localHour: number,
+  hemisphereSign: HemisphereSign = 1,
+): number {
+  return normalizeDegrees(hemisphereSign * localSiderealTimeDeg(date, localHour));
 }

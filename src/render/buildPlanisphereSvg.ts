@@ -12,7 +12,11 @@ export function buildPlanisphereSvg(
   constellations: ConstellationData[],
   config: PlanisphereConfig,
 ): { discRotator: SVGGElement; bakedRotationDeg: number } {
-  const bakedRotationDeg = discRotationDeg(config.date, config.localHour);
+  const bakedRotationDeg = discRotationDeg(
+    config.date,
+    config.localHour,
+    config.latDeg >= 0 ? 1 : -1,
+  );
   svg.setAttribute('viewBox', '-100 -100 200 200');
   // Only numeric attributes and XML-escaped catalogue labels enter this markup.
   // The layer order matches an opaque-paper assembly.

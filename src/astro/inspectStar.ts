@@ -76,7 +76,7 @@ export function inspectStar(star: CatalogueStar, config: PlanisphereConfig) {
   const hourAngle = normalizeDegrees(
     localSiderealTimeDeg(config.date, config.localHour) - position.ra,
   );
-  const holder = projectPoint(position.dec, hourAngle, sign, scale);
+  const holder = projectPoint(position.dec, sign * hourAngle, sign, scale);
   const horizontal = equatorialToHorizontal(position.dec, hourAngle, config.latDeg);
   const onDisc = printedStarRadius(star.mag, disc) !== null;
   const includedByMagnitude = star.mag <= config.magLimit;
@@ -177,7 +177,8 @@ export function buildStarEvidence(
       pmRaPmDec: 'milliarcseconds per Julian year; pmRa includes cos(dec)',
       distancePc: 'parsecs',
       radialVelocityKmSec: 'km/s, receding positive',
-      discPointMm: 'millimetres, unrotated disc; mirrored RA, y up',
+      discPointMm:
+        'millimetres, unrotated disc; theta = -hemisphereSign * RA, y up; hemisphereSign = +1 north, -1 south',
       holderPointMm: 'millimetres, fixed holder; y up',
     },
     result: inspectStar(star, config),
