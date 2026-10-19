@@ -80,6 +80,8 @@ errors. The catalogue SHA-256 is recorded in each. The small committed fixture
 in `tests/fixtures/sky-handedness.oracle.json` covers seven familiar stars at
 all nine latitudes; `oracle.py` regenerates it.
 
+Full clean-install and browser results: [verification report](../../docs/verification-sky-handedness-2026-10-18.md).
+
 ## Reproduce
 
 From the repository root, after `npm ci`:

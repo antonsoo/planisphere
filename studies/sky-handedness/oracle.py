@@ -58,7 +58,15 @@ for lat in [-89, -65, -33.9, -0.1, 0, 0.1, 32.5, 65, 89]:
                 }
             )
         cases.append({"latitudeDeg": lat, "lstDeg": lst, "stars": entries})
+attribution = {
+    "name": "HYG v4.1",
+    "author": "David Nash / AstroNexus",
+    "source": "https://github.com/astronexus/HYG-Database",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+}
 result = {
+    "catalogue": attribution,
     "model": "local ENU camera looking outward, azimuthal equidistant from elevated pole",
     "epoch": 2000,
     "skyRadiusMm": RADIUS_MM,
@@ -79,6 +87,7 @@ print(
 )
 
 fixture = {
+    "catalogue": attribution,
     "model": result["model"],
     "cases": [
         {

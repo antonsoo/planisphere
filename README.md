@@ -229,8 +229,8 @@ flowchart LR
 - **Star catalogue**: [HYG v4.1](https://github.com/astronexus/HYG-Database)
   (David Nash / AstroNexus), **CC BY-SA 4.0**. Vendored license text in
   `scripts/vendor/HYG_LICENSE.txt`; not redistributed raw (see
-  `scripts/fetch_hygdata.sh`), only the reduced derivative in
-  `public/data/stars.json`.
+  `scripts/fetch_hygdata.sh`), the reduced derivative in
+  `public/data/stars.json` and HYG-derived astronomy fixtures retain that license.
 - **Constellation lines**: self-authored (see
   [`docs/constellations.md`](docs/constellations.md)), released under this
   repo's MIT license along with the code.

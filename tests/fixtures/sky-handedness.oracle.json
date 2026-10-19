@@ -1,4 +1,11 @@
 {
+  "catalogue": {
+    "name": "HYG v4.1",
+    "author": "David Nash / AstroNexus",
+    "source": "https://github.com/astronexus/HYG-Database",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
   "model": "local ENU camera looking outward, azimuthal equidistant from elevated pole",
   "cases": [
     {
