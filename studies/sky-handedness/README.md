@@ -6,8 +6,8 @@ instrument therefore passed horizon tests while showing a sky that cannot be
 matched by turning the paper.
 
 Both southern pieces must be regenerated: the wheel, date scale, hour scale
-and compass labels all change together. This correction is local source work;
-it has not been deployed or released to a registry.
+and compass labels all change together. The correction is in public source and the live demo; no registry release
+is implied. [Publication and hosted verification](#publication).
 
 | Original assembled preview | Corrected assembled preview |
 | --- | --- |
@@ -118,3 +118,16 @@ and reconstructs their opaque assembly from their actual paths. The repository's
 [example print files](../../docs/assembly.md#example-print-files) now use those
 corrected pieces. All screenshots and that assembled proof were visually
 reviewed. Physical paper, fastener, printer and cutter validation remains open.
+
+## Publication
+
+Source `07b1ca3` and Pages `bd1a8fb` were pushed after the owner authorized
+publication. Pages appends to `f2d2f79`; previous hashed assets are retained
+for cached pages. All 37 current build files were fetched from the live site
+and matched by SHA-256 ([receipt](hosted-bytes.json)). The complete 78-workflow
+production browser suite passed against that byte-verified deployment. The
+dedicated four-workflow study also passed on the live origin with offline
+calculations and downloads. [Publication receipt](publication.json).
+
+These receipts establish source and site publication. They do not establish
+a registry release, CI result, or physical paper validation.

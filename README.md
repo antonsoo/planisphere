@@ -16,7 +16,7 @@ of ancient observing conditions. It pairs with
 [`horologium`](https://antonsoo.github.io/horologium/) (ancient calendars)
 and [`gnomon`](https://antonsoo.github.io/gnomon/) (sundials).
 
-**Southern chart correction in this checkout:** the earlier south-pole
+**Southern chart correction:** the earlier south-pole
 projection reflected constellation shapes and compass directions. The wheel,
 date/hour scales and drag direction now follow an outward-looking sky map in
 both hemispheres. Replace both pieces of a previously generated southern
