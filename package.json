@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Print a star wheel for historical epochs and inspect its catalogue data, stellar space motion, precession, and physical horizon windows.",
   "type": "module",
-  "author": "Anton Soloviev",
+  "author": "Anthony Mercer",
   "license": "MIT",
   "homepage": "https://antonsoo.github.io/planisphere/",
   "repository": {
