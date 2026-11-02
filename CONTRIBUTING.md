@@ -61,7 +61,7 @@ that the holder's material agrees with the finder.
 
 ## License
 
-MIT. Contributions are accepted under the same license.
+PolyForm Noncommercial. Contributions are accepted under the same license.
 
 ## Community and private reports
 

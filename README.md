@@ -3,7 +3,7 @@
 **Print a star wheel and inspect the astronomy behind every point.**
 Compare stellar epochs from 3000 BCE to 3000 CE, then cut out the instrument.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](LICENSE)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-informational.svg)](LICENSE)
 [![Live demo](https://img.shields.io/badge/Live%20demo-antonsoo.github.io%2Fplanisphere-8a6a2f)](https://antonsoo.github.io/planisphere/)
 
 A planisphere is a rotating star chart: dial in a date and time and a window
@@ -233,8 +233,8 @@ flowchart LR
   `public/data/stars.json` and HYG-derived astronomy fixtures retain that license.
 - **Constellation lines**: self-authored (see
   [`docs/constellations.md`](docs/constellations.md)), released under this
-  repo's MIT license along with the code.
-- **Code**: MIT, see [`LICENSE`](LICENSE).
+  repo's PolyForm Noncommercial license along with the code.
+- **Code**: PolyForm Noncommercial, see [`LICENSE`](LICENSE).
 
 ## Testing
 
@@ -286,8 +286,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 
-MIT, see [`LICENSE`](LICENSE). Star data is CC BY-SA 4.0 (see Data licenses,
-above) — the code and the self-authored constellation lines are MIT, the
+New versions are released under the [PolyForm Noncommercial License 1.0.0](LICENSE). It is free for any noncommercial purpose, including personal study, teaching and research, and for use by charities, schools, universities, research organizations and government institutions. Commercial use needs written permission from Anthony Mercer (anthony@praviel.com). Versions up to commit [`b07f3f9`](https://github.com/antonsoo/planisphere/tree/b07f3f9) (2026-11-01) were released under the MIT License, and copies of those versions keep it.
+
+PolyForm Noncommercial, see [`LICENSE`](LICENSE). Star data is CC BY-SA 4.0 (see Data licenses,
+above) — the code and the self-authored constellation lines are PolyForm Noncommercial, the
 vendored star catalogue derivative keeps its original license.
 
 ---
