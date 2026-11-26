@@ -55,8 +55,8 @@
       "downloads": [
         {
           "file": "chromium-1440-disc.svg",
-          "bytes": 315711,
-          "sha256": "529c2e23dd99447c9e9fda61296172280844d65b828f2e9d76b5d90b96b56da4",
+          "bytes": 315730,
+          "sha256": "0b1e2383785cbedcbaa29f2d0a00450581795a0168539569cb569d3b6520ea1c",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -76,8 +76,8 @@
         },
         {
           "file": "chromium-1440-holder.svg",
-          "bytes": 93934,
-          "sha256": "2a29326325ff768499e2577286a348d52edba5c47167a02eb42faaa38f85679a",
+          "bytes": 93953,
+          "sha256": "20c2c9e78920d1710fc8e61274aa8dad6847a895f21cf0c71c112978893c98a5",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -157,8 +157,8 @@
       "downloads": [
         {
           "file": null,
-          "bytes": 315711,
-          "sha256": "529c2e23dd99447c9e9fda61296172280844d65b828f2e9d76b5d90b96b56da4",
+          "bytes": 315730,
+          "sha256": "0b1e2383785cbedcbaa29f2d0a00450581795a0168539569cb569d3b6520ea1c",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -178,8 +178,8 @@
         },
         {
           "file": null,
-          "bytes": 93934,
-          "sha256": "2a29326325ff768499e2577286a348d52edba5c47167a02eb42faaa38f85679a",
+          "bytes": 93953,
+          "sha256": "20c2c9e78920d1710fc8e61274aa8dad6847a895f21cf0c71c112978893c98a5",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -259,8 +259,8 @@
       "downloads": [
         {
           "file": null,
-          "bytes": 315711,
-          "sha256": "529c2e23dd99447c9e9fda61296172280844d65b828f2e9d76b5d90b96b56da4",
+          "bytes": 315730,
+          "sha256": "0b1e2383785cbedcbaa29f2d0a00450581795a0168539569cb569d3b6520ea1c",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -280,8 +280,8 @@
         },
         {
           "file": null,
-          "bytes": 93934,
-          "sha256": "2a29326325ff768499e2577286a348d52edba5c47167a02eb42faaa38f85679a",
+          "bytes": 93953,
+          "sha256": "20c2c9e78920d1710fc8e61274aa8dad6847a895f21cf0c71c112978893c98a5",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -361,8 +361,8 @@
       "downloads": [
         {
           "file": null,
-          "bytes": 315711,
-          "sha256": "529c2e23dd99447c9e9fda61296172280844d65b828f2e9d76b5d90b96b56da4",
+          "bytes": 315730,
+          "sha256": "0b1e2383785cbedcbaa29f2d0a00450581795a0168539569cb569d3b6520ea1c",
           "valid": true,
           "width": "210mm",
           "points": [
@@ -382,8 +382,8 @@
         },
         {
           "file": null,
-          "bytes": 93934,
-          "sha256": "2a29326325ff768499e2577286a348d52edba5c47167a02eb42faaa38f85679a",
+          "bytes": 93953,
+          "sha256": "20c2c9e78920d1710fc8e61274aa8dad6847a895f21cf0c71c112978893c98a5",
           "valid": true,
           "width": "210mm",
           "points": [

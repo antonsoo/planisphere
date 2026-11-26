@@ -145,6 +145,13 @@ npm run preview -- --host 127.0.0.1 --port 4205 --strictPort
 node scripts/capture-star-finder.mjs
 ```
 
+The capture was rerun on 2026-11-25 for the author-name and license change, so
+the retained 61 Cyg downloads, screenshots and
+[star-finder-capture.json](star-finder-capture.json) are from the current app;
+the JSON's disc-coordinate note now states the hemisphere sign. The
+[2026-10-10 source evidence](evidence/source-2026-10-10/browser-capture.json)
+records the earlier files.
+
 The capture records 96 time-control changes with the selected star's assumptions
 expanded, forcing layout after each update. Timings are in the manifest, measured
 on this 14-vCPU WSL2 Linux / 48-GB-class machine at a 320-pixel viewport. This is

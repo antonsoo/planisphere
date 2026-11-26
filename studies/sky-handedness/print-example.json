@@ -10,13 +10,13 @@
   "files": [
     {
       "name": "print-southern-disc-letter.svg",
-      "bytes": 315903,
-      "sha256": "d6fdbe65fe37f8ecea1cf544fdeec737585f9ce4ff9a60a82cdaa4213125b4ea"
+      "bytes": 315922,
+      "sha256": "ac3c6a9a867db979602ac2abc764e1ae6f94ccb97ac7f62f7402665e2f121e14"
     },
     {
       "name": "print-southern-holder-letter.svg",
-      "bytes": 93965,
-      "sha256": "ee0a8dfed692be4f17de51f89a1a5d226acf4c8071989f7c1a8be4429cdd5ee1"
+      "bytes": 93984,
+      "sha256": "befd96ceab9e40fe2f0076cba442f0e97fdf17ddabad6ec1dfa9ce1c7391ae5d"
     }
   ]
 }

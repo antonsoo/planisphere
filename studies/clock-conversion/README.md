@@ -129,3 +129,8 @@ resolve skipped/repeated local times, or accept historical second-level offsets
 and leap seconds. Mean time is rounded to the wheel's existing 15-minute ticks.
 The annual ring still samples the mean Sun at 00:00 UTC and has the existing
 paper-chart approximations. A physical assembly and observation remain unverified.
+
+The date-line downloads and [browser.json](browser.json) were regenerated on
+2026-11-25 with `browser.mjs` on the current build, for the author-name and
+license change; the SVGs differ from the earlier files only in their credit
+metadata.

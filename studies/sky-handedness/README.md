@@ -131,3 +131,21 @@ calculations and downloads. [Publication receipt](publication.json).
 
 These receipts establish source and site publication. They do not establish
 a registry release, CI result, or physical paper validation.
+
+## Author name, 2026-11-25
+
+The `after/` downloads and the southern print example were regenerated on
+2026-11-25 with `browser.mjs` and `print-example.mjs` on a build of commit
+`672e949`, for the author-name and license change. Only the SVG credit
+metadata changed; `replay.mjs` gives the same result (2,668 checks, 0 incorrect).
+`after/browser.json` and `print-example.json` are that day's runs.
+
+The `before/` pair records the handedness bug and cannot be produced again by
+the fixed app. Its credit line was edited in place instead: the former author name became
+"Anthony Mercer" (same length; the MIT notice of that version stays).
+`before/browser.json` keeps the hashes of the original downloads:
+
+| File | Downloaded SHA-256 | After the edit |
+| --- | --- | --- |
+| `before/chromium-1440-disc.svg` | `9b52c76e22b168be674ffa0c78995e8694958d2070a61511fd3a17a9ba369c8c` | `f1249389e554125d05cc547de96383e9f126d3b3f0467ef0ec96bc46b435bf7e` |
+| `before/chromium-1440-holder.svg` | `baaedfa33d7b8c7bcc3f8fc4959a9f0ed018dc1f8309010f3fee8680db224168` | `b439248c0bbe022395ff8aa9548d9ef42debc15cacf598e5afa4803442a0ff41` |

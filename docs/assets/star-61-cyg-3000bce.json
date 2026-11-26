@@ -55,7 +55,7 @@
     "pmRaPmDec": "milliarcseconds per Julian year; pmRa includes cos(dec)",
     "distancePc": "parsecs",
     "radialVelocityKmSec": "km/s, receding positive",
-    "discPointMm": "millimetres, unrotated disc; mirrored RA, y up",
+    "discPointMm": "millimetres, unrotated disc; theta = -hemisphereSign * RA, y up; hemisphereSign = +1 north, -1 south",
     "holderPointMm": "millimetres, fixed holder; y up"
   },
   "result": {

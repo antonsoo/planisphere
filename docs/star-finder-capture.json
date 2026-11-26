@@ -13,8 +13,8 @@
     },
     {
       "name": "star-finder-paper.png",
-      "bytes": 1038218,
-      "sha256": "504614ef7ac201693e5b6a3cf6ab66449355498b4e8c6f008c23e6928a4735f1"
+      "bytes": 1036081,
+      "sha256": "091a4aa8e58c1fc6b622ae5acbcfbb469421b4f7757fd0cfe6072cde8e856109"
     },
     {
       "name": "star-finder-register.png",
@@ -23,18 +23,18 @@
     },
     {
       "name": "star-61-cyg-3000bce.json",
-      "bytes": 2763,
-      "sha256": "75053e312484dcbd3c0c5b9a5d0639cd2634f6a99a33ac9107ae7be941674a28"
+      "bytes": 2817,
+      "sha256": "7774e407e62969b7dc4b70d20cc8be06f08f66fd4002c1505b0ec487dcf446d7"
     },
     {
       "name": "star-61-cyg-3000bce-disc.svg",
-      "bytes": 323271,
-      "sha256": "1e3cef139deb907038043b75b8e01520b599c205f0aeacb17c2601866171c8f6"
+      "bytes": 323290,
+      "sha256": "ad0d1c09bded96bd491f8b76c66c2797577b6287b403224f805bf512cb494567"
     },
     {
       "name": "star-61-cyg-holder.svg",
-      "bytes": 93766,
-      "sha256": "9f208ba63444fe1f4b5a20d4f716ff999332fe448b6353d015e03c5341fe55fb"
+      "bytes": 93785,
+      "sha256": "a2b2bd13b4c0dc2a8bb9b0341ffc06976df8d3146c7ed66d002c8d82e49106ef"
     },
     {
       "name": "star-finder-night.png",
@@ -43,8 +43,8 @@
     },
     {
       "name": "star-finder-mobile.png",
-      "bytes": 227546,
-      "sha256": "bddba39f74984d52d0748ee904d5fc3801b0cfa0ac3d2f2f7e687156abf82923"
+      "bytes": 225179,
+      "sha256": "1dd62cb358d7e126b03720af0e253d2904f985a999d2e4417ab8d00293635575"
     }
   ],
   "accessibility": [
@@ -85,9 +85,9 @@
   "timeControlWithInspection": {
     "samples": 96,
     "includesSynchronousLayout": true,
-    "medianMs": 3.2999999821186066,
-    "p95Ms": 4.5999999940395355,
-    "maxMs": 10.199999988079071,
+    "medianMs": 4.099999999627471,
+    "p95Ms": 14.199999999254942,
+    "maxMs": 16.299999998882413,
     "viewport": {
       "width": 320,
       "height": 1100

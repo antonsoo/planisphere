@@ -126,6 +126,14 @@ These are actual app downloads, not drawings reconstructed from a screenshot:
 | Babylon, 32.5 N; epoch 700 BCE; 2026 scale; A4 | [SVG](assets/print-babylon-disc-a4.svg) | [SVG](assets/print-babylon-holder-a4.svg) | [PNG](assets/print-babylon-assembled.png) |
 | 33.9 S; epoch 2026 CE; leap-year 2024 scale; Letter | [SVG](assets/print-southern-disc-letter.svg) | [SVG](assets/print-southern-holder-letter.svg) | [PNG](assets/print-southern-assembled.png) |
 
+All four SVGs were downloaded again on 2026-11-25 from the current app with the
+settings above, for the author-name and license change. The southern pair and
+the Babylon holder differ from the earlier files only in their credit metadata.
+The Babylon wheel was first captured on 2026-10-04, before the 2026-10-07 stellar
+motion model; its 139 constellation lines now sit within 0.01 mm of the earlier
+positions, with the same 2,671 marks. The assembled review images are the
+earlier renderings.
+
 The review images reconstruct the opaque holder from the downloaded cut
 paths and place it over the downloaded wheel at 21:00 mean time. The red
 outlines remain visible in these proofs to make the cutting paths inspectable.
